@@ -10,7 +10,7 @@ import org.horrabin.horrorss.RssParser;
 import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
-import cn.edu.zju.plex.tdd.web.HttpUtil;
+import cn.edu.zju.plex.tdd.tools.HttpUtil;
 
 public class RssNewsCrawler implements Runnable {
 

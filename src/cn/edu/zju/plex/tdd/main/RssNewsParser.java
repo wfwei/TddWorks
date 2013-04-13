@@ -44,7 +44,7 @@ public class RssNewsParser implements Runnable {
 			} else {
 				for (RssNews rssNews : rssNewsToParse) {
 					parse(rssNews);
-					DB4Tdd.updateParsedData(rssNews);
+					DB4Tdd.updateParsedRssNews(rssNews);
 				}
 			}
 		}
