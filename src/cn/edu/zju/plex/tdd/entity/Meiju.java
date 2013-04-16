@@ -6,9 +6,7 @@ public class Meiju {
 	private String id;
 	private String cname;
 	private String ename;
-	
-	private HashSet<String> akas = new HashSet<String>();
 
-	
+	private HashSet<String> akas = new HashSet<String>();
 
 }

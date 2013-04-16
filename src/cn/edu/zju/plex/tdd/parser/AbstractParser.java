@@ -30,24 +30,29 @@ public abstract class AbstractParser {
 	public abstract void setTargetElements();
 
 	public void parseContent() {
-		if(targetElements==null)
+		if (targetElements == null)
 			setTargetElements();
 		String plainText = targetElements.text();
-		LOG.info("[abstract]extract text length:" + plainText.length() + " in page: " + rssNews.getLink());
+		LOG.info("[abstract]extract text length:" + plainText.length()
+				+ " in page: " + rssNews.getLink());
 		rssNews.setContent(plainText);
 	}
+
 	/*
-	 * TODO
-	 * <img style="border-bottom: 0px; border-left: 0px; display: block; float: none; margin-left: auto; border-top: 0px; margin-right: auto; border-right: 0px" title="130408DW" border="0" alt="130408DW" src="http://img.tvjike.com/1fee003f2e1a_C416/130408DW_thumb.jpg" width="500" height="281" />
-	 * <img src="’http://yarpp.org/pixels/f9c577860ed4c44340122c80c1353a0d’/" />
-	 * 
-	 * */
+	 * TODO <img style=
+	 * "border-bottom: 0px; border-left: 0px; display: block; float: none; margin-left: auto; border-top: 0px; margin-right: auto; border-right: 0px"
+	 * title="130408DW" border="0" alt="130408DW"
+	 * src="http://img.tvjike.com/1fee003f2e1a_C416/130408DW_thumb.jpg"
+	 * width="500" height="281" /> <img
+	 * src="’http://yarpp.org/pixels/f9c577860ed4c44340122c80c1353a0d’/" />
+	 */
 	public void parseImages() {
-		if(targetElements==null)
+		if (targetElements == null)
 			setTargetElements();
 		Elements images = targetElements.select("img[src]");
 
-		LOG.info("[abstract]get image  number:" + images.size() + " in page: " + rssNews.getLink());
+		LOG.info("[abstract]get image  number:" + images.size() + " in page: "
+				+ rssNews.getLink());
 		StringBuffer sb = new StringBuffer();
 		for (Element link : images) {
 			sb.append(link.attr("src") + ";");
@@ -56,10 +61,11 @@ public abstract class AbstractParser {
 	}
 
 	public void parseVideos() {
-		if(targetElements==null)
+		if (targetElements == null)
 			setTargetElements();
 		Elements videos = targetElements.select("embed[src]");
-		LOG.info("[abstract]get video number:" + videos.size() + " in page: " + rssNews.getLink());
+		LOG.info("[abstract]get video number:" + videos.size() + " in page: "
+				+ rssNews.getLink());
 		StringBuffer sb = new StringBuffer();
 		for (Element link : videos) {
 			sb.append(link.attr("src") + ";");

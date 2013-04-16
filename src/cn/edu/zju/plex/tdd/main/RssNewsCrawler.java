@@ -16,8 +16,8 @@ public class RssNewsCrawler implements Runnable {
 
 	private static final Logger LOG = Logger.getLogger(RssNewsCrawler.class);
 	private static final Long ONE_HOUR = 3600000L;
-//	private static Pattern refreshPtn = Pattern
-//			.compile("<HTML>[^<]*<HEAD>[^<]*<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=(http://[^\"]+)\">[^<]*</HEAD>[^<]*</HTML>");
+	// private static Pattern refreshPtn = Pattern
+	// .compile("<HTML>[^<]*<HEAD>[^<]*<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=(http://[^\"]+)\">[^<]*</HEAD>[^<]*</HTML>");
 
 	private RssFeed rssFeed;
 	private RssParser rssParser = new RssParser();
@@ -60,15 +60,15 @@ public class RssNewsCrawler implements Runnable {
 	public void run() {
 		while (true) {
 			checkUpdate();
-			 try {
-				 // 从google reader上查看各个rss的更新频率后决定8小时轮循
-				 long sleepTime = 8*ONE_HOUR;
-				 LOG.info("Sleep for "+sleepTime/ONE_HOUR);
-				 Thread.currentThread().sleep(sleepTime);
-			 } catch (InterruptedException e) {
-				 LOG.error("Thread Interrupted!\t" + e.getMessage());
-				 //LOG.trace("", e);// TODO
-			 }
+			try {
+				// 从google reader上查看各个rss的更新频率后决定8小时轮循
+				long sleepTime = 8 * ONE_HOUR;
+				LOG.info("Sleep for " + sleepTime / ONE_HOUR);
+				Thread.currentThread().sleep(sleepTime);
+			} catch (InterruptedException e) {
+				LOG.error("Thread Interrupted!\t" + e.getMessage());
+				// LOG.trace("", e);// TODO
+			}
 		}
 	}
 

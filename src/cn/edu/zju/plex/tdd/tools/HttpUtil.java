@@ -25,10 +25,13 @@ import org.apache.log4j.Logger;
 
 /**
  * optimize this code...
- * http://stackoverflow.com/questions/14866362/invalid-use-of-basicclientconnmanager-connection-still-allocated
- * http://hc.apache.org/httpcomponents-client-ga/tutorial/html/connmgmt.html#d5e639
+ * http://stackoverflow.com/questions/14866362/invalid-use-
+ * of-basicclientconnmanager-connection-still-allocated
+ * http://hc.apache.org/httpcomponents
+ * -client-ga/tutorial/html/connmgmt.html#d5e639
+ * 
  * @author WangFengwei
- *
+ * 
  */
 public class HttpUtil {
 
@@ -139,7 +142,7 @@ public class HttpUtil {
 		}
 		LOG.warn("Login Success!!!\t");
 		return true;
-		
+
 	}
 
 	/**

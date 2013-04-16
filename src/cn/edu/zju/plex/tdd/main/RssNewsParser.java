@@ -11,6 +11,7 @@ import cn.edu.zju.plex.tdd.parser.ParserFactory;
 //import cn.edu.zju.plex.tdd.seg.IctclasSeg;
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 
+
 public class RssNewsParser implements Runnable {
 	static {
 		PropertyConfigurator.configure("resources/log4j.properties");
@@ -21,9 +22,14 @@ public class RssNewsParser implements Runnable {
 	void parse(RssNews rssNews) {
 
 		ParserFactory.getParser(rssNews).parse();
+
+		// words segmentation
+		String words = MyICTCLAS.fenci(rssNews.getContent());
+		rssNews.setWords(words);
 		
-		 String words = MyICTCLAS.fenci(rssNews.getContent());
-		 rssNews.setWords(words);
+		// parse tvids TODO test
+		String meijuIds = MeijuTvUtil.guessTv(rssNews.getContent());
+		rssNews.setMeiju_ids(meijuIds);
 
 		rssNews.setStatus(RssNews.ST_FINISHED);
 	}
@@ -37,7 +43,7 @@ public class RssNewsParser implements Runnable {
 			if (rssNewsToParse.size() == 0) {
 				LOG.info("Temporally done, going to sleep a while");
 				try {
-					Thread.sleep(ONE_HOUR*10);
+					Thread.sleep(ONE_HOUR * 10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

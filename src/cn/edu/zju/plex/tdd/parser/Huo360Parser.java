@@ -12,11 +12,11 @@ public class Huo360Parser extends AbstractParser {
 	public Huo360Parser(RssNews data) {
 		super(data);
 	}
-	
+
 	public void setTargetElements() {
-		String targetId = "article"; //这个比较明显，只有一种类型的新闻
+		String targetId = "article"; // 这个比较明显，只有一种类型的新闻
 		targetElements = doc.getElementById(targetId).getAllElements();
-		if(targetElements == null){
+		if (targetElements == null) {
 			LOG.error("Huo360Parser not parse well");
 		}
 	}

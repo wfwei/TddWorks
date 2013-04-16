@@ -13,7 +13,6 @@ import org.apache.lucene.analysis.StopFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.util.Version;
 
-
 /**
  * 封装ICTCLAS的Analyzer，但是只能支持lucene29以前的版本
  * 
@@ -59,8 +58,9 @@ public final class MyICTCLASAnalyzer extends Analyzer {
 		try {
 			StringWriter writer = new StringWriter();
 			IOUtils.copy(reader, writer);
-			
-			String resultString =  cn.edu.zju.plex.tdd.seg.MyICTCLAS.fenci(writer.toString());
+
+			String resultString = cn.edu.zju.plex.tdd.seg.MyICTCLAS
+					.fenci(writer.toString());
 			return new StopFilter(matchVersion, new LowerCaseTokenizer(
 					this.matchVersion, new StringReader(resultString)),
 					stopWords);

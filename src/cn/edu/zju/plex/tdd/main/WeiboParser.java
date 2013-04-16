@@ -18,59 +18,60 @@ public class WeiboParser implements Runnable {
 	}
 	private static final Logger LOG = Logger.getLogger(WeiboParser.class);
 	private static final Long ONE_HOUR = 3600000L;
-	
+
 	private static final Pattern WeiboTopicPatt = Pattern.compile("#(.*?)#");
-	private static final Pattern  WeiboUrlPatt = Pattern.compile("(http://t.cn/[^\\s]+)");
+	private static final Pattern WeiboUrlPatt = Pattern
+			.compile("(http://t.cn/[^\\s]+)");
 	private static final Pattern AtPatt = Pattern.compile("(@[^\\s]+)");
-	
+
 	void parse(ParsedStatus status) {
 		String wtext = status.getText();
 		String content = wtext;
 		StringBuffer sb;
-		
-		//extract & set topic
+
+		// extract & set topic
 		Matcher mat = WeiboTopicPatt.matcher(content);
 		StringBuffer topics = new StringBuffer();
-		while(mat.find()){
-			topics.append(mat.group(1)+";");
+		while (mat.find()) {
+			topics.append(mat.group(1) + ";");
 		}
 		status.setTopic(topics.toString());
-		
-		//extract & set urls
+
+		// extract & set urls
 		mat = WeiboUrlPatt.matcher(content);
 		sb = new StringBuffer();
 		StringBuffer urls = new StringBuffer();
-		while(mat.find()){
-			urls.append(mat.group()+";");
+		while (mat.find()) {
+			urls.append(mat.group() + ";");
 			mat.appendReplacement(sb, "");
 		}
 		mat.appendTail(sb);
 		content = sb.toString();
 		status.setUrl(urls.toString());
-		
+
 		// extract & set ats
 		mat = AtPatt.matcher(content);
 		sb = new StringBuffer();
 		StringBuffer ats = new StringBuffer();
-		while(mat.find()){
-			ats.append(mat.group(1)+";");
+		while (mat.find()) {
+			ats.append(mat.group(1) + ";");
 			mat.appendReplacement(sb, "");
 		}
 		mat.appendTail(sb);
 		content = sb.toString();
 		status.setAt_unames(ats.toString());
-		
+
 		// set content
 		status.setContent(content);
-		
+
 		// seg & set words
 		String words = MyICTCLAS.fenci(content);
 		status.setWords(words);
-		
+
 		// parse tvids
 		String meijuIds = MeijuTvUtil.guessTv(content);
 		status.setMeiju_ids(meijuIds);
-		
+
 		// set status
 		status.setStatus(ParsedStatus.ST_FINISHED);
 	}

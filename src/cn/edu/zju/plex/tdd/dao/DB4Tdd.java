@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -38,7 +37,7 @@ public final class DB4Tdd {
 	/**
 	 */
 	public static List<RssNews> getRssNewsToParse(int count) {
-		String sql = "select id, title, link, feed, page from rss_news where status = "
+		String sql = "select id, title, link, category, description, pubDate, feed, page, status from rss_news where status = "
 				+ RssNews.ST_READY + " limit 0," + count;
 		List<RssNews> res = new ArrayList<RssNews>();
 		try {
@@ -49,8 +48,50 @@ public final class DB4Tdd {
 				rssnews.setId(rs.getLong(1));
 				rssnews.setTitle(rs.getString(2));
 				rssnews.setLink(rs.getString(3));
-				rssnews.setFeed(rs.getLong(4));
-				rssnews.setPage(rs.getString(5));
+				rssnews.setCategory(rs.getString(4));
+				rssnews.setDescription(rs.getString(5));
+				try {
+					rssnews.setPubDate(new SimpleDateFormat(
+							"yyyy-MM-dd HH:mm:ss").parse(rs.getString(6)));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				rssnews.setFeed(rs.getLong(7));
+				rssnews.setPage(rs.getString(8));
+				rssnews.setStatus(rs.getInt(9));
+				res.add(rssnews);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	/**
+	 * @param count
+	 *            一次获取的数量
+	 * @param linkReg
+	 *            link的正则表达式
+	 * @return
+	 */
+	public static List<RssNews> getRssNewsToSplit(int count, String linkReg) {
+		String sql = "select id, title, link, category, description, pubDate, feed, page, status from rss_news where link regexp '"
+				+ linkReg + "' limit 0," + count;
+		List<RssNews> res = new ArrayList<RssNews>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				RssNews rssnews = new RssNews();
+				rssnews.setId(rs.getLong(1));
+				rssnews.setTitle(rs.getString(2));
+				rssnews.setLink(rs.getString(3));
+				rssnews.setCategory(rs.getString(4));
+				rssnews.setDescription(rs.getString(5));
+				rssnews.setPubDate(rs.getDate(6));
+				rssnews.setFeed(rs.getLong(7));
+				rssnews.setPage(rs.getString(8));
+				rssnews.setStatus(rs.getInt(9));
 				res.add(rssnews);
 			}
 		} catch (SQLException e) {
@@ -172,10 +213,11 @@ public final class DB4Tdd {
 	public static void updateParsedRssNews(RssNews rssNews) {
 
 		String sql = String
-				.format("update rss_news set content='%s', images='%s', videos='%s', words='%s', status=%d where id=%d",
+				.format("update rss_news set content='%s', images='%s', videos='%s', words='%s', meiju_ids='%s', status=%d where id=%d",
 						rssNews.getContent(), rssNews.getImages(),
 						rssNews.getVideos(), rssNews.getWords(),
-						rssNews.getStatus(), rssNews.getId());
+						rssNews.getMeiju_ids(), rssNews.getStatus(),
+						rssNews.getId());
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
@@ -343,22 +385,30 @@ public final class DB4Tdd {
 	}
 
 	public static void updateParsedStatus(ParsedStatus st) {
-		String sql = String.format("update meiju_weibo set "
-				+ "content='%s', video='%s', url='%s', topic='%s', words='%s', meiju_ids='%s', "
-				+ "at_unames='%s', status=%d where wid='%s'", st.getContent(), st.getVideo(), st.getUrl()
-				, st.getTopic(), st.getWords(), st.getMeiju_ids(), st.getUname(), st.getStatus(), st.getId());
+		String sql = String
+				.format("update meiju_weibo set "
+						+ "content='%s', video='%s', url='%s', topic='%s', words='%s', meiju_ids='%s', "
+						+ "at_unames='%s', status=%d where wid='%s'",
+						st.getContent(), st.getVideo(), st.getUrl(),
+						st.getTopic(), st.getWords(), st.getMeiju_ids(),
+						st.getUname(), st.getStatus(), st.getId());
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			LOG.warn("error occured in updateParsedStatus:"+e.getMessage());
+			LOG.warn("error occured in updateParsedStatus:" + e.getMessage());
 			LOG.warn(sql);
 		}
 	}
-	
-	public static HashMap<String, String> getMeijuTvs(){
+
+	/**
+	 * 返回美剧名(aka),英文名去掉中间空格，并且小写
+	 * 
+	 * @return
+	 */
+	public static HashMap<String, String> getMeijuTvs() {
 		HashMap<String, String> tvs = new HashMap<String, String>();
 		String sql = "select sid, cname, ename, aka_original, aka from tvshows";
 		try {
@@ -367,24 +417,23 @@ public final class DB4Tdd {
 			String aka, id;
 			while (rs.next()) {
 				id = rs.getString(1);
-				// TODO 权利的游戏 没有。。。
-				if(id.equals("24493")){
-					LOG.info("");
-				}
 				String cname = rs.getString(2);
 				tvs.put(cname, id);
-				for(int i=3; i<6; i++){
-					aka = rs.getString(i);
-					if(CharsetTool.containChinese(aka)){
-						aka = aka.replaceAll("[\\s:：，-；;]", ",");
-					}
-					for(String name:aka.split(",")){
-						if(tvs.get(name)!=null && tvs.get(name)!=id){
-							LOG.info(tvs.get(name)+" and "+id+" conflicted by name:"+name);
-						}else{
+				for (int i = 3; i < 6; i++) {
+					aka = rs.getString(i).toLowerCase()
+							.replaceAll("[:：，-；;]", ",");
+					for (String name : aka.split(",")) {
+						if (tvs.get(name) != null && tvs.get(name) != id) {
+							LOG.debug(tvs.get(name) + " and " + id
+									+ " conflicted by name:" + name);
+						} else {
 							name = name.trim();
-							if(name.length()>1)
+							if (name.length() > 1) {
+								if (!CharsetTool.containChinese(name))
+									name = name.replace(" ", "");
 								tvs.put(name, id);
+								LOG.info("put in name:\t" + name);
+							}
 						}
 					}
 				}
@@ -397,7 +446,21 @@ public final class DB4Tdd {
 			LOG.warn("sql is:\t" + sql);
 		}
 		return tvs;
-		
+
+	}
+
+	// TODO test
+	public static void delete(RssNews rssNews) {
+		String sql = "delete from rss_news where id=" + rssNews.getId();
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.warn("error occured in updateParsedStatus:" + e.getMessage());
+			LOG.warn(sql);
+		}
 	}
 
 }

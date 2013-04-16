@@ -14,13 +14,14 @@ public class TvjikeParser extends AbstractParser {
 	}
 
 	public void setTargetElements() {
-		String targetId = "content";//范围太大，包含了相关咨询，评论等模块
+		String targetId = "content";// 范围太大，包含了相关咨询，评论等模块
 		String targetClass = "entry"; // 缩小范围，但还是包括了相关咨询
-		
-		targetElements = doc.getElementById(targetId).getElementsByClass(targetClass);
-		if (targetElements == null) 
+
+		targetElements = doc.getElementById(targetId).getElementsByClass(
+				targetClass);
+		if (targetElements == null)
 			LOG.error("美剧极客 TvjikeParser not parse well");
-		
+
 	}
 
 }

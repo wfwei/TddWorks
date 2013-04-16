@@ -2,7 +2,7 @@ package cn.edu.zju.plex.tdd.entity;
 
 import java.util.Date;
 
-public class RssNews {
+public class RssNews implements Cloneable{
 
 	private long id;
 	private String title;
@@ -17,12 +17,25 @@ public class RssNews {
 	private String words;
 	private String images;
 	private String videos;
+	private String meiju_ids;
 	private int status;
 
 	public static final int ST_ERROR = -1;
 	public static final int ST_READY = 0;
 	public static final int ST_PARSING = 1;
 	public static final int ST_FINISHED = 2;
+	
+	@Override
+	public RssNews clone(){
+		RssNews rssNews=null;
+		try {
+			rssNews = (RssNews) super.clone();
+		} catch(CloneNotSupportedException e){
+			e.printStackTrace();
+		}
+		// TODO do I need deep clone???
+		return rssNews;
+	}
 
 	@Override
 	public String toString() {
@@ -31,8 +44,8 @@ public class RssNews {
 	}
 
 	/**
-	 * init rss news with rss parts(title, link, category, description, pubDate, content, 
-	 * feed) and set status = ST_READY
+	 * init rss news with rss parts(title, link, category, description, pubDate,
+	 * content, feed) and set status = ST_READY
 	 */
 	public void setFirstPart(String title, String link, String category,
 			String description, Date pubDate, String page, long feed) {
@@ -172,6 +185,14 @@ public class RssNews {
 
 	public static int getStFinished() {
 		return ST_FINISHED;
+	}
+
+	public String getMeiju_ids() {
+		return meiju_ids;
+	}
+
+	public void setMeiju_ids(String meiju_ids) {
+		this.meiju_ids = meiju_ids;
 	}
 
 }
