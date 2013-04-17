@@ -3,7 +3,7 @@ package cn.edu.zju.plex.tdd.tools;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CharsetTool {
+public class CharsetUtil {
 	private static final Pattern ChineseCharPatt = Pattern
 			.compile("[\u4e00-\u9fa5]");
 

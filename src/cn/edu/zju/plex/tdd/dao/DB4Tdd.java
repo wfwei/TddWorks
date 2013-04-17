@@ -17,7 +17,7 @@ import weibo4j.model.Status;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
-import cn.edu.zju.plex.tdd.tools.CharsetTool;
+import cn.edu.zju.plex.tdd.tools.CharsetUtil;
 
 /**
  * TDD的数据库操作类. TODO 以表分割该类
@@ -429,7 +429,7 @@ public final class DB4Tdd {
 						} else {
 							name = name.trim();
 							if (name.length() > 1) {
-								if (!CharsetTool.containChinese(name))
+								if (!CharsetUtil.containChinese(name))
 									name = name.replace(" ", "");
 								tvs.put(name, id);
 								LOG.info("put in name:\t" + name);

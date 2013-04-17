@@ -1,4 +1,4 @@
-package cn.edu.zju.plex.tdd.main;
+package cn.edu.zju.plex.tdd.tools;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 
 import cn.edu.zju.plex.tdd.dao.DB4Tdd;
-import cn.edu.zju.plex.tdd.tools.CharsetTool;
+import cn.edu.zju.plex.tdd.module.WeiboParser;
 
 public class MeijuTvUtil {
 
@@ -56,7 +56,7 @@ public class MeijuTvUtil {
 			PrintWriter pw = new PrintWriter(fname);
 			for (String names : Meijus.keySet()) {
 				for (String name : names.split(" ")) {
-					if (CharsetTool.containChinese(name)) {
+					if (CharsetUtil.containChinese(name)) {
 						pw.println(name + "\tn");
 						LOG.info("write user dic item:" + name);
 					}

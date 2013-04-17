@@ -1,4 +1,4 @@
-package cn.edu.zju.plex.tdd.main;
+package cn.edu.zju.plex.tdd.module;
 
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -11,17 +11,23 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
+/**
+ * weibo crawler
+ * @author WangFengwei
+ */
 public class WeiboCrawler implements Runnable {
 
 	private final Logger LOG = Logger.getLogger(DB4Tdd.class);
 	private final long INTERVAL = 30000L; // 30 seconds?
-	private String accessToken;
-	private HashMap<String, String> targetUsers;
+	private String accessToken = "2.00l9nr_DfUKrWDf655d3279arZgVvD";
+	private HashMap<String, String> targetUsers = DB4Tdd.getWeiboTargets();
 
 	public WeiboCrawler(String accessToken, HashMap<String, String> targetUsers) {
 		this.accessToken = accessToken;
 		this.targetUsers = targetUsers;
 	}
+	
+	public WeiboCrawler(){};
 
 	@Override
 	public void run() {
@@ -46,8 +52,8 @@ public class WeiboCrawler implements Runnable {
 							if (latestWeibo == null) {
 								latestWeibo = s.getId();
 							}
-							s.getIdstr();
-							// s.getId().compareTo(lastUpdateWeibo)<=0
+							
+							// MARK s.getId().compareTo(lastUpdateWeibo)<=0
 							if (Long.valueOf(s.getId()) <= Long
 									.valueOf(lastUpdateWeibo)) {
 								flag = true;
@@ -77,12 +83,7 @@ public class WeiboCrawler implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		String accessToken = "2.00l9nr_DfUKrWDf655d3279arZgVvD";
-		HashMap<String, String> targetUsers = DB4Tdd.getWeiboTargets();
-
-		new Thread(new WeiboCrawler(accessToken, targetUsers), "WeiboCrawler")
-				.start();
+//		new Thread(new WeiboCrawler(), "WeiboCrawler").start();
 	}
 
 }

@@ -1,4 +1,4 @@
-package cn.edu.zju.plex.tdd.main;
+package cn.edu.zju.plex.tdd.module;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,6 +11,7 @@ import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
+import cn.edu.zju.plex.tdd.tools.MeijuTvUtil;
 
 public class WeiboParser implements Runnable {
 	static {
@@ -83,12 +84,8 @@ public class WeiboParser implements Runnable {
 			LOG.info("Get " + weiboToParse.size() + " weibo status to parse...");
 
 			if (weiboToParse.size() == 0) {
-				LOG.info("Temporally done, going to sleep a while");
-				try {
-					Thread.sleep(ONE_HOUR * 10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				LOG.info("Temporally done");
+				break;
 			} else {
 				for (ParsedStatus status : weiboToParse) {
 					parse(status);
@@ -99,10 +96,7 @@ public class WeiboParser implements Runnable {
 	}
 
 	public static void main(String args[]) {
-		for (int i = 0; i < 1; i++) {
-			new Thread(new WeiboParser(), "WeiboParser-" + i).start();
-			LOG.info("WeiboParser-" + i + " started");
-		}
+//		new Thread(new WeiboParser(), "WeiboParser").start();
 	}
 
 }

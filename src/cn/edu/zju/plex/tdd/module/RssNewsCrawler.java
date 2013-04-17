@@ -1,4 +1,4 @@
-package cn.edu.zju.plex.tdd.main;
+package cn.edu.zju.plex.tdd.module;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +15,14 @@ import cn.edu.zju.plex.tdd.tools.HttpUtil;
 public class RssNewsCrawler implements Runnable {
 
 	private static final Logger LOG = Logger.getLogger(RssNewsCrawler.class);
-	private static final Long ONE_HOUR = 3600000L;
+	
 	// private static Pattern refreshPtn = Pattern
 	// .compile("<HTML>[^<]*<HEAD>[^<]*<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=(http://[^\"]+)\">[^<]*</HEAD>[^<]*</HTML>");
 
-	private RssFeed rssFeed;
 	private RssParser rssParser = new RssParser();
 	private HttpUtil httpUtil = new HttpUtil();
 
-	public RssNewsCrawler(RssFeed rssFeed) {
-		this.rssFeed = rssFeed;
-	}
-
-	private void checkUpdate() {
+	private void checkUpdate(RssFeed rssFeed) {
 		try {
 			String feedPage = httpUtil.fetchPage(rssFeed.getFeed());
 			org.horrabin.horrorss.RssFeed feed = rssParser.loadString(feedPage);
@@ -49,7 +44,6 @@ public class RssNewsCrawler implements Runnable {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LOG.error(e.toString());
 		}
@@ -58,27 +52,14 @@ public class RssNewsCrawler implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
-			checkUpdate();
-			try {
-				// 从google reader上查看各个rss的更新频率后决定8小时轮循
-				long sleepTime = 8 * ONE_HOUR;
-				LOG.info("Sleep for " + sleepTime / ONE_HOUR);
-				Thread.currentThread().sleep(sleepTime);
-			} catch (InterruptedException e) {
-				LOG.error("Thread Interrupted!\t" + e.getMessage());
-				// LOG.trace("", e);// TODO
-			}
+		ArrayList<RssFeed> rssFeeds = DB4Tdd.getRssFeedList();
+		for (RssFeed rf : rssFeeds) {
+			checkUpdate(rf);
 		}
 	}
 
 	public static void main(String[] args) {
-		ArrayList<RssFeed> rssFeeds = DB4Tdd.getRssFeedList();
-		for (RssFeed rf : rssFeeds) {
-			new Thread(new RssNewsCrawler(rf), "RssCrawler-" + rf.getTitle())
-					.start();
-			LOG.info("RssCrawler-" + rf.getTitle() + " started");
-		}
+//		new Thread(new RssNewsCrawler(), "RssCrawler").start();
 	}
 
 }
