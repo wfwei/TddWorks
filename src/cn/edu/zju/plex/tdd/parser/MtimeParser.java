@@ -17,11 +17,12 @@ public class MtimeParser extends AbstractParser {
 	}
 
 	public void setTargetElements() {
-		String targetId = "newscont";
-
-		targetElements = doc.getElementById(targetId).getAllElements();
-		if (targetElements == null) {
-			LOG.error("时光网 MtimeParser not parse well");
+		String targetId = "newscont";		
+		try{
+			targetElements = doc.getElementById(targetId).getAllElements();
+		} catch (Exception e) {
+			LOG.error("时光网 MtimeParser not parse well:" + rssNews);
+			targetElements = doc.getAllElements();
 		}
 	}
 

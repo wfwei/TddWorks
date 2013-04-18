@@ -12,7 +12,7 @@ public class ParsedStatus extends Status {
 	private String url; // weibo中嵌入的url，分号分割
 	private String topic; // weibo中的话题(between#)
 	private String words; // 对@content分词
-	private String meiju_ids; // 关于哪些美剧，分号分割
+	private TvShows tvShow; // 关于哪些美剧，分号分割
 	private String at_unames; // at的用户名，分号分割
 	private int status; // 状态
 
@@ -77,20 +77,20 @@ public class ParsedStatus extends Status {
 		this.words = words;
 	}
 
-	public String getMeiju_ids() {
-		return meiju_ids;
-	}
-
-	public void setMeiju_ids(String meiju_ids) {
-		this.meiju_ids = meiju_ids;
-	}
-
 	public String getAt_unames() {
 		return at_unames;
 	}
 
 	public void setAt_unames(String at_unames) {
 		this.at_unames = at_unames;
+	}
+
+	public TvShows getTvShow() {
+		return tvShow;
+	}
+
+	public void setTvShow(TvShows tvShow) {
+		this.tvShow = tvShow;
 	}
 
 	public int getStatus() {

@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import weibo4j.model.Status;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
+import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.tools.CharsetUtil;
 
 /**
@@ -88,13 +90,17 @@ public final class DB4Tdd {
 				rssnews.setLink(rs.getString(3));
 				rssnews.setCategory(rs.getString(4));
 				rssnews.setDescription(rs.getString(5));
-				rssnews.setPubDate(rs.getDate(6));
+				rssnews.setPubDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+						.parse(rs.getString(6)));
 				rssnews.setFeed(rs.getLong(7));
 				rssnews.setPage(rs.getString(8));
 				rssnews.setStatus(rs.getInt(9));
 				res.add(rssnews);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -196,11 +202,12 @@ public final class DB4Tdd {
 			stmt.close();
 		} catch (SQLException e) {
 			// ignore duplicated entry warning
-			if (!e.getMessage().toLowerCase().contains("duplicated")) {
+			if (!e.getMessage().contains("Duplicate")) {
 				e.printStackTrace();
 				LOG.warn(e.getMessage());
 				LOG.warn("sql is:\t" + sql);
-			}
+			} else
+				LOG.debug("duplicated entry:" + rssnews);
 		}
 	}
 
@@ -213,11 +220,12 @@ public final class DB4Tdd {
 	public static void updateParsedRssNews(RssNews rssNews) {
 
 		String sql = String
-				.format("update rss_news set content='%s', images='%s', videos='%s', words='%s', meiju_ids='%s', status=%d where id=%d",
-						rssNews.getContent(), rssNews.getImages(),
-						rssNews.getVideos(), rssNews.getWords(),
-						rssNews.getMeiju_ids(), rssNews.getStatus(),
-						rssNews.getId());
+				.format("update rss_news set content='%s', images='%s', videos='%s', words='%s', meiju_id='%s', meiju_cname='%s', meiju_ename='%s', status=%d where id=%d",
+						rssNews.getContent(), rssNews.getImages(), rssNews
+								.getVideos(), rssNews.getWords(), rssNews
+								.getTvShows().getSid(), rssNews.getTvShows()
+								.getCname(), rssNews.getTvShows().getEname(),
+						rssNews.getStatus(), rssNews.getId());
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
@@ -337,11 +345,12 @@ public final class DB4Tdd {
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			// ignore duplicated entry warning
-			if (!e.getMessage().toLowerCase().contains("duplicated")) {
+			if (!e.getMessage().contains("Duplicate")) {
 				e.printStackTrace();
 				LOG.warn(e.getMessage());
 				LOG.warn("sql is:\t" + sql);
-			}
+			} else
+				LOG.debug("duplicated entry:" + s);
 		}
 
 	}
@@ -387,10 +396,11 @@ public final class DB4Tdd {
 	public static void updateParsedStatus(ParsedStatus st) {
 		String sql = String
 				.format("update meiju_weibo set "
-						+ "content='%s', video='%s', url='%s', topic='%s', words='%s', meiju_ids='%s', "
+						+ "content='%s', video='%s', url='%s', topic='%s', words='%s', meiju_id='%s', meiju_cname='%s', meiju_ename='%s', "
 						+ "at_unames='%s', status=%d where wid='%s'",
 						st.getContent(), st.getVideo(), st.getUrl(),
-						st.getTopic(), st.getWords(), st.getMeiju_ids(),
+						st.getTopic(), st.getWords(), st.getTvShow().getSid(),
+						st.getTvShow().getCname(), st.getTvShow().getEname(),
 						st.getUname(), st.getStatus(), st.getId());
 		try {
 			Statement stmt = con.createStatement();
@@ -408,8 +418,8 @@ public final class DB4Tdd {
 	 * 
 	 * @return
 	 */
-	public static HashMap<String, String> getMeijuTvs() {
-		HashMap<String, String> tvs = new HashMap<String, String>();
+	public static HashMap<String, TvShows> getMeijuTvs() {
+		HashMap<String, TvShows> tvs = new HashMap<String, TvShows>();
 		String sql = "select sid, cname, ename, aka_original, aka from tvshows";
 		try {
 			Statement stmt = con.createStatement();
@@ -418,12 +428,15 @@ public final class DB4Tdd {
 			while (rs.next()) {
 				id = rs.getString(1);
 				String cname = rs.getString(2);
-				tvs.put(cname, id);
-				for (int i = 3; i < 6; i++) {
+				String ename = rs.getString(3);
+				TvShows tvShow = new TvShows(id, cname, ename);
+				tvs.put(cname, tvShow);
+				tvs.put(ename.toLowerCase().replace(" ", ""), tvShow);
+				for (int i = 4; i < 6; i++) {
 					aka = rs.getString(i).toLowerCase()
 							.replaceAll("[:：，-；;]", ",");
 					for (String name : aka.split(",")) {
-						if (tvs.get(name) != null && tvs.get(name) != id) {
+						if (tvs.get(name) != null && tvs.get(name) != tvShow) {
 							LOG.debug(tvs.get(name) + " and " + id
 									+ " conflicted by name:" + name);
 						} else {
@@ -431,8 +444,8 @@ public final class DB4Tdd {
 							if (name.length() > 1) {
 								if (!CharsetUtil.containChinese(name))
 									name = name.replace(" ", "");
-								tvs.put(name, id);
-								LOG.info("put in name:\t" + name);
+								tvs.put(name, tvShow);
+								// LOG.info("put in name:\t" + name);
 							}
 						}
 					}
@@ -445,11 +458,11 @@ public final class DB4Tdd {
 			LOG.error(e.getMessage());
 			LOG.warn("sql is:\t" + sql);
 		}
+		LOG.info("init Meiju Tv Over");
 		return tvs;
 
 	}
 
-	// TODO test
 	public static void delete(RssNews rssNews) {
 		String sql = "delete from rss_news where id=" + rssNews.getId();
 		try {
@@ -463,4 +476,73 @@ public final class DB4Tdd {
 		}
 	}
 
+	/**
+	 * TODO test
+	 * 
+	 * @param timeLen
+	 * @return
+	 */
+	public static List<RssNews> getRssNewsToMerge(int timeLen) {
+		String presql = "select pubDate from rss_news where delegate=0 order by pubDate limit 0, 1";
+		String sql = "select id, title, link, category, description, pubDate, "
+				+ "feed, words, meiju_id, meiju_cname, meiju_ename, delegate, status "
+				+ "from rss_news where delegate=0 and pubDate<='%s' order by pubDate";
+		List<RssNews> res = new ArrayList<RssNews>();
+		Date endDate = null;
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(presql);
+			if (rs.next()) {
+				Date start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+						.parse(rs.getString(1));
+				endDate = new Date(start.getTime() + timeLen);
+			} else {
+				LOG.warn("no more dates...");
+				endDate = new Date();
+			}
+			sql = String
+					.format(sql, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+							.format(endDate));
+			rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				RssNews rssnews = new RssNews();
+				rssnews.setId(rs.getLong(1));
+				rssnews.setTitle(rs.getString(2));
+				rssnews.setLink(rs.getString(3));
+				rssnews.setCategory(rs.getString(4));
+				rssnews.setDescription(rs.getString(5));
+				rssnews.setPubDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+						.parse(rs.getString(6)));
+				rssnews.setFeed(rs.getLong(7));
+				rssnews.setWords(rs.getString(8));
+				rssnews.setTvShows(new TvShows(rs.getString(9), rs
+						.getString(10), rs.getString(11)));
+				rssnews.setDelegate(rs.getLong(12));
+				rssnews.setStatus(rs.getInt(13));
+				res.add(rssnews);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+		return res;
+	}
+
+
+	public static void updateDelegate(RssNews rssNews) {
+		String sql = String
+				.format("update rss_news set delegate=%d where id=%d",rssNews.getDelegate(), rssNews.getId());
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+	}
+	
 }

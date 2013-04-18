@@ -16,6 +16,8 @@ public class ParserFactory {
 			parser = new Huo360Parser(rssNews);
 		else if (rssNews.getFeed() == 4)
 			parser = new TvjikeParser(rssNews);
+		else if (rssNews.getFeed() == 5)
+			parser = new MeijufansParser(rssNews);
 		else
 			parser = new DefaultParser(rssNews);
 		return parser;

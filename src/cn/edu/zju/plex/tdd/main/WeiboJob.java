@@ -44,7 +44,7 @@ public class WeiboJob implements Runnable {
 		}
 		
 		// 去重
-		// TODO
+		// TODO if needed
 	}
 
 }

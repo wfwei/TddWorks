@@ -17,7 +17,8 @@ public class RssNews implements Cloneable{
 	private String words;
 	private String images;
 	private String videos;
-	private String meiju_ids;
+	private TvShows tvShows;
+	private long delegate;
 	private int status;
 
 	public static final int ST_ERROR = -1;
@@ -38,7 +39,7 @@ public class RssNews implements Cloneable{
 
 	@Override
 	public String toString() {
-		return "newsrss:{id:" + id + ", title:" + title + ", link:" + link + ", status:" + status
+		return "rssnews:{id:" + id + ", title:" + title + ", link:" + link + ", status:" + status
 				+ "}";
 	}
 
@@ -162,6 +163,22 @@ public class RssNews implements Cloneable{
 		this.videos = videos;
 	}
 
+	public TvShows getTvShows() {
+		return tvShows;
+	}
+
+	public void setTvShows(TvShows tvShows) {
+		this.tvShows = tvShows;
+	}
+
+	public long getDelegate() {
+		return delegate;
+	}
+
+	public void setDelegate(long delegate) {
+		this.delegate = delegate;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -186,12 +203,6 @@ public class RssNews implements Cloneable{
 		return ST_FINISHED;
 	}
 
-	public String getMeiju_ids() {
-		return meiju_ids;
-	}
-
-	public void setMeiju_ids(String meiju_ids) {
-		this.meiju_ids = meiju_ids;
-	}
+	
 
 }

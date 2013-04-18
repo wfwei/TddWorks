@@ -14,14 +14,16 @@ public class TvfantasyParser extends AbstractParser {
 	}
 
 	public void setTargetElements() {
-		String targetId = "entry_main";
+//		String targetId = "entry_main";
 		String targetTag = "article";
-
-		targetElements = doc.getElementsByClass(targetId);
-		targetElements = doc.getElementsByTag(targetTag);
-		if (targetElements == null) {
-			LOG.error("天涯小筑 TvfantasyParser not parse well");
+		
+		try{
+			targetElements = doc.getElementsByTag(targetTag);
+		} catch (Exception e) {
+			LOG.error("天涯小筑 TvfantasyParse not parse well:" + rssNews);
+			targetElements = doc.getAllElements();
 		}
+		
 	}
 
 }

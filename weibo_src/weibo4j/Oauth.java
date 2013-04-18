@@ -51,7 +51,6 @@ public class Oauth extends Weibo{
 		m.init(key);
 		m.update(t[1].getBytes());
 		String part1Expect = BASE64Encoder.encode(m.doFinal());
-		// TODO how to fix this
 		sun.misc.BASE64Decoder decode = new sun.misc.BASE64Decoder();
 		String s = new String(decode.decodeBuffer(t[1]));
 		if (part1.equals(part1Expect)) {

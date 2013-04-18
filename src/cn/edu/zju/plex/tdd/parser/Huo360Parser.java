@@ -15,9 +15,11 @@ public class Huo360Parser extends AbstractParser {
 
 	public void setTargetElements() {
 		String targetId = "article"; // 这个比较明显，只有一种类型的新闻
-		targetElements = doc.getElementById(targetId).getAllElements();
-		if (targetElements == null) {
-			LOG.error("Huo360Parser not parse well");
+		try{
+			targetElements = doc.getElementById(targetId).getAllElements();
+		} catch (Exception e) {
+			LOG.error("Huo360Parser not parse well:" + rssNews);
+			targetElements = doc.getAllElements();
 		}
 	}
 

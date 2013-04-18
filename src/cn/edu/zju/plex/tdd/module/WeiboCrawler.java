@@ -41,10 +41,10 @@ public class WeiboCrawler {
 			Paging paging = new Paging();
 			int perNum = 100;
 			paging.setCount(perNum);
-			boolean flag = false; // if caught @lastUpdateWeibo
+			boolean done = false; // if caught @lastUpdateWeibo
 			String latestWeibo = null;
 			// 最多爬取最近的前1000条微博
-			for (int p = 1; p < 11; p++) {
+			for (int p = 1; p < 11 && !done; p++) {
 				paging.setPage(p);
 				try {
 					tm.client.setToken(accessToken);
@@ -56,10 +56,9 @@ public class WeiboCrawler {
 								latestWeibo = s.getId();
 							}
 							
-							// MARK s.getId().compareTo(lastUpdateWeibo)<=0
 							if (Long.valueOf(s.getId()) <= Long
 									.valueOf(lastUpdateWeibo)) {
-								flag = true;
+								done = true;
 								break;
 							}
 							DB4Tdd.insertWeibo(s);
@@ -77,7 +76,8 @@ public class WeiboCrawler {
 				}
 				LOG.info("\tget weibo update:" + p * perNum);
 			}
-			if (flag && latestWeibo != null) {
+			
+			if (done && latestWeibo != null) {
 				lastUpdateWeibo = latestWeibo;
 				DB4Tdd.updateWeiboTargets(wuid, lastUpdateWeibo);
 			} else

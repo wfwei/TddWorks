@@ -8,32 +8,32 @@ import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.module.RssNewsCrawler;
 import cn.edu.zju.plex.tdd.module.RssNewsParser;
+import cn.edu.zju.plex.tdd.module.RssNewsRmDup;
 import cn.edu.zju.plex.tdd.tools.TvfantasySplitUtil;
 
 /**
- * crawl & parse rssNews 
+ * crawl & parse rssNews
  * 
  * @author plex
  */
 public class RssNewsJob implements Runnable {
 
 	private static final Logger LOG = Logger.getLogger(RssNewsJob.class);
-	
+
 	private RssNewsCrawler crawler = new RssNewsCrawler();
 	private RssNewsParser parser = new RssNewsParser();
-
 
 	@Override
 	public void run() {
 		LOG.info("Loop start for RssNewsJob");
-		
-		//下载rss更新
+
+		// 下载rss更新
 		ArrayList<RssFeed> rssFeeds = DB4Tdd.getRssFeedList();
 		for (RssFeed rf : rssFeeds) {
-			for(RssNews rssnews:crawler.fetchUpdate(rf))
+			for (RssNews rssnews : crawler.fetchUpdate(rf))
 				DB4Tdd.insertRssNews(rssnews);
 		}
-		
+
 		// 解析rss_news
 		while (true) {
 			List<RssNews> rssNewsToParse = DB4Tdd.getRssNewsToParse(30);
@@ -44,7 +44,8 @@ public class RssNewsJob implements Runnable {
 				break;
 			} else {
 				for (RssNews rssNews : rssNewsToParse) {
-					if(rssNews.getLink().matches("http://tvfantasy.net/.{10}/newsletter[^#]+")){
+					if (rssNews.getLink().matches(
+							"http://tvfantasy.net/.{10}/newsletter[^#]+")) {
 						TvfantasySplitUtil.splite(rssNews);
 						continue;
 					}
@@ -53,8 +54,29 @@ public class RssNewsJob implements Runnable {
 				}
 			}
 		}
-		
-		// 去重
-		// TODO
+
+		// 去重, 这个基本无效...
+		int timeLen = 172800000;// two days
+		while (true) {
+			List<RssNews> list = DB4Tdd.getRssNewsToMerge(timeLen);
+			RssNews[] rssNewsToMerge = new RssNews[list.size()];
+			list.toArray(rssNewsToMerge);
+
+			if (rssNewsToMerge.length < 2) {
+				LOG.info("get all merge work temply done");
+				break;
+			} else {
+				RssNewsRmDup.deals(rssNewsToMerge);
+				for (RssNews rssNews : rssNewsToMerge)
+					if (rssNews.getDelegate() != 0)
+						DB4Tdd.updateDelegate(rssNews);
+				LOG.info("merge rss news:" + rssNewsToMerge.length);
+			}
+
+		}
+	}
+
+	public static void main(String[] args) {
+		new Thread(new RssNewsJob(), "RssNewsJob").start();
 	}
 }

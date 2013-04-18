@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
+import cn.edu.zju.plex.tdd.entity.TvShows;
 
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 import cn.edu.zju.plex.tdd.tools.MeijuTvUtil;
@@ -71,8 +72,8 @@ public class WeiboParser {
 		status.setWords(words);
 
 		// parse tvids
-		String meijuIds = MeijuTvUtil.guessTv(content);
-		status.setMeiju_ids(meijuIds);
+		TvShows tvShow = MeijuTvUtil.guessTv(content + ats.toString());
+		status.setTvShow(tvShow);
 
 		// set status
 		status.setStatus(ParsedStatus.ST_FINISHED);

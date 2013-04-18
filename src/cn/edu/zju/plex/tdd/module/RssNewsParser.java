@@ -3,6 +3,7 @@ package cn.edu.zju.plex.tdd.module;
 import org.apache.log4j.Logger;
 
 import cn.edu.zju.plex.tdd.entity.RssNews;
+import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.parser.ParserFactory;
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 import cn.edu.zju.plex.tdd.tools.MeijuTvUtil;
@@ -21,13 +22,13 @@ public class RssNewsParser {
 		
 		ParserFactory.getParser(rssNews).parse();
 
-		// words segmentation
+		LOG.info("words segmentation");
 		String words = MyICTCLAS.fenci(rssNews.getContent());
 		rssNews.setWords(words);
 		
-		// parse tvids
-		String meijuIds = MeijuTvUtil.guessTv(rssNews.getContent());
-		rssNews.setMeiju_ids(meijuIds);
+		LOG.info("parse tvshow");
+		TvShows tvShows = MeijuTvUtil.guessTv(rssNews.getContent());
+		rssNews.setTvShows(tvShows);
 
 		rssNews.setStatus(RssNews.ST_FINISHED);
 		return rssNews;
