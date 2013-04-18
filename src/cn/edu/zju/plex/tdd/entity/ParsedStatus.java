@@ -3,6 +3,8 @@ package cn.edu.zju.plex.tdd.entity;
 import weibo4j.model.Status;
 
 public class ParsedStatus extends Status {
+	private static final long serialVersionUID = 6958395272310366338L;
+	
 	private String uname;
 	private String uid;
 	private String content; // weibo中的文本内容(去除了video,url)

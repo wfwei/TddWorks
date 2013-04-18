@@ -1,21 +1,19 @@
 package cn.edu.zju.plex.tdd.main;
 
-import cn.edu.zju.plex.tdd.module.RssNewsCrawler;
-import cn.edu.zju.plex.tdd.module.RssNewsParser;
-import cn.edu.zju.plex.tdd.module.WeiboCrawler;
-import cn.edu.zju.plex.tdd.module.WeiboParser;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Controller {
-	private static final Long ONE_HOUR = 3600000L;
-
 
 	public static void main(String[] args) {
-		RssNewsCrawler rssNewsCrawler = new RssNewsCrawler();
-		WeiboCrawler weiboCrawler = new WeiboCrawler();
-		RssNewsParser rssNewsParser = new RssNewsParser();
-		WeiboParser weiboParser = new WeiboParser();
 		
-		//http://marshal.easymorse.com/archives/3136		
+		ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(2);
+		
+		// RssNews 每隔8小时更新一次
+		scheduler.scheduleAtFixedRate(new RssNewsJob(), 0, 8, TimeUnit.HOURS);
+		// Weibo 每隔20分钟刷新一次
+		scheduler.scheduleAtFixedRate(new WeiboJob(), 0, 20, TimeUnit.MINUTES);
+		
 	}
 
 }

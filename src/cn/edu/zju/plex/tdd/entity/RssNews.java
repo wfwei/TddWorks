@@ -33,13 +33,12 @@ public class RssNews implements Cloneable{
 		} catch(CloneNotSupportedException e){
 			e.printStackTrace();
 		}
-		// TODO do I need deep clone???
 		return rssNews;
 	}
 
 	@Override
 	public String toString() {
-		return "newsrss:{id:" + id + ", title:" + title + ", status:" + status
+		return "newsrss:{id:" + id + ", title:" + title + ", link:" + link + ", status:" + status
 				+ "}";
 	}
 

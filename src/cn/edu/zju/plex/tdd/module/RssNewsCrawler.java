@@ -7,12 +7,16 @@ import org.horrabin.horrorss.RssChannelBean;
 import org.horrabin.horrorss.RssItemBean;
 import org.horrabin.horrorss.RssParser;
 
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.tools.HttpUtil;
 
-public class RssNewsCrawler implements Runnable {
+/**
+ * RssNews Crawler
+ * 
+ * @author plex
+ */
+public class RssNewsCrawler {
 
 	private static final Logger LOG = Logger.getLogger(RssNewsCrawler.class);
 	
@@ -22,7 +26,10 @@ public class RssNewsCrawler implements Runnable {
 	private RssParser rssParser = new RssParser();
 	private HttpUtil httpUtil = new HttpUtil();
 
-	private void checkUpdate(RssFeed rssFeed) {
+	public ArrayList<RssNews> fetchUpdate(RssFeed rssFeed) {
+		LOG.info("fetching rss news updates...");
+		
+		ArrayList<RssNews> res = new ArrayList<RssNews>();
 		try {
 			String feedPage = httpUtil.fetchPage(rssFeed.getFeed());
 			org.horrabin.horrorss.RssFeed feed = rssParser.loadString(feedPage);
@@ -30,7 +37,7 @@ public class RssNewsCrawler implements Runnable {
 			// Gets the channel information of the feed and
 			// display its title
 			RssChannelBean channel = feed.getChannel();
-			LOG.info("Get feed update: " + channel.getTitle());
+			LOG.debug("Get feed update: " + channel.getTitle());
 
 			// TODO category is not parsed???
 			List<RssItemBean> items = feed.getItems();
@@ -40,26 +47,16 @@ public class RssNewsCrawler implements Runnable {
 				rssnews.setFirstPart(item.getTitle(), item.getLink(),
 						item.getCategory(), item.getDescription(),
 						item.getPubDate(), page, rssFeed.getId());
-				DB4Tdd.insertRssNews(rssnews);
+				res.add(rssnews);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.toString());
 		}
+		LOG.info("get total rss news updates:" + res.size());
+		return res;
 
-	}
-
-	@Override
-	public void run() {
-		ArrayList<RssFeed> rssFeeds = DB4Tdd.getRssFeedList();
-		for (RssFeed rf : rssFeeds) {
-			checkUpdate(rf);
-		}
-	}
-
-	public static void main(String[] args) {
-//		new Thread(new RssNewsCrawler(), "RssCrawler").start();
 	}
 
 }

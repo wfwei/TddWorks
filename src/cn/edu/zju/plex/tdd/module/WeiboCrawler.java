@@ -1,5 +1,6 @@
 package cn.edu.zju.plex.tdd.module;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.log4j.Logger;
 
@@ -13,9 +14,10 @@ import weibo4j.model.WeiboException;
 
 /**
  * weibo crawler
+ * 
  * @author WangFengwei
  */
-public class WeiboCrawler implements Runnable {
+public class WeiboCrawler {
 
 	private final Logger LOG = Logger.getLogger(DB4Tdd.class);
 	private final long INTERVAL = 30000L; // 30 seconds?
@@ -28,20 +30,21 @@ public class WeiboCrawler implements Runnable {
 	}
 	
 	public WeiboCrawler(){};
-
-	@Override
-	public void run() {
+	
+	public ArrayList<Status> fetchAndStoreUpdate(){
+		ArrayList<Status> res = new ArrayList<Status>();
+		
 		for (String wuid : targetUsers.keySet()) {
 			LOG.info("start fetching weibo updates for user:" + wuid);
 			String lastUpdateWeibo = targetUsers.get(wuid);
 			Timeline tm = new Timeline();
 			Paging paging = new Paging();
-			int perNum = 200;
+			int perNum = 100;
 			paging.setCount(perNum);
 			boolean flag = false; // if caught @lastUpdateWeibo
 			String latestWeibo = null;
 			// 最多爬取最近的前1000条微博
-			for (int p = 1; p < 6; p++) {
+			for (int p = 1; p < 11; p++) {
 				paging.setPage(p);
 				try {
 					tm.client.setToken(accessToken);
@@ -63,10 +66,14 @@ public class WeiboCrawler implements Runnable {
 						}
 					} catch (WeiboException e) {
 						e.printStackTrace();
+						LOG.error(e.getMessage());
 					}
-					Thread.currentThread().sleep(INTERVAL);
+					
+					Thread.sleep(INTERVAL);
+					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
+					LOG.error(e.getMessage());
 				}
 				LOG.info("\tget weibo update:" + p * perNum);
 			}
@@ -76,14 +83,8 @@ public class WeiboCrawler implements Runnable {
 			} else
 				LOG.warn("not succeed in fetching weibo for user:" + wuid);
 		}
-
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-//		new Thread(new WeiboCrawler(), "WeiboCrawler").start();
+		
+		return res;
 	}
 
 }

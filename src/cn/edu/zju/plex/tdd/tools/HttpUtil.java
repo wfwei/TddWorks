@@ -91,6 +91,7 @@ public class HttpUtil {
 				byte[] bytes = EntityUtils.toByteArray(entity);
 
 				/* 获取头部Content-Type中包含了编码信息 */
+				@SuppressWarnings("deprecation")
 				String charSet = EntityUtils.getContentCharSet(entity);
 				/* 如果头部中没有，那么我们需要 查看页面源码，这个方法虽然不能说完全正确，因为有些粗糙的网页编码者没有在页面中写头部编码信息 */
 				if (charSet == null) {

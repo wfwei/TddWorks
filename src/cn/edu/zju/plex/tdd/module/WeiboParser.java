@@ -1,31 +1,32 @@
 package cn.edu.zju.plex.tdd.module;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 import cn.edu.zju.plex.tdd.tools.MeijuTvUtil;
 
-public class WeiboParser implements Runnable {
-	static {
-		PropertyConfigurator.configure("resources/log4j.properties");
-	}
+/**
+ * weibo parser
+ *  
+ * @author plex
+ */
+public class WeiboParser {
+
 	private static final Logger LOG = Logger.getLogger(WeiboParser.class);
-	private static final Long ONE_HOUR = 3600000L;
 
 	private static final Pattern WeiboTopicPatt = Pattern.compile("#(.*?)#");
 	private static final Pattern WeiboUrlPatt = Pattern
 			.compile("(http://t.cn/[^\\s]+)");
 	private static final Pattern AtPatt = Pattern.compile("(@[^\\s]+)");
 
-	void parse(ParsedStatus status) {
+	// TODO 直接在参数上修改是不是不太好
+	public void parse(ParsedStatus status) {
+		LOG.info("start parsing weibo status:"+status.getId());
+		
 		String wtext = status.getText();
 		String content = wtext;
 		StringBuffer sb;
@@ -75,28 +76,6 @@ public class WeiboParser implements Runnable {
 
 		// set status
 		status.setStatus(ParsedStatus.ST_FINISHED);
-	}
-
-	@Override
-	public void run() {
-		while (true) {
-			List<ParsedStatus> weiboToParse = DB4Tdd.getWeiboToParse(30);
-			LOG.info("Get " + weiboToParse.size() + " weibo status to parse...");
-
-			if (weiboToParse.size() == 0) {
-				LOG.info("Temporally done");
-				break;
-			} else {
-				for (ParsedStatus status : weiboToParse) {
-					parse(status);
-					DB4Tdd.updateParsedStatus(status);
-				}
-			}
-		}
-	}
-
-	public static void main(String args[]) {
-//		new Thread(new WeiboParser(), "WeiboParser").start();
 	}
 
 }
