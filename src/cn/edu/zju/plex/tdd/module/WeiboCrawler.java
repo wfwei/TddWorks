@@ -81,10 +81,11 @@ public class WeiboCrawler {
 			LOG.info("Fetching weibo updates for user:" + wuid
 					+ " over, total:" + count);
 
-			if (done && latestWeibo != null) {
+			if (latestWeibo != null) {
 				lastUpdateWeibo = latestWeibo;
 				DB4Tdd.updateWeiboTargets(wuid, lastUpdateWeibo);
-			} else
+			}
+			if(! done)
 				LOG.warn("not succeed in fetching weibo for user:" + wuid);
 
 			try {

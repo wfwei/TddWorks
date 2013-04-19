@@ -166,11 +166,13 @@ public final class DB4Tdd {
 				rf.setFeed(rs.getString(3));
 				rf.setLink(rs.getString(4));
 				rf.setCount(rs.getInt(5));
-				rf.setFirstUpdate(rs.getDate(6));
-				rf.setLastUpdate(rs.getDate(7));
+				rf.setFirstUpdate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+						.parse(rs.getString(6)));
+				rf.setLastUpdate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+						.parse(rs.getString(7)));
 				res.add(rf);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			LOG.warn(e.toString());
 		}
@@ -374,7 +376,8 @@ public final class DB4Tdd {
 				ps.setGeo(rs.getString(6));
 				ps.setUname(rs.getString(7));
 				ps.setUid(rs.getString(8));
-				ps.setCreatedAt(rs.getDate(9));
+				ps.setCreatedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+						.parse(rs.getString(9)));
 				ps.setText(rs.getString(10));
 				ps.setInReplyToStatusId(rs.getLong(11));
 				ps.setInReplyToUserId(rs.getLong(12));
@@ -384,7 +387,7 @@ public final class DB4Tdd {
 				ps.setStatus(RssNews.ST_READY);
 				res.add(ps);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			LOG.warn("error occured in getWeiboToParse: " + e.getMessage());
 			LOG.warn(sql);
