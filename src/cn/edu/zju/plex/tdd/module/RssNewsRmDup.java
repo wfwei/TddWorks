@@ -23,7 +23,8 @@ public class RssNewsRmDup {
 	}
 
 	/**
-	 * 判定是不是重复报道，计算a，b的jaccard距离，小于0.05则认为重复文本
+	 * 判定是不是重复报道，计算a，b的jaccard距离，小于0.05则认为重复文本 TODO seg words here, remove words
+	 * in databases;
 	 */
 	private static boolean judgeDup(RssNews a, RssNews b) {
 		Set<String> as = new HashSet<String>();

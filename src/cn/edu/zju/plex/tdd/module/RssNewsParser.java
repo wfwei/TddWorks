@@ -19,13 +19,14 @@ public class RssNewsParser {
 
 	public RssNews parse(RssNews rssNews) {
 		LOG.info("paring rssNews:" + rssNews);
-		
+
 		ParserFactory.getParser(rssNews).parse();
 
-		LOG.info("words segmentation");
-		String words = MyICTCLAS.fenci(rssNews.getContent());
-		rssNews.setWords(words);
-		
+		// 不再分次
+		// LOG.info("words segmentation");
+		// String words = MyICTCLAS.fenci(rssNews.getContent());
+		// rssNews.setWords(words);
+
 		LOG.info("parse tvshow");
 		TvShows tvShows = MeijuTvUtil.guessTv(rssNews.getContent());
 		rssNews.setTvShows(tvShows);
@@ -35,7 +36,7 @@ public class RssNewsParser {
 	}
 
 	public static void main(String args[]) {
-//		new Thread(new RssNewsParser(), "RssParser").start();
+		// new Thread(new RssNewsParser(), "RssParser").start();
 	}
 
 }

@@ -55,6 +55,8 @@ public class HttpUtil {
 	 * @time 2012-8-29
 	 */
 	public String fetchPage(String url) {
+		// TODO remove me
+		LOG.info("fetching url:" + url);
 		String html = null;
 		HttpGet httpget = new HttpGet(url);
 

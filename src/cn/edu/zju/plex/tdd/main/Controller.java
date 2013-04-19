@@ -19,7 +19,7 @@ public class Controller {
 		// TimeUnit.MINUTES);
 
 		new Thread(new RssNewsJob(), "RssNewsJob").start();
-		new Thread(new WeiboJob(), "WeiboJob").start();
+//		new Thread(new WeiboJob(), "WeiboJob").start();
 
 	}
 

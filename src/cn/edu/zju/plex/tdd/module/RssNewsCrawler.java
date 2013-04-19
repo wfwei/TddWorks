@@ -19,7 +19,7 @@ import cn.edu.zju.plex.tdd.tools.HttpUtil;
 public class RssNewsCrawler {
 
 	private static final Logger LOG = Logger.getLogger(RssNewsCrawler.class);
-	
+
 	// private static Pattern refreshPtn = Pattern
 	// .compile("<HTML>[^<]*<HEAD>[^<]*<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0;URL=(http://[^\"]+)\">[^<]*</HEAD>[^<]*</HTML>");
 
@@ -27,8 +27,8 @@ public class RssNewsCrawler {
 	private HttpUtil httpUtil = new HttpUtil();
 
 	public ArrayList<RssNews> fetchUpdate(RssFeed rssFeed) {
-		LOG.info("fetching rss news updates...");
-		
+		LOG.info("fetching rss news updates:" + rssFeed.getTitle());
+
 		ArrayList<RssNews> res = new ArrayList<RssNews>();
 		try {
 			String feedPage = httpUtil.fetchPage(rssFeed.getFeed());
@@ -36,12 +36,15 @@ public class RssNewsCrawler {
 
 			// Gets the channel information of the feed and
 			// display its title
-			RssChannelBean channel = feed.getChannel();
-			LOG.debug("Get feed update: " + channel.getTitle());
+			// RssChannelBean channel = feed.getChannel();
+			// LOG.debug("Get feed update: " + channel.getTitle());
 
-			// TODO category is not parsed???
+			// TODO category is not parsed
 			List<RssItemBean> items = feed.getItems();
 			for (RssItemBean item : items) {
+				if (item.getPubDate().getTime() < rssFeed.getLastUpdate()
+						.getTime())
+					break;
 				RssNews rssnews = new RssNews();
 				String page = httpUtil.fetchPage(item.getLink());
 				rssnews.setFirstPart(item.getTitle(), item.getLink(),

@@ -97,11 +97,10 @@ public final class DB4Tdd {
 				rssnews.setStatus(rs.getInt(9));
 				res.add(rssnews);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
 		}
 		return res;
 	}
@@ -207,7 +206,7 @@ public final class DB4Tdd {
 				LOG.warn(e.getMessage());
 				LOG.warn("sql is:\t" + sql);
 			} else
-				LOG.debug("duplicated entry:" + rssnews);
+				LOG.info("duplicated entry:" + rssnews);
 		}
 	}
 
@@ -477,8 +476,6 @@ public final class DB4Tdd {
 	}
 
 	/**
-	 * TODO test
-	 * 
 	 * @param timeLen
 	 * @return
 	 */
@@ -504,7 +501,7 @@ public final class DB4Tdd {
 					.format(sql, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 							.format(endDate));
 			rs = stmt.executeQuery(sql);
-			
+
 			while (rs.next()) {
 				RssNews rssnews = new RssNews();
 				rssnews.setId(rs.getLong(1));
@@ -530,10 +527,10 @@ public final class DB4Tdd {
 		return res;
 	}
 
-
 	public static void updateDelegate(RssNews rssNews) {
-		String sql = String
-				.format("update rss_news set delegate=%d where id=%d",rssNews.getDelegate(), rssNews.getId());
+		String sql = String.format(
+				"update rss_news set delegate=%d where id=%d",
+				rssNews.getDelegate(), rssNews.getId());
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
@@ -544,5 +541,93 @@ public final class DB4Tdd {
 			LOG.warn("sql:\t" + sql);
 		}
 	}
-	
+
+	public static void updateRssFeedLastUpdateTime(RssFeed rf) {
+		String sql = String.format(
+				"update rss_feeds set last_update='%s' where id=%d",
+				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rf
+						.getLastUpdate()), rf.getId());
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+
+	}
+
+	// images_count = -1是还没有获取的，没有是0
+	public static List<RssNews> getRssNewsToDownloadImages() {
+		String sql = "select id, images from rss_news where image_count = -1 limit 0, 100";
+		List<RssNews> res = new ArrayList<RssNews>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				RssNews rssnews = new RssNews();
+				rssnews.setId(rs.getLong(1));
+				rssnews.setImages(rs.getString(2));
+				res.add(rssnews);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+		return res;
+	}
+
+	public static void updateRssNewsImageCount(long rssNewsId, int count) {
+		String sql = "update rss_news set image_count = " + count
+				+ " where id=" + rssNewsId;
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+
+	}
+
+	public static List<ParsedStatus> getParsedStatusToDownloadImages() {
+		String sql = "select wid, wsmallimage, wmiddleimage, woriginalimage from meiju_weibo where image_count = -1 limit 0, 100";
+		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				ParsedStatus st = new ParsedStatus();
+				st.setId(rs.getString(1));
+				st.setThumbnailPic(rs.getString(2));
+				st.setBmiddlePic(rs.getString(3));
+				st.setOriginalPic(rs.getString(4));
+				res.add(st);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+		return res;
+	}
+
+	public static void updateParsedStatusImageCount(String statusId, int count) {
+		String sql = "update meiju_weibo set image_count = " + count
+				+ " where wid='" + statusId + "'";
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+
+	}
+
 }

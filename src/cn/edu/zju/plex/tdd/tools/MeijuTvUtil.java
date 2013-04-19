@@ -12,10 +12,11 @@ import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.module.WeiboParser;
 
 public class MeijuTvUtil {
-
+	// TODO 考虑更新问题，不要使用static
 	private static final HashMap<String, TvShows> Meijus = DB4Tdd.getMeijuTvs();
 	private static final Logger LOG = Logger.getLogger(WeiboParser.class);
 
+	// TODO 效率太低？？
 	public static TvShows guessTv(String content) {
 
 		HashMap<TvShows, Double> guessList = new HashMap<TvShows, Double>();
