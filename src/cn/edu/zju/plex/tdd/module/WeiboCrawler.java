@@ -36,8 +36,11 @@ public class WeiboCrawler {
 		ArrayList<Status> res = new ArrayList<Status>();
 
 		for (String wuid : targetUsers.keySet()) {
-			LOG.info("start fetching weibo updates for user:" + wuid);
 			String lastUpdateWeibo = targetUsers.get(wuid);
+			LOG.info("start fetching weibo updates for user:" + wuid
+					+ " lastUpdateWeibo:" + lastUpdateWeibo);
+			if (lastUpdateWeibo == null)
+				lastUpdateWeibo = "1";
 			Timeline tm = new Timeline();
 			Paging paging = new Paging();
 			int perNum = 100;
@@ -85,14 +88,8 @@ public class WeiboCrawler {
 				lastUpdateWeibo = latestWeibo;
 				DB4Tdd.updateWeiboTargets(wuid, lastUpdateWeibo);
 			}
-			if(! done)
+			if (!done)
 				LOG.warn("not succeed in fetching weibo for user:" + wuid);
-
-			try {
-				Thread.sleep(INTERVAL * 4);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 
 		return res;
