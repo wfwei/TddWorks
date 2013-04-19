@@ -28,12 +28,13 @@ public class WeiboCrawler {
 		this.accessToken = accessToken;
 		this.targetUsers = targetUsers;
 	}
-	
-	public WeiboCrawler(){};
-	
-	public ArrayList<Status> fetchAndStoreUpdate(){
+
+	public WeiboCrawler() {
+	};
+
+	public ArrayList<Status> fetchAndStoreUpdate() {
 		ArrayList<Status> res = new ArrayList<Status>();
-		
+
 		for (String wuid : targetUsers.keySet()) {
 			LOG.info("start fetching weibo updates for user:" + wuid);
 			String lastUpdateWeibo = targetUsers.get(wuid);
@@ -43,6 +44,7 @@ public class WeiboCrawler {
 			paging.setCount(perNum);
 			boolean done = false; // if caught @lastUpdateWeibo
 			String latestWeibo = null;
+			int count = 0;
 			// 最多爬取最近的前1000条微博
 			for (int p = 1; p < 11 && !done; p++) {
 				paging.setPage(p);
@@ -55,35 +57,43 @@ public class WeiboCrawler {
 							if (latestWeibo == null) {
 								latestWeibo = s.getId();
 							}
-							
+
 							if (Long.valueOf(s.getId()) <= Long
 									.valueOf(lastUpdateWeibo)) {
 								done = true;
 								break;
 							}
+							count++;
 							DB4Tdd.insertWeibo(s);
 						}
 					} catch (WeiboException e) {
 						e.printStackTrace();
 						LOG.error(e.getMessage());
 					}
-					
+
 					Thread.sleep(INTERVAL);
-					
+
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 					LOG.error(e.getMessage());
 				}
-				LOG.info("\tget weibo update:" + p * perNum);
 			}
-			
+			LOG.info("Fetching weibo updates for user:" + wuid
+					+ " over, total:" + count);
+
 			if (done && latestWeibo != null) {
 				lastUpdateWeibo = latestWeibo;
 				DB4Tdd.updateWeiboTargets(wuid, lastUpdateWeibo);
 			} else
 				LOG.warn("not succeed in fetching weibo for user:" + wuid);
+
+			try {
+				Thread.sleep(INTERVAL * 4);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-		
+
 		return res;
 	}
 

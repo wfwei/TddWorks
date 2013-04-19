@@ -19,7 +19,7 @@ import cn.edu.zju.plex.tdd.tools.TvfantasySplitUtil;
 public class RssNewsJob implements Runnable {
 
 	private static final Logger LOG = Logger.getLogger(RssNewsJob.class);
-
+	private final int EIGHT_HOUR = 8 * 60 * 60 * 1000;
 	private RssNewsCrawler crawler = new RssNewsCrawler();
 	private RssNewsParser parser = new RssNewsParser();
 
@@ -37,7 +37,7 @@ public class RssNewsJob implements Runnable {
 			LOG.info("Get " + rssNewsToParse.size() + " rss items to parse...");
 
 			if (rssNewsToParse.size() == 0) {
-				LOG.info("Temporally done");
+				LOG.info("RssNews parse work temporally done");
 				break;
 			} else {
 				for (RssNews rssNews : rssNewsToParse) {
@@ -62,7 +62,7 @@ public class RssNewsJob implements Runnable {
 			list.toArray(rssNewsToMerge);
 
 			if (rssNewsToMerge.length < 2) {
-				LOG.info("get all merge work temply done");
+				LOG.info("RssNews merge work temply done");
 				break;
 			} else {
 				RssNewsRmDup.deals(rssNewsToMerge);
@@ -77,22 +77,27 @@ public class RssNewsJob implements Runnable {
 
 	@Override
 	public void run() {
-		LOG.info("Loop start for RssNewsJob");
+		while (true) {
+			LOG.info("Loop start for RssNewsJob");
+			try {
+				LOG.info("开始下载rss更新");
+				fetchRssUpdates();
 
-		try {
-			LOG.info("开始下载rss更新");
-			fetchRssUpdates();
+				LOG.info("开始解析rss_news");
+				parseRssNews();
 
-			LOG.info("开始解析rss_news");
-			parseRssNews();
-
-			LOG.info("开始去重");
-			rmDump();
-		} catch (Throwable t) {
-			LOG.error(t);
-			LOG.error(t.getCause());
-		} finally {
-			LOG.info("Loop stop for RssNewsJob");
+				LOG.info("开始去重");
+				rmDump();
+			} catch (Throwable t) {
+				LOG.error(t.getCause());
+			} finally {
+				LOG.info("Loop over for RssNewsJob");
+				try {
+					Thread.sleep(EIGHT_HOUR);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

@@ -17,6 +17,7 @@ import cn.edu.zju.plex.tdd.module.WeiboParser;
 public class WeiboJob implements Runnable {
 
 	private final Logger LOG = Logger.getLogger(WeiboJob.class);
+	private final int HALF_HOUR = 1800000;
 	private WeiboCrawler crawler = new WeiboCrawler();
 	private WeiboParser parser = new WeiboParser();
 
@@ -43,22 +44,32 @@ public class WeiboJob implements Runnable {
 
 	@Override
 	public void run() {
-		LOG.info("Loop start for WeiboJob");
-		try {
-			LOG.info("开始下载微博更新");
-			fetchWeiboUpdate();
+		while (true) {
+			LOG.info("Loop start for WeiboJob");
+			try {
+				LOG.info("开始下载微博更新");
+				fetchWeiboUpdate();
 
-			LOG.info("开始解析微博");
-			parseWeibo();
+				LOG.info("开始解析微博");
+				parseWeibo();
 
-			// 去重
-			// TODO if needed
-		} catch (Throwable t) {
-			LOG.error(t.getMessage());
-			LOG.error(t.getCause().getMessage());
-		} finally {
-			LOG.info("Loog over for WeiboJob");
+				// 去重
+				// TODO if needed
+			} catch (Throwable t) {
+				LOG.error(t.getCause().getMessage());
+			} finally {
+				LOG.info("Loog over for WeiboJob");
+				try {
+					Thread.sleep(HALF_HOUR);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+	}
+	
+	public static void main(String[] args) {
+		new Thread(new WeiboJob(), "WeiboJob").start();
 	}
 
 }
