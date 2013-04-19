@@ -23,18 +23,15 @@ public class RssNewsJob implements Runnable {
 	private RssNewsCrawler crawler = new RssNewsCrawler();
 	private RssNewsParser parser = new RssNewsParser();
 
-	@Override
-	public void run() {
-		LOG.info("Loop start for RssNewsJob");
-
-		// 下载rss更新
+	private void fetchRssUpdates() {
 		ArrayList<RssFeed> rssFeeds = DB4Tdd.getRssFeedList();
 		for (RssFeed rf : rssFeeds) {
 			for (RssNews rssnews : crawler.fetchUpdate(rf))
 				DB4Tdd.insertRssNews(rssnews);
 		}
+	}
 
-		// 解析rss_news
+	private void parseRssNews() {
 		while (true) {
 			List<RssNews> rssNewsToParse = DB4Tdd.getRssNewsToParse(30);
 			LOG.info("Get " + rssNewsToParse.size() + " rss items to parse...");
@@ -55,7 +52,9 @@ public class RssNewsJob implements Runnable {
 			}
 		}
 
-		// 去重, 这个基本无效...
+	}
+
+	private void rmDump() {
 		int timeLen = 172800000;// two days
 		while (true) {
 			List<RssNews> list = DB4Tdd.getRssNewsToMerge(timeLen);
@@ -73,6 +72,27 @@ public class RssNewsJob implements Runnable {
 				LOG.info("merge rss news:" + rssNewsToMerge.length);
 			}
 
+		}
+	}
+
+	@Override
+	public void run() {
+		LOG.info("Loop start for RssNewsJob");
+
+		try {
+			LOG.info("开始下载rss更新");
+			fetchRssUpdates();
+
+			LOG.info("开始解析rss_news");
+			parseRssNews();
+
+			LOG.info("开始去重");
+			rmDump();
+		} catch (Throwable t) {
+			LOG.error(t);
+			LOG.error(t.getCause());
+		} finally {
+			LOG.info("Loop stop for RssNewsJob");
 		}
 	}
 

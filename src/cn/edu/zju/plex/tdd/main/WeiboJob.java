@@ -19,15 +19,12 @@ public class WeiboJob implements Runnable {
 	private final Logger LOG = Logger.getLogger(WeiboJob.class);
 	private WeiboCrawler crawler = new WeiboCrawler();
 	private WeiboParser parser = new WeiboParser();
-	
-	@Override
-	public void run() {
-		LOG.info("Loop start for WeiboJob");
-		
-		// fetch weibo update
+
+	private void fetchWeiboUpdate() {
 		crawler.fetchAndStoreUpdate();
-		
-		// parse
+	}
+
+	private void parseWeibo() {
 		while (true) {
 			List<ParsedStatus> weiboToParse = DB4Tdd.getWeiboToParse(30);
 			LOG.info("Get " + weiboToParse.size() + " weibo status to parse...");
@@ -42,9 +39,26 @@ public class WeiboJob implements Runnable {
 				}
 			}
 		}
-		
-		// 去重
-		// TODO if needed
+	}
+
+	@Override
+	public void run() {
+		LOG.info("Loop start for WeiboJob");
+		try {
+			LOG.info("开始下载微博更新");
+			fetchWeiboUpdate();
+
+			LOG.info("开始解析微博");
+			parseWeibo();
+
+			// 去重
+			// TODO if needed
+		} catch (Throwable t) {
+			LOG.error(t.getMessage());
+			LOG.error(t.getCause().getMessage());
+		} finally {
+			LOG.info("Loog over for WeiboJob");
+		}
 	}
 
 }
