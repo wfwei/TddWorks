@@ -3,8 +3,11 @@ package cn.edu.zju.plex.tdd.module;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +40,7 @@ public class MeijuTvAnalyzer {
 		HashMap<TvShows, Double> guessList = new HashMap<TvShows, Double>();
 		// 美女上错身/aka 不/d 简单/a oh sit!/aka 666 park avenue/aka 逝者之证/aka
 		Matcher mat = FenciResPatt.matcher(MyICTCLAS.fenci(content));
+		Map<String, Integer> wordMap = new HashMap<String, Integer>();
 		while (mat.find()) {
 			String word = mat.group(1).trim();
 			String cixing = mat.group(2).trim();
@@ -48,6 +52,13 @@ public class MeijuTvAnalyzer {
 
 				TvShows tvShow = Meijus.get(word);
 				if (tvShow != null) {
+					if (wordMap.containsKey(word))
+						wordMap.put(word, wordMap.get(word) + 1);
+					else
+						wordMap.put(word, 1);
+
+					weight /= wordMap.get(word) * wordMap.get(word);
+
 					if (guessList.containsKey(tvShow))
 						weight += guessList.get(tvShow);
 					guessList.put(tvShow, weight);
@@ -70,7 +81,7 @@ public class MeijuTvAnalyzer {
 			if (entry.getValue() >= 2)
 				candidateCount++;
 		}
-		if (candidateCount > 4) {
+		if (candidateCount > 4 || maxW < 2) {
 			LOG.warn("found " + candidateCount + " different meiju in \n"
 					+ content);
 			return result = new TvShows();

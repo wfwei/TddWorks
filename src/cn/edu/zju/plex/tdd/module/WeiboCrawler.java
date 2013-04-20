@@ -20,7 +20,7 @@ import weibo4j.model.WeiboException;
 public class WeiboCrawler {
 
 	private final Logger LOG = Logger.getLogger(DB4Tdd.class);
-	private final long INTERVAL = 30000L; // 30 seconds?
+	private final long INTERVAL = 12000L; // 12 seconds
 	private String accessToken = "2.00l9nr_DfUKrWDf655d3279arZgVvD";
 	private HashMap<String, String> targetUsers = DB4Tdd.getWeiboTargets();
 

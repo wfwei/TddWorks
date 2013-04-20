@@ -111,6 +111,7 @@ public class RssNewsJob implements Runnable {
 							if (images[i].startsWith(".")
 									|| images[i].startsWith("/")) {
 								// TODO
+								
 							}
 							boolean success = ImageFetcher.saveimage(images[i],
 									rootPath + "news-" + rssNews.getId() + "-"
