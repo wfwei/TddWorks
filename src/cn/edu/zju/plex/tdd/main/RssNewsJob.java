@@ -108,6 +108,10 @@ public class RssNewsJob implements Runnable {
 					for (int i = 0; i < images.length; i++) {
 						Matcher m = ImagePatt.matcher(images[i]);
 						if (m.find()) {
+							if (images[i].startsWith(".")
+									|| images[i].startsWith("/")) {
+								// TODO
+							}
 							boolean success = ImageFetcher.saveimage(images[i],
 									rootPath + "news-" + rssNews.getId() + "-"
 											+ idx + m.group(1));
@@ -138,8 +142,8 @@ public class RssNewsJob implements Runnable {
 		while (true) {
 			LOG.info("Loop start for RssNewsJob");
 			try {
-//				LOG.info("开始下载rss更新");
-//				fetchRssUpdates();
+				// LOG.info("开始下载rss更新");
+				// fetchRssUpdates();
 
 				LOG.info("开始解析rss_news");
 				parseRssNews();

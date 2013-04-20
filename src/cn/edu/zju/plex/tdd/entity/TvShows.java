@@ -5,7 +5,8 @@ public class TvShows {
 	private String cname;
 	private String ename;
 	private String doubanid;
-	private String akas;
+	private String aka;
+	private String aka_original;
 
 	public TvShows(String sid, String cname, String ename) {
 		this.sid = sid;
@@ -61,12 +62,20 @@ public class TvShows {
 		this.doubanid = doubanid;
 	}
 
-	public String getAkas() {
-		return akas;
+	public String getAka() {
+		return aka;
 	}
 
-	public void setAkas(String akas) {
-		this.akas = akas;
+	public void setAka(String akas) {
+		this.aka = akas;
+	}
+
+	public String getAka_original() {
+		return aka_original;
+	}
+
+	public void setAka_original(String aka_original) {
+		this.aka_original = aka_original;
 	}
 
 	public boolean equals2(TvShows show) {

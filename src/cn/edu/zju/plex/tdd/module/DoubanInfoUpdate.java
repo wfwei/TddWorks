@@ -17,7 +17,7 @@ public class DoubanInfoUpdate {
 			IllegalAccessException, Exception {
 		String sid = tvShow.getSid();
 		String url = tvShow.getDoubanid();
-		String oldAkas = tvShow.getAkas();
+		String oldAkas = tvShow.getAka() + tvShow.getAka_original();
 		try {
 			String tum = httpUtil.fetchPage(url);
 			JSONObject jobj = new JSONObject(tum);
@@ -32,7 +32,7 @@ public class DoubanInfoUpdate {
 					newAkas.append(aka).append(",");
 			}
 			if (newAkas.length() > 0) {
-				newAkas.append(oldAkas);
+				newAkas.append(tvShow.getAka());
 				DB4Tdd.updateTvShowAka(sid, newAkas.toString());
 			}
 
@@ -55,7 +55,7 @@ public class DoubanInfoUpdate {
 	}
 
 	public static void main(String[] args) throws Exception {
-		// updateDoubanIdToV2();
+		updateDoubanIdToV2();
 		DoubanInfoUpdate douban = new DoubanInfoUpdate();
 		for (TvShows tvShow : DB4Tdd.getTvShowList()) {
 			if (tvShow.getDoubanid() == null

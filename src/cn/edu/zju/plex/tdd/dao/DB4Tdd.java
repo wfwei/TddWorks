@@ -693,12 +693,8 @@ public final class DB4Tdd {
 				String ename = rs.getString(3);
 				TvShows tvShow = new TvShows(sid, cname, ename);
 				tvShow.setDoubanid(rs.getString(4));
-				String akas = "";
-				if (rs.getString(5) != null)
-					akas += rs.getString(5) + ",";
-				if (rs.getString(6) != null)
-					akas += rs.getString(6) + ",";
-				tvShow.setAkas(akas);
+				tvShow.setAka(rs.getString(5));
+				tvShow.setAka_original(rs.getString(6));
 				res.add(tvShow);
 			}
 
