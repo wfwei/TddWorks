@@ -6,7 +6,6 @@ import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.parser.ParserFactory;
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
-import cn.edu.zju.plex.tdd.tools.MeijuTvUtil;
 
 /**
  * RssNews parser
@@ -22,21 +21,12 @@ public class RssNewsParser {
 
 		ParserFactory.getParser(rssNews).parse();
 
-		// 不再分次
-		// LOG.info("words segmentation");
-		// String words = MyICTCLAS.fenci(rssNews.getContent());
-		// rssNews.setWords(words);
-
 		LOG.info("parse tvshow");
-		TvShows tvShows = MeijuTvUtil.guessTv(rssNews.getContent());
+		TvShows tvShows = MeijuTvAnalyzer.guessTv(rssNews.getContent());
 		rssNews.setTvShows(tvShows);
 
 		rssNews.setStatus(RssNews.ST_FINISHED);
 		return rssNews;
-	}
-
-	public static void main(String args[]) {
-		// new Thread(new RssNewsParser(), "RssParser").start();
 	}
 
 }

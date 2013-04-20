@@ -1,685 +1,1146 @@
-不简单	n
-逝者之证	n
-联盟	n
-靓太唔易做(港)	n
-厨房噩梦	n
-唐顿庄园	n
-老爸老妈的浪漫史	n
-大爆炸理论	n
-喋血街头	n
-我欲为人	n
-美女上错身	n
-风城烈火	n
-客户名单	n
-拉字至上－真人秀	n
-神探夏洛克	n
-頓悟人生(台)	n
-谍影迷情	n
-一鸣惊人	n
-厨房噩梦	n
-第五季	n
-迷踪	n
-穷逼姐妹花	n
-订婚法则	n
-死了都要上网	n
-间谍亚契	n
-工作男	n
-社区学院	n
-下一位博士	n
-真人秀	n
-天赋秉异	n
-美国丽人真人秀	n
-新常态	n
-心魔	n
-第三季	n
-卧底老板	n
-妖女迷行	n
-糗事集锦	n
-神秘岛(台)	n
-邪恶力量	n
-犯罪现场鉴证	n
-海滨帝国	n
-宅鬼逐个捉	n
-青春密语	n
-第五季	n
-不可能的任务	n
-劫后余生	n
-灵异之城	n
-生活向前冲	n
-失踪	n
-致命的女性	n
-剧集人生	n
-舞池争锋	n
-侠胆雄狮	n
-下一站歌后	n
-金装律师	n
-花边教主	n
-拉字至上—真人秀	n
-犯罪现场迈阿密篇	n
-泽西制造	n
-复仇	n
-老妈与奶爸	n
-吐槽姐妹	n
-警察世家	n
-靓太唔易做	n
-流言教主	n
-地心游记2	n
-绯闻女孩	n
-美国恐怖故事	n
-社区大学	n
-神秘圈	n
-小城疑云	n
-魔鬼卡车	n
-医神	n
-南国医恋	n
-军嫂们	n
-追踪	n
-妙警贼探	n
-冷面女法医	n
-飞黄腾达	n
-女孩我最大(台)	n
-幸存者	n
-吸血鬼日记	n
-制毒师	n
-凯丽日记	n
-后声可畏	n
-心灵旋律	n
-纽约警察故事	n
-明迪烦事多	n
-小律师大作为	n
-约会规则	n
-港湾	n
-加州迷情	n
-射手	n
-替身姐妹	n
-都市侠盗	n
-麦克和茉莉	n
-家庭伙伴	n
-美少女的谎言	n
-英国偶像	n
-最后一人	n
-绅士养成记	n
-时尚之星	n
-极速前进	n
-与星共舞	n
-打破规则（暂译）	n
-鉴证行动组	n
-未知因素	n
-与星共舞	n
-纳什维尔	n
-第二季	n
-倒霉蛋的新生	n
-菜鸟警察	n
-私家医情	n
-蛇蝎美人	n
-护士当家	n
-少而为父	n
-笼困	n
-懵懂少女	n
-拉斯维加斯	n
-无耻家庭	n
-飞黄腾达	n
-妙探雙姝	n
-家有贱女	n
-摩登家庭	n
-荒野求爱	n
-周六夜现场	n
-地心历险记2：神秘岛	n
-全美超模	n
-斯巴达克斯	n
-爆笑办公室	n
-青涩警队	n
-妮基塔女郎	n
-尴尬	n
-囧女珍娜	n
-老爸老妈罗曼史	n
-闹鬼的公路	n
-阿三汉堡王	n
-内鬼	n
-欲乱绝情妻	n
-寻踪者	n
-钻石单身汉真人秀	n
-变形金刚-猛兽侠	n
-衰仔乐园	n
-神探	n
-火线警探	n
-克里夫兰秀	n
-学徒	n
-火线警告	n
-谎言屋	n
-二当家	n
-无耻之徒(美版)	n
-噬血真爱	n
-末世	n
-灵书妙探	n
-如果还有明天	n
-路易不容易	n
-混乱之子	n
-二零一二	n
-新闻编辑室	n
-血玫瑰	n
-超级减肥王	n
-神秘因素	n
-南方公园	n
-绝望主妇	n
-反恐危机	n
-海军罪案调查处	n
-洛杉矶	n
-绯闻私校	n
-八卦女郎	n
-鬼影约章(港)	n
-死党	n
-欲望师奶	n
-鬼便车	n
-执子之手(英版)	n
-致命美人	n
-黑帮医生	n
-鬼影行动	n
-新福尔摩斯	n
-美国达人	n
-彻底改变之家庭再造	n
-急速前进	n
-当夏洛克遇见华生	n
-行尸走肉	n
-真实世界公路竞技版之地狱二	n
-核国风云	n
-衰姐们	n
-改变游戏	n
-第63届艾美奖颁奖典礼	n
-天桥风云	n
-外科实习生格蕾	n
-平地风云	n
-尼基塔	n
-美国版我欲为人	n
-政坛野兽	n
-梅林传奇	n
-妙贼警探	n
-永远的好朋友	n
-碟中谍4	n
-破釜沉舟	n
-中产家庭	n
-触摸未来	n
-芝加哥烈焰	n
-愤怒管理	n
-艾美奖颁奖典礼	n
-舞林争霸	n
-第一季	n
-第45届年度乡村音乐颁奖典礼	n
-吨级双宝	n
-无耻家庭(美版)	n
-恐怖都市传说	n
-無法之子	n
-拍档	n
-郊区是监狱	n
-办公室	n
-辣女队医	n
-罪案实鉴	n
-傲骨贤妻	n
-规则改变	n
-嗜血娇娃	n
-篮球兄弟	n
-x达人秀	n
-家庭朋友	n
-嗜血判官	n
-实习医生格蕾	n
-第十五季	n
-神秘河	n
-费城永远阳光灿烂	n
-游魂人间	n
-南方警察	n
-拉字至上	n
-阿尔法战士	n
-福尔摩斯	n
-谋杀	n
-办公室	n
-本和凯特	n
-洛城警事	n
-私人诊所	n
-疑犯追踪	n
-快乐结局	n
-见证	n
-复仇	n
-幡然悔悟	n
-第四季	n
-郊区故事	n
-冰与火之歌	n
-美国青少年的私密生活	n
-第七季	n
-干嘛炒我	n
-夏威夷搅基队	n
-世外秘岛	n
-生活大爆炸	n
-鬼楼契约	n
-怪杰医生豪斯	n
-辛普森一家	n
-鞋店事务所	n
-反恐危机(台)	n
-法律与秩序	n
-开膛街	n
-总统一家	n
-零点时刻	n
-决战伸展台	n
-汉尼拔	n
-美国好声音	n
-堕落天空	n
-青春密语	n
-风城烈焰	n
-疑踪	n
-幽灵协议	n
-基本正常	n
-家有后爹	n
-猎捕	n
-洛杉矶海军犯罪调查处	n
-第一季	n
-美国谍梦	n
-新世纪福尔摩斯(港/台)	n
-基本演绎法	n
-嗜血法医	n
-mtv电影颁奖礼	n
-鬼上车	n
-加州靡情	n
-忧愁河上桥	n
-家庭工具	n
-大减肥	n
-美国怪谭	n
-八卦天后	n
-生活大爆炸	n
-癌莫能助	n
-小镇保全	n
-少年奶爸	n
-彪悍人生	n
-绝命毒师	n
-绿箭侠	n
-拉字至上真人秀	n
-当顿庄园	n
-世外秘岛(港)	n
-谎言之屋	n
-暗战(港)	n
-迈阿密	n
-灵妻	n
-家族风云	n
-父母好室友	n
-新编夏洛克	n
-国土安全	n
-终极格斗王	n
-拯救希望	n
-泽西海滩	n
-地狱厨房	n
-美国怪谈	n
-恶搞之家	n
-地心探险记2	n
-鞋店里的律师行	n
-迷离档案	n
-律政双雄	n
-最后一人	n
-新闻演播室	n
-格蕾的解剖	n
-不眠之夜	n
-暗战	n
-小人物浮生记	n
-杰茜驾到	n
-血色日记	n
-废柴联盟	n
-决战芭蕾之巅	n
-医人当自强	n
-糖衣陷阱	n
-美人不可貌相	n
-异世奇人	n
-鸿运赛马	n
-共同法则	n
-妙女神探	n
-欢乐合唱团	n
-妮基塔	n
-国土安全	n
-东岸赌城风云	n
-泛美航空	n
-黑吃黑	n
-魔幻都市	n
-美版厨艺大师	n
-犯罪心理	n
-职业特工队	n
-美丽的小骗子	n
-废柴再造	n
-职业特工队4	n
-法律与秩序:特殊受害者	n
-吸血新世代(港)	n
-黑衣天使	n
-不可遗忘	n
-你认为你是谁	n
-黑帮天使	n
-魔约之宅	n
-妙手愈荣华	n
-猫鼠游戏	n
-罪案终结	n
-无证律师	n
-英版地狱厨房	n
-绯闻少女	n
-制服搭档	n
-天赋秉异	n
-真爱拍档	n
-陽光照我心	n
-摩登家庭	n
-异度觉醒	n
-王座游戏	n
-纽约篇	n
-三年之痒	n
-全美一叮	n
-美版非诚勿扰	n
-無政府之子	n
-灵界	n
-追梦女孩	n
-尴哩个尬(豆友译名)	n
-天堂执法者	n
-外星邻居	n
-格林	n
-安全警报	n
-公园与游憩	n
-幸福终点站	n
-犬人笑传	n
-金童	n
-x音素	n
-谎言堂	n
-绅士养成记	n
-十三号仓库	n
-老大哥(美版)	n
-麦迪逊狂人	n
-明星二重唱	n
-戏中迷局	n
-陨落星辰	n
-当代家庭	n
-独木岭	n
-豪斯医生	n
-走出艳阳天	n
-嫌疑人	n
-吸血新世代	n
-绝望的主妇	n
-诉讼双雄	n
-家庭滑稽录像	n
-重案组	n
-摩登白宫	n
-先声夺人	n
-入侵	n
-外来女婿	n
-全美超级模特新秀大赛	n
-少男老爸	n
-戏里戏外	n
-神秘博士	n
-御姐奶爸	n
-犯罪现场调查	n
-新朱门恩怨	n
-辛普森一家	n
-超自然	n
-天才理论传	n
-追踪者	n
-美版办公室	n
-风城大佬	n
-打破规则	n
-西镇警魂	n
-都市女孩	n
-斯巴达克思	n
-左右不逢源	n
-简	n
-犯罪现场	n
-纽约篇	n
-罪案实鉴	n
-纽约	n
-维加斯	n
-奥林匹克运动会	n
-肥肥和胖胖	n
-超感神探	n
-音乐之乡	n
-联盟	n
-反击	n
-革命	n
-记忆神探	n
-创智赢家	n
-居家男人	n
-良家恶女	n
-设计人生	n
-替身姐妹	n
-单身汉公寓	n
-双面法医	n
-新飞跃比佛利	n
-x音素(美版)	n
-心机少女	n
-犯罪现场	n
-迈阿密	n
-新闻中心	n
-好汉两个半	n
-她来自泽西	n
-神秘岛	n
-西装革律	n
-歇洛克	n
-怪医豪斯	n
-鬼影约章	n
-人生苦短	n
-波吉亚家族	n
-大西洋帝国	n
-非常人贩	n
-神秘之河	n
-危机边缘	n
-舞魅天下	n
-神秘谋杀	n
-地心冒险2	n
-血与沙	n
-犯罪现场纽约篇	n
-惠特妮	n
-律政佳人	n
-彻夜难眠	n
-天崩	n
-达拉斯2012	n
-青山镇	n
-奥运囧事多	n
-阿森一族	n
-檀岛骑警	n
-中间人	n
-真人秀：你认为你是谁	n
-美国版	n
-谎言游戏	n
-达芬奇的恶魔	n
-无耻之徒	n
-致命毒师	n
-x达人秀(美版)	n
-洛城公寓	n
-拉斯维加斯往事	n
-跟踪	n
-秘密特工	n
-奶爸当家	n
-大人物拿破仑	n
-避风港	n
-纽约	n
-超越时间线	n
-政治动物	n
-666号鬼宅	n
-美国恐怖故事	n
-天桥骄子	n
-合法	n
-为人父母	n
-杀戮	n
-福尔摩斯：基本演绎法	n
-费城阳光	n
-地狱厨房(英版)	n
-缉凶记	n
-鬼上车/鬼便车	n
-马奎萨斯群岛	n
-惊爆时刻	n
-厨艺大师	n
-灭罪鉴证科(港)	n
-律政宝贝	n
-新飞越比佛利	n
-灵异妙探	n
-胖子的爱情	n
-糖衣陷阱	n
-职场四少	n
-全美超模大赛	n
-单身毒妈	n
-废材联盟	n
-谁偷了我的裤子	n
-碟中谍	n
-抢椅子游戏	n
-社区生活	n
-设计不简单	n
-网疗记	n
-朋克不死	n
-反击	n
-应召男	n
-頓悟人生	n
-绿箭	n
-整夜难眠	n
-丑闻	n
-体育老师笑传	n
-记忆神探	n
-洛克菲勒广场30号	n
-老大哥	n
-不可能的任务4	n
-鸭子王朝	n
-传说	n
-csi犯罪现场(台)	n
-熟女镇	n
-地狱之轮	n
-模特再造	n
-破产姐妹	n
-鬼影行动(台)	n
-广告狂人	n
-珍妮制造	n
-缉凶记(港)	n
-我们到了吗	n
-人模狗样(豆友译名)	n
-伙伴	n
-我用青春买醉	n
-一戏之间	n
-律政巾帼	n
-f档案(港)	n
-f档案	n
-动物诊所	n
-美女与野兽	n
-南国警察	n
-第四十六届超级碗	n
-凯莉日记	n
-MTV电影颁奖礼	n
-“基”本正常	n
-黑白怎么配	n
-灵界	n
-流言蜚女	n
-中之道	n
-醍醐灌顶	n
-识骨寻踪	n
-执子之手	n
-夏威夷特勤组	n
-半路情缘	n
-童话镇	n
-谁比我糗	n
-绝命杀局	n
-X音素(美版)	n
-地心历险记2	n
-欲海医心	n
-公园与休憩	n
-无耻之徒(美版)	n
-特殊受害者	n
-杀手之王	n
-致命陷阱	n
-恶魔岛	n
-美国之声	n
-猎杀行动	n
-直弯好基友	n
-决战时装伸展台	n
-搞怪一家人	n
-美国版	n
-家有喜旺	n
-csi犯罪现场	n
-异镇风云	n
-律政俏师太	n
-纸牌屋	n
-特效化妆师大对决	n
-真爱如血	n
-钻石单身汉	n
-第8季	n
-真爱如血	n
-灭世	n
-流氓医生	n
-变局	n
-脚尖上的世界	n
-疯狂单身汉	n
-犯罪现场	n
-秘社	n
-黑名单	n
-异镇	n
-灭罪鉴证科	n
-罪案现场	n
-loser党	n
-不是冤家不聚头	n
-格利芬一家	n
-迈克和茉莉	n
-非常突然	n
-少狼	n
-无法忘记	n
-减肥达人	n
-国土	n
-血迷棕榈	n
-新闻间轶事	n
-中产家庭	n
-海军罪案调查处：洛杉矶	n
-南城警事	n
-名声大噪	n
-超自然目击者	n
-我为喜剧狂	n
-体操公主	n
-复仇女神	n
-秘社	n
-权力的游戏	n
-女孩我最大	n
-不眠之夜	n
-真血	n
-兽医诊所	n
-新世纪福尔摩斯	n
-南国医恋	n
-熟女当道	n
-郊区故事	n
-少女巫师	n
-舞林争霸	n
-副总统	n
-破产女孩	n
-好汉两个半	n
-开心汉堡店	n
-医缘	n
-白教堂血案	n
-报仇雪恨	n
-执法双雄	n
-2011年第63届艾美奖颁奖典礼	n
-杰茜驾到	n
-美国老豆	n
-哪一位博士	n
-犬友笑传	n
-泛美航空	n
-超级制作人	n
-另类家庭	n
-情何以堪	n
-惠特妮	n
-两两相望	n
-23号公寓的坏女孩	n
-追灵妙探	n
-终极审判	n
-南方四贱客	n
-美国老爸	n
-直弯拍档	n
-人模狗样	n
-血夜迷情	n
-周一清晨	n
-炫舞飞扬	n
-疑犯追踪	n
-谎言游戏	n
-唐顿庄园	n
-错位青春	n
-交换命运	n
-美人谋律	n
-罪案第六感	n
-13号仓库	n
-善恶双生	n
-天才也性感	n
-打工姐妹花	n
-宅女医生	n
-真人秀	n
-单身汉公寓	n
-美国偶像	n
-尴哩个尬	n
-电视剧版	n
+不简单@@aka
+oh sit!@@aka
+666 park avenue@@aka
+逝者之证@@aka
+间谍亚契 第一季@@aka
+联盟@@aka
+it’s always sunny in philadelphia@@aka
+厨房噩梦@@aka
+唐顿庄园@@aka
+老爸老妈的浪漫史@@aka
+nashville@@aka
+大爆炸理论@@aka
+喋血街头@@aka
+los angeles@@aka
+我欲为人@@aka
+美女上错身@@aka
+客户名单@@aka
+风城烈火@@aka
+神探夏洛克@@aka
+i hate my teenage daughter@@aka
+a gifted man@@aka
+真人秀 单身汉公寓@@aka
+天堂执法者 第一季@@aka
+心机少女 第一季@@aka
+谍影迷情@@aka
+家庭朋友 第一季@@aka
+一鸣惊人@@aka
+the client list@@aka
+厨房噩梦 第五季@@aka
+touch@@aka
+迷踪@@aka
+妙贼警探 第一季@@aka
+穷逼姐妹花@@aka
+face off@@aka
+订婚法则@@aka
+eureka@@aka
+hell’s kitchen @@aka
+死了都要上网@@aka
+scandal@@aka
+dr. who season 7@@aka
+绅士养成记 第一季@@aka
+unforgettable@@aka
+间谍亚契@@aka
+国土安全 第一季@@aka
+工作男@@aka
+社区学院@@aka
+fame is at your doorstep@@aka
+i just want my pants back@@aka
+doctor who @@aka
+super bowl@@aka
+下一位博士@@aka
+犯罪现场 纽约篇@@aka
+真人秀@@aka
+breaking in@@aka
+天赋秉异@@aka
+harry's law@@aka
+美国丽人真人秀@@aka
+新常态@@aka
+american dad!@@aka
+心魔@@aka
+the americans @@aka
+covert affairs@@aka
+黑色孤儿@@aka
+hawaii 5-0@@aka
+卧底老板@@aka
+妖女迷行@@aka
+美丽的小骗子 第一季@@aka
+糗事集锦@@aka
+new york season 1@@aka
+blood and sand@@aka
+犯罪现场纽约篇 第一季@@aka
+parenthood @@aka
+邪恶力量@@aka
+masterchef@@aka
+第66届托尼奖颁奖典礼@@aka
+犯罪现场鉴证@@aka
+the new normal@@aka
+海滨帝国@@aka
+青春密语@@aka
+under the dome@@aka
+不可能的任务@@aka
+the closer@@aka
+劫后余生@@aka
+灵异之城@@aka
+the mindy project@@aka
+生活向前冲@@aka
+致命的女性@@aka
+失踪@@aka
+breaking pointe@@aka
+motive@@aka
+luck@@aka
+da vinci's demons@@aka
+剧集人生@@aka
+舞池争锋@@aka
+alcatraz@@aka
+侠胆雄狮@@aka
+breaking bad@@aka
+金装律师@@aka
+下一站歌后@@aka
+花边教主@@aka
+拉字至上—真人秀@@aka
+犯罪现场迈阿密篇@@aka
+泽西制造@@aka
+californication@@aka
+妙手愈荣华 第一季@@aka
+复仇@@aka
+老妈与奶爸@@aka
+country music awards@@aka
+吐槽姐妹@@aka
+警察世家@@aka
+anger management@@aka
+downton abbey@@aka
+cougar town@@aka
+dexter@@aka
+90210@@aka
+靓太唔易做@@aka
+流言教主@@aka
+绯闻女孩@@aka
+hell on wheels@@aka
+美国恐怖故事@@aka
+社区大学@@aka
+family tools@@aka
+american dance idol@@aka
+big brother @@aka
+神秘圈@@aka
+小城疑云@@aka
+the apprentice@@aka
+glee@@aka
+crime scene investigation@@aka
+血色日记 第一季@@aka
+医神@@aka
+南国医恋@@aka
+军嫂们@@aka
+追梦女孩 第一季@@aka
+真血 第一季@@aka
+追踪@@aka
+冷面女法医@@aka
+妙警贼探@@aka
+duets@@aka
+飞黄腾达@@aka
+八卦女郎 第一季@@aka
+major crimes@@aka
+幸存者@@aka
+las vegas@@aka
+吸血鬼日记@@aka
+非凡女警@@aka
+制毒师@@aka
+凯丽日记@@aka
+padre de familia season 1@@aka
+castle@@aka
+后声可畏@@aka
+心灵旋律@@aka
+纽约警察故事@@aka
+kindreds@@aka
+gigolos@@aka
+哪一位博士 第七季@@aka
+明迪烦事多@@aka
+jersey shore@@aka
+小律师大作为@@aka
+约会规则@@aka
+报仇雪恨 第一季@@aka
+shameless@@aka
+港湾@@aka
+新编夏洛克 第一季@@aka
+加州迷情@@aka
+射手@@aka
+the finder@@aka
+the job@@aka
+bones@@aka
+twenty twelve@@aka
+s always sunny in philadelphia@@aka
+graceland@@aka
+马赫脱口秀@@aka
+都市侠盗@@aka
+so you think you can dance@@aka
+麦克和茉莉@@aka
+ben and kate@@aka
+家庭伙伴@@aka
+美少女的谎言@@aka
+英国偶像@@aka
+最后一人@@aka
+嗜血判官 第一季@@aka
+绅士养成记@@aka
+格蕾的解剖 第一季@@aka
+美人不可貌相 第一季@@aka
+时尚之星@@aka
+s.y.t.y.c.d.@@aka
+极速前进@@aka
+与星共舞@@aka
+two broke girls@@aka
+鉴证行动组@@aka
+美版厨艺大师 第一季@@aka
+未知因素@@aka
+纳什维尔@@aka
+花边教主 第一季@@aka
+are we there yet?@@aka
+new girl@@aka
+hou$e of lie$@@aka
+倒霉蛋的新生@@aka
+当代家庭 第一季@@aka
+菜鸟警察@@aka
+私家医情@@aka
+the apprentice @@aka
+louie@@aka
+蛇蝎美人@@aka
+护士当家@@aka
+少而为父@@aka
+阿森一族 第一季@@aka
+hell’s kitchen@@aka
+vegas@@aka
+懵懂少女@@aka
+拉斯维加斯@@aka
+无耻家庭@@aka
+拉斯维加斯 第一季@@aka
+破产女孩 第一季@@aka
+妙探雙姝@@aka
+家有贱女@@aka
+survivor@@aka
+摩登家庭@@aka
+american greed@@aka
+荒野求爱@@aka
+nikita@@aka
+the bachelor@@aka
+周六夜现场@@aka
+wilfred@@aka
+斯巴达克斯@@aka
+爆笑办公室@@aka
+妮基塔女郎@@aka
+青涩警队@@aka
+the voice@@aka
+尴尬@@aka
+最后一人 第一季@@aka
+囧女珍娜@@aka
+舞池争锋 第一季@@aka
+老爸老妈罗曼史@@aka
+grimm@@aka
+闹鬼的公路@@aka
+the lying game@@aka
+内鬼@@aka
+先声夺人 第一季@@aka
+ügyféllista@@aka
+欲乱绝情妻@@aka
+寻踪者@@aka
+钻石单身汉真人秀@@aka
+the walking dead@@aka
+衰仔乐园@@aka
+神探@@aka
+make it or break it@@aka
+火线警探@@aka
+克里夫兰秀@@aka
+学徒@@aka
+迈阿密 第一季@@aka
+火线警告@@aka
+西装革律 第一季@@aka
+谎言屋@@aka
+二当家@@aka
+the job @@aka
+居家男人 第一季@@aka
+噬血真爱@@aka
+parks and recreation@@aka
+末世@@aka
+灵书妙探@@aka
+如果还有明天@@aka
+doctor who@@aka
+路易不容易@@aka
+混乱之子@@aka
+special victims unit@@aka
+the big bang theory@@aka
+game of thrones season 1@@aka
+二零一二@@aka
+新闻编辑室@@aka
+rules of engagement@@aka
+parenthood@@aka
+噬血真爱 第一季@@aka
+new york@@aka
+the secret circle@@aka
+血玫瑰@@aka
+warehouse 13@@aka
+common law@@aka
+超级减肥王@@aka
+决战时装伸展台 第一季@@aka
+love in the wild@@aka
+拉斯维加斯往事 第一季@@aka
+boardwalk empire@@aka
+神秘因素@@aka
+南方公园@@aka
+绝望主妇@@aka
+后声可畏 第一季@@aka
+反恐危机@@aka
+海军罪案调查处@@aka
+happy endings@@aka
+非常突然 第一季@@aka
+国土 第一季@@aka
+洛杉矶@@aka
+不可遗忘 第一季@@aka
+权力的游戏 第一季@@aka
+dancing with the stars@@aka
+绯闻私校@@aka
+八卦女郎@@aka
+死党@@aka
+欲望师奶@@aka
+miami@@aka
+鬼便车@@aka
+独木岭 第一季@@aka
+the x factor@@aka
+how i met your mother@@aka
+致命美人@@aka
+胖子的爱情 第一季@@aka
+red widow@@aka
+黑帮医生@@aka
+鬼影行动@@aka
+新福尔摩斯@@aka
+美国达人@@aka
+彻底改变之家庭再造@@aka
+sons of anarchy@@aka
+急速前进@@aka
+当夏洛克遇见华生@@aka
+大爆炸理论 第一季@@aka
+作案动机/ 第一季@@aka
+行尸走肉@@aka
+suits@@aka
+穹顶之下@@aka
+are you there@@aka
+核国风云@@aka
+being human@@aka
+衰姐们@@aka
+banshee@@aka
+改变游戏@@aka
+第63届艾美奖颁奖典礼@@aka
+堕落天空 第一季@@aka
+天桥风云@@aka
+dr. house season 1@@aka
+外科实习生格蕾@@aka
+平地风云@@aka
+尼基塔@@aka
+美国版我欲为人@@aka
+政坛野兽@@aka
+梅林传奇@@aka
+x factor uk season 1@@aka
+revolution @@aka
+surgeons@@aka
+性爱大师@@aka
+妙贼警探@@aka
+永远的好朋友@@aka
+elementary@@aka
+碟中谍4@@aka
+破釜沉舟@@aka
+中产家庭@@aka
+情何以堪 第一季@@aka
+the simpsons@@aka
+触摸未来@@aka
+芝加哥烈焰@@aka
+愤怒管理@@aka
+学徒 第一季@@aka
+炫舞飞扬 第一季@@aka
+艾美奖颁奖典礼@@aka
+destination truth@@aka
+舞林争霸 第一季@@aka
+致命美人 第一季@@aka
+第45届年度乡村音乐颁奖典礼@@aka
+吨级双宝@@aka
+流言教主 第一季@@aka
+extreme makeover@@aka
+真爱如血 第一季@@aka
+switched at birth@@aka
+劫后余生 第一季@@aka
+無法之子@@aka
+拍档@@aka
+郊区是监狱@@aka
+办公室@@aka
+辣女队医@@aka
+罪案实鉴@@aka
+傲骨贤妻@@aka
+规则改变@@aka
+冷面女法医 第一季@@aka
+嗜血娇娃@@aka
+篮球兄弟@@aka
+x达人秀@@aka
+chelsea?@@aka
+vampire diaries@@aka
+家庭朋友@@aka
+流言蜚女 第一季@@aka
+嗜血判官@@aka
+实习医生格蕾@@aka
+传说 第一季@@aka
+波吉亚家族 第一季@@aka
+贝兹旅馆@@aka
+bachelor pad@@aka
+神秘河@@aka
+费城永远阳光灿烂@@aka
+ringer@@aka
+游魂人间@@aka
+舞魅天下 第一季@@aka
+web therapy@@aka
+guys with kids@@aka
+南方警察@@aka
+person of interest@@aka
+拉字至上@@aka
+mistresses @@aka
+阿尔法战士@@aka
+福尔摩斯@@aka
+谋杀@@aka
+community@@aka
+犯罪现场迈阿密篇 第一季@@aka
+本和凯特@@aka
+洛城警事@@aka
+1600 penn@@aka
+私人诊所@@aka
+疑犯追踪@@aka
+快乐结局@@aka
+见证@@aka
+幡然悔悟@@aka
+csi@@aka
+打工姐妹花 第一季@@aka
+bent@@aka
+吐槽姐妹 第一季@@aka
+执法双雄 第一季@@aka
+冰与火之歌@@aka
+迷离档案 第一季@@aka
+revolution@@aka
+彻夜难眠 第一季@@aka
+美国青少年的私密生活@@aka
+house@@aka
+dr. who@@aka
+whitechapel@@aka
+academy of country music awards@@aka
+血夜迷情 第一季@@aka
+干嘛炒我@@aka
+欲望师奶 第一季@@aka
+southland@@aka
+神秘因素 第一季@@aka
+新常态 第一季@@aka
+夏威夷搅基队@@aka
+take me out @@aka
+生活大爆炸@@aka
+鬼楼契约@@aka
+怪杰医生豪斯@@aka
+the following@@aka
+go on@@aka
+the glades@@aka
+基本正常 第一季@@aka
+鞋店事务所@@aka
+dr. house@@aka
+法律与秩序@@aka
+开膛街@@aka
+总统一家@@aka
+全美超级模特新秀大赛 第十五季@@aka
+零点时刻@@aka
+criminal minds@@aka
+the goodwin games@@aka
+决战伸展台@@aka
+檀岛骑警 第一季@@aka
+汉尼拔@@aka
+美国好声音@@aka
+堕落天空@@aka
+the river@@aka
+it's messy@@aka
+疑踪@@aka
+风城烈焰@@aka
+幽灵协议@@aka
+基本正常@@aka
+the fades@@aka
+家有后爹@@aka
+猎捕@@aka
+洛杉矶海军犯罪调查处@@aka
+绯闻少女 第一季@@aka
+archer@@aka
+美国谍梦@@aka
+2011 mtv电影颁奖礼@@aka
+king & maxwell@@aka
+big brother all-stars@@aka
+基本演绎法@@aka
+嗜血法医@@aka
+law & order@@aka
+鬼上车@@aka
+加州靡情@@aka
+strike back@@aka
+忧愁河上桥@@aka
+white collar@@aka
+家庭工具@@aka
+大减肥@@aka
+inside men@@aka
+八卦天后@@aka
+美国怪谭@@aka
+癌莫能助@@aka
+美国偶像 第8季@@aka
+双面法医 第一季@@aka
+小镇保全@@aka
+洛杉矶海军犯罪调查处 第一季@@aka
+the amazing race@@aka
+少年奶爸@@aka
+彪悍人生@@aka
+绝命毒师@@aka
+alphas@@aka
+绿箭侠@@aka
+拉字至上真人秀@@aka
+东岸赌城风云 第一季@@aka
+当顿庄园@@aka
+cma awards@@aka
+谎言之屋@@aka
+迈阿密@@aka
+灵妻@@aka
+家族风云@@aka
+父母好室友@@aka
+新编夏洛克@@aka
+国土安全@@aka
+终极格斗王@@aka
+take me out@@aka
+shark tank@@aka
+犯罪现场鉴证 第一季@@aka
+天崩 第一季@@aka
+拯救希望@@aka
+泽西海滩@@aka
+30 rock@@aka
+地狱厨房@@aka
+美国怪谈@@aka
+恶搞之家@@aka
+核国风云 第一季@@aka
+鞋店里的律师行@@aka
+金麦侦探社 第一季@@aka
+迷离档案@@aka
+律政双雄@@aka
+modern family@@aka
+las vegas season 1@@aka
+幸存者 第四季@@aka
+神秘谋杀 第一季@@aka
+teen wolf@@aka
+天才理论传 第一季@@aka
+legit@@aka
+新闻演播室@@aka
+格蕾的解剖@@aka
+grey's anatomy@@aka
+the next@@aka
+lost girl@@aka
+不眠之夜@@aka
+暗战@@aka
+血色日记@@aka
+废柴联盟@@aka
+决战芭蕾之巅@@aka
+医人当自强@@aka
+baby daddy@@aka
+pan am@@aka
+你认为你是谁 美国版@@aka
+糖衣陷阱@@aka
+美人不可貌相@@aka
+异世奇人@@aka
+鸿运赛马@@aka
+necessary roughness@@aka
+loser党 第一季@@aka
+妙女神探@@aka
+共同法则@@aka
+欢乐合唱团@@aka
+妮基塔@@aka
+enlightened@@aka
+eastbound & down@@aka
+下一位博士 第七季@@aka
+东岸赌城风云@@aka
+泛美航空@@aka
+天桥风云 第一季@@aka
+黑吃黑@@aka
+魔幻都市@@aka
+美版厨艺大师@@aka
+犯罪心理@@aka
+职业特工队@@aka
+missing@@aka
+comic book men@@aka
+bates motel@@aka
+美丽的小骗子@@aka
+the middle@@aka
+医人当自强 第一季@@aka
+废柴再造@@aka
+嫌疑人 第一季@@aka
+defiance@@aka
+三年之痒 第一季@@aka
+职业特工队4@@aka
+黑衣天使@@aka
+do no harm@@aka
+不可遗忘@@aka
+黑帮天使@@aka
+魔约之宅@@aka
+妙手愈荣华@@aka
+都市女孩 第一季@@aka
+devious maids@@aka
+deception@@aka
+猫鼠游戏@@aka
+罪案终结@@aka
+veep@@aka
+无证律师@@aka
+英版地狱厨房@@aka
+绯闻少女@@aka
+制服搭档@@aka
+真爱拍档@@aka
+陽光照我心@@aka
+saturday night live@@aka
+men at work@@aka
+异度觉醒@@aka
+masters of sex@@aka
+王座游戏@@aka
+napoleon dynamite@@aka
+老爸老妈罗曼史 第一季@@aka
+family guy@@aka
+sherlock@@aka
+吨级双宝 第一季@@aka
+zero hour@@aka
+三年之痒@@aka
+the secret life of the american teenager@@aka
+全美一叮@@aka
+黑帮医生 第一季@@aka
+美版非诚勿扰@@aka
+無政府之子@@aka
+ufc@@aka
+f.k.a.@@aka
+白热人生@@aka
+追灵妙探 第一季@@aka
+华盛顿高地@@aka
+追梦女孩@@aka
+绝望的主妇 第一季@@aka
+天堂执法者@@aka
+王座游戏 第一季@@aka
+外星邻居@@aka
+who do you think you are?@@aka
+duck dynasty@@aka
+格林@@aka
+haunted highway@@aka
+好汉两个半 第一季@@aka
+golden boy@@aka
+安全警报@@aka
+公园与游憩@@aka
+犬人笑传@@aka
+幸福终点站@@aka
+green arrow season 1@@aka
+s anatomy@@aka
+金童@@aka
+true blood@@aka
+x音素@@aka
+谎言堂@@aka
+十三号仓库@@aka
+mike & molly@@aka
+麦迪逊狂人@@aka
+the inbetweeners@@aka
+明星二重唱@@aka
+戏中迷局@@aka
+天才也性感 第一季@@aka
+the ultimate fighter@@aka
+陨落星辰@@aka
+quantico@@aka
+当代家庭@@aka
+独木岭@@aka
+避风港 第一季@@aka
+豪斯医生@@aka
+嫌疑人@@aka
+走出艳阳天@@aka
+franklin & bash@@aka
+吸血新世代@@aka
+绝望的主妇@@aka
+诉讼双雄@@aka
+家庭滑稽录像@@aka
+up all night@@aka
+制服搭档 第一季@@aka
+郊区是监狱 第一季@@aka
+重案组@@aka
+摩登白宫@@aka
+先声夺人@@aka
+new series@@aka
+剧集人生 第一季@@aka
+入侵@@aka
+外来女婿@@aka
+少男老爸@@aka
+戏里戏外@@aka
+神秘博士@@aka
+paranormal witness@@aka
+御姐奶爸@@aka
+犯罪现场调查@@aka
+新朱门恩怨@@aka
+联盟 第三季@@aka
+the unusuals@@aka
+辛普森一家@@aka
+good christian belles@@aka
+超自然@@aka
+天才理论传@@aka
+追踪者@@aka
+美版办公室@@aka
+suburgatory@@aka
+杰茜驾到 第一季@@aka
+风城大佬@@aka
+打破规则@@aka
+中之道 第一季@@aka
+西镇警魂@@aka
+big brother@@aka
+都市女孩@@aka
+左右不逢源@@aka
+斯巴达克思@@aka
+the big c@@aka
+partners @@aka
+犯罪现场 纽约篇 / 罪案实鉴 纽约@@aka
+维加斯@@aka
+last man standing@@aka
+blue bloods@@aka
+尼基塔 第一季@@aka
+妮基塔女郎 第一季@@aka
+肥肥和胖胖@@aka
+political animals@@aka
+异世奇人 第七季@@aka
+monday mornings@@aka
+超感神探@@aka
+masterchef @@aka
+音乐之乡@@aka
+once upon a time@@aka
+爆笑办公室 第一季@@aka
+律政双雄 第一季@@aka
+无证律师 第一季@@aka
+leverage@@aka
+反击@@aka
+gcb@@aka
+mission@@aka
+革命@@aka
+创智赢家@@aka
+fringe@@aka
+the firm@@aka
+懵懂少女 第一季@@aka
+居家男人@@aka
+ny@@aka
+夏威夷搅基队 第一季@@aka
+黑名单 第一季@@aka
+私家医情 第一季@@aka
+设计人生@@aka
+良家恶女@@aka
+替身姐妹@@aka
+real time with bill maher@@aka
+双面法医@@aka
+white heat@@aka
+drop dead diva@@aka
+新飞跃比佛利@@aka
+黑衣天使 第一季@@aka
+纽约 第一季@@aka
+左右不逢源 第一季@@aka
+心机少女@@aka
+犯罪现场 迈阿密@@aka
+新闻中心@@aka
+她来自泽西@@aka
+西装革律@@aka
+歇洛克@@aka
+搞怪一家人 第一季@@aka
+lapd@@aka
+house of cards@@aka
+怪医豪斯@@aka
+in plain sight@@aka
+鬼影约章@@aka
+ripper street@@aka
+斯巴达克思 第一季@@aka
+波吉亚家族@@aka
+the vampire diaries@@aka
+犬人笑传 第一季@@aka
+大西洋帝国@@aka
+非常人贩@@aka
+神秘之河@@aka
+危机边缘@@aka
+雷·多诺万 第一季@@aka
+舞魅天下@@aka
+神秘谋杀@@aka
+新福尔摩斯 第一季@@aka
+血与沙@@aka
+犯罪现场纽约篇@@aka
+south park@@aka
+律政佳人@@aka
+彻夜难眠@@aka
+罪案实鉴 纽约@@aka
+天崩@@aka
+mad men@@aka
+nurse jackie@@aka
+达拉斯2012@@aka
+青山镇@@aka
+the graham norton show@@aka
+奥运囧事多@@aka
+唐顿庄园 第一季@@aka
+阿森一族@@aka
+檀岛骑警@@aka
+being human uk@@aka
+green arrow@@aka
+中间人@@aka
+麦迪逊狂人 第一季@@aka
+绯闻私校 第一季@@aka
+the borgias@@aka
+谎言游戏@@aka
+达芬奇的恶魔@@aka
+chicago fire@@aka
+致命的女性 第一季@@aka
+无耻之徒@@aka
+ncis@@aka
+抗争@@aka
+hunted@@aka
+致命毒师@@aka
+洛城公寓@@aka
+纳什维尔 第一季@@aka
+真相终点站@@aka
+拉斯维加斯往事@@aka
+超级制作人 第一季@@aka
+跟踪@@aka
+秘密特工@@aka
+奶爸当家@@aka
+falling skies@@aka
+大人物拿破仑@@aka
+致命毒师 第一季@@aka
+避风港@@aka
+蛇蝎女佣@@aka
+himym 1@@aka
+纽约@@aka
+超越时间线@@aka
+政治动物@@aka
+the mentalist@@aka
+the league@@aka
+666号鬼宅@@aka
+the real l word@@aka
+天桥骄子@@aka
+femme fatales@@aka
+合法@@aka
+weight loss edition@@aka
+best friends forever@@aka
+copper@@aka
+snl@@aka
+为人父母@@aka
+杀戮 第一季@@aka
+杀戮@@aka
+费城阳光@@aka
+episodes@@aka
+raising hope@@aka
+缉凶记@@aka
+鬼上车/鬼便车@@aka
+partners@@aka
+南国医恋 第一季@@aka
+game change@@aka
+马奎萨斯群岛@@aka
+惊爆时刻@@aka
+i 4@@aka
+厨艺大师@@aka
+八卦天后 第一季@@aka
+twisted @@aka
+律政宝贝@@aka
+新飞越比佛利@@aka
+smash@@aka
+american horror story@@aka
+灵异妙探@@aka
+胖子的爱情@@aka
+绿箭 第一季@@aka
+全美超模大赛@@aka
+职场四少@@aka
+单身毒妈@@aka
+废材联盟@@aka
+ray donovan@@aka
+美国好声音 第一季@@aka
+谁偷了我的裤子@@aka
+肥肥和胖胖 第一季@@aka
+碟中谍@@aka
+抢椅子游戏@@aka
+社区生活@@aka
+设计不简单@@aka
+绝命毒师 第一季@@aka
+网疗记@@aka
+癌莫能助 第一季@@aka
+justified@@aka
+burn notice@@aka
+arrow@@aka
+应召男@@aka
+頓悟人生@@aka
+终极审判 第一季@@aka
+绿箭@@aka
+扭曲青春 第一季@@aka
+整夜难眠@@aka
+the inbetweeners @@aka
+丑闻@@aka
+美国怪谈 第一季@@aka
+体育老师笑传@@aka
+全美超模 第十五季@@aka
+尴尬 第一季@@aka
+记忆神探@@aka
+homeland@@aka
+ridiculousness@@aka
+transporter@@aka
+洛克菲勒广场30号@@aka
+非凡警察@@aka
+老大哥@@aka
+continuum@@aka
+不可能的任务4@@aka
+emily owens@@aka
+project runway@@aka
+“基”本正常 第一季@@aka
+鸭子王朝@@aka
+美国怪谭 第一季@@aka
+传说@@aka
+the newsroom@@aka
+熟女镇@@aka
+地狱之轮@@aka
+破产姐妹@@aka
+impossible ghost protocol@@aka
+mulci@@aka
+广告狂人@@aka
+gossip girl@@aka
+珍妮制造@@aka
+决战伸展台 第一季@@aka
+我们到了吗@@aka
+witness@@aka
+13号仓库 第一季@@aka
+伙伴@@aka
+two and a half men@@aka
+我用青春买醉@@aka
+how to be a gentleman@@aka
+一戏之间@@aka
+it&#39@@aka
+律政巾帼@@aka
+cult@@aka
+干嘛炒我 第一季@@aka
+jane by design@@aka
+boss@@aka
+f档案@@aka
+一戏之间 第一季@@aka
+格利芬一家 第一季@@aka
+kitchen nightmares@@aka
+the carrie diaries@@aka
+small town security@@aka
+制毒师 第一季@@aka
+fairly legal@@aka
+¡rob!@@aka
+动物诊所@@aka
+美女与野兽@@aka
+你认为你是谁 美国版 第一季@@aka
+南国警察@@aka
+第四十六届超级碗@@aka
+wipeout@@aka
+欲乱绝情妻 第一季@@aka
+凯莉日记@@aka
+诉讼双雄 第一季@@aka
+“基”本正常@@aka
+黑白怎么配@@aka
+desperate housewives@@aka
+真人秀 单身汉公寓 第一季@@aka
+灵界@@aka
+beauty and the beast@@aka
+shameless usa@@aka
+one tree hill@@aka
+流言蜚女@@aka
+last resort@@aka
+中之道@@aka
+the good wife@@aka
+醍醐灌顶@@aka
+game of thrones@@aka
+识骨寻踪@@aka
+执子之手@@aka
+夏威夷特勤组@@aka
+半路情缘@@aka
+m.d.@@aka
+当夏洛克遇见华生 第一季@@aka
+副总统 第一季@@aka
+童话镇@@aka
+hawaii five-0@@aka
+whitney@@aka
+grey&#39@@aka
+rookie blue@@aka
+malibu country@@aka
+谁比我糗@@aka
+america’s next top model@@aka
+一鸣惊人 第一季@@aka
+绝命杀局@@aka
+animal practice@@aka
+歇洛克 第一季@@aka
+欲海医心@@aka
+weeds@@aka
+公园与休憩@@aka
+house of lies@@aka
+a song of ice and fire@@aka
+特殊受害者@@aka
+杀手之王@@aka
+家庭伙伴 第一季@@aka
+罪案现场 第一季@@aka
+perception@@aka
+致命陷阱@@aka
+royal pains@@aka
+反击 第二季@@aka
+西镇警魂 第一季@@aka
+恶魔岛@@aka
+无法忘记 第一季@@aka
+treme@@aka
+how to live with your parents@@aka
+美国之声@@aka
+the office@@aka
+猎杀行动@@aka
+直弯好基友@@aka
+决战时装伸展台@@aka
+搞怪一家人@@aka
+家有喜旺@@aka
+重案组 第一季@@aka
+csi犯罪现场@@aka
+pretty little liars@@aka
+泛美航空 第一季@@aka
+girls@@aka
+异镇风云@@aka
+fashion star@@aka
+律政俏师太@@aka
+the search for a superstar@@aka
+彪悍人生 第一季@@aka
+情人 第一季@@aka
+纸牌屋@@aka
+特效化妆师大对决@@aka
+钻石单身汉@@aka
+真爱如血@@aka
+灭世@@aka
+流氓医生@@aka
+变局@@aka
+脚尖上的世界@@aka
+疯狂单身汉@@aka
+hart of dixie@@aka
+the killing@@aka
+x factor uk@@aka
+犯罪现场@@aka
+黑名单@@aka
+异镇@@aka
+灭罪鉴证科@@aka
+america’s got talent@@aka
+罪案现场@@aka
+loser党@@aka
+不是冤家不聚头@@aka
+american idol@@aka
+magic city@@aka
+英版地狱厨房 第一季@@aka
+格利芬一家@@aka
+迈克和茉莉@@aka
+the americans@@aka
+非常突然@@aka
+少狼@@aka
+洛克菲勒广场30号 第一季@@aka
+无法忘记@@aka
+下一站歌后 第一季@@aka
+减肥达人@@aka
+海滨帝国 第一季@@aka
+超自然 第一季@@aka
+国土@@aka
+awkward@@aka
+外科实习生格蕾 第一季@@aka
+exit@@aka
+血迷棕榈@@aka
+apartment 23@@aka
+新闻间轶事@@aka
+the x factor @@aka
+saving hope@@aka
+南城警事@@aka
+名声大噪@@aka
+超自然目击者@@aka
+我为喜剧狂@@aka
+加州迷情 第一季@@aka
+猫鼠游戏 第一季@@aka
+整夜难眠 第一季@@aka
+undercover boss@@aka
+体操公主@@aka
+the neighbors@@aka
+the l.a. complex@@aka
+the cleveland show@@aka
+dallas@@aka
+复仇女神@@aka
+秘社@@aka
+权力的游戏@@aka
+nashville @@aka
+女孩我最大@@aka
+麦克和茉莉 第一季@@aka
+who do you think you are? @@aka
+rizzoli & isles@@aka
+private practice@@aka
+longmire@@aka
+真血@@aka
+merlin @@aka
+兽医诊所@@aka
+新世纪福尔摩斯@@aka
+熟女当道@@aka
+the emmy awards@@aka
+郊区故事@@aka
+the transporter@@aka
+haven@@aka
+舞林争霸@@aka
+awake@@aka
+副总统@@aka
+破产女孩@@aka
+走出艳阳天 第一季@@aka
+好汉两个半@@aka
+遗产游戏@@aka
+made in jersey@@aka
+青山镇 第一季@@aka
+医缘@@aka
+白教堂血案@@aka
+the mob doctor@@aka
+报仇雪恨@@aka
+执法双雄@@aka
+2011年第63届艾美奖颁奖典礼@@aka
+追新剧@@aka
+杰茜驾到@@aka
+美国老豆@@aka
+哪一位博士@@aka
+犬友笑传@@aka
+tony awards@@aka
+青涩警队 第一季@@aka
+未知因素 第一季@@aka
+超级制作人@@aka
+美版办公室 第一季@@aka
+另类家庭@@aka
+惠特妮@@aka
+情何以堪@@aka
+psych@@aka
+两两相望@@aka
+2 broke girls@@aka
+23号公寓的坏女孩@@aka
+追灵妙探@@aka
+the biggest loser@@aka
+终极审判@@aka
+missing @@aka
+嗜血娇娃 第一季@@aka
+南方四贱客@@aka
+美国老爸@@aka
+直弯拍档@@aka
+人模狗样@@aka
+revenge@@aka
+血夜迷情@@aka
+周一清晨@@aka
+padre de familia@@aka
+炫舞飞扬@@aka
+mtv movie awards@@aka
+黑白怎么配 第一季@@aka
+merlin@@aka
+错位青春@@aka
+交换命运@@aka
+美人谋律@@aka
+罪案第六感@@aka
+body of proof@@aka
+13号仓库@@aka
+善恶双生@@aka
+orphan black@@aka
+天才也性感@@aka
+melissa & joey@@aka
+army wives@@aka
+打工姐妹花@@aka
+宅女医生@@aka
+hannibal@@aka
+不是冤家不聚头 第一季@@aka
+supernatural@@aka
+美国偶像@@aka
+washington heights@@aka
+spartacus@@aka
+尴哩个尬@@aka
+the bachelorette@@aka
+电视剧版@@aka

@@ -7,12 +7,9 @@ import org.apache.log4j.Logger;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.TvShows;
 
-import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
-import cn.edu.zju.plex.tdd.tools.MeijuTvUtil;
-
 /**
  * weibo parser
- *  
+ * 
  * @author plex
  */
 public class WeiboParser {
@@ -24,10 +21,9 @@ public class WeiboParser {
 			.compile("(http://t.cn/[^\\s]+)");
 	private static final Pattern AtPatt = Pattern.compile("(@[^\\s]+)");
 
-	// TODO 直接在参数上修改是不是不太好
 	public void parse(ParsedStatus status) {
-		LOG.info("start parsing weibo status:"+status.getId());
-		
+		LOG.info("start parsing weibo status:" + status.getId());
+
 		String wtext = status.getText();
 		String content = wtext;
 		StringBuffer sb;
@@ -67,12 +63,8 @@ public class WeiboParser {
 		// set content
 		status.setContent(content);
 
-		// seg & set words
-		String words = MyICTCLAS.fenci(content);
-		status.setWords(words);
-
 		// parse tvids
-		TvShows tvShow = MeijuTvUtil.guessTv(content + ats.toString());
+		TvShows tvShow = MeijuTvAnalyzer.guessTv(content + ats.toString());
 		status.setTvShow(tvShow);
 
 		// set status

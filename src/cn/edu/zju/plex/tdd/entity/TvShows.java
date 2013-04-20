@@ -4,6 +4,8 @@ public class TvShows {
 	private String sid;
 	private String cname;
 	private String ename;
+	private String doubanid;
+	private String akas;
 
 	public TvShows(String sid, String cname, String ename) {
 		this.sid = sid;
@@ -50,7 +52,23 @@ public class TvShows {
 			return true;
 		return false;
 	}
-	
+
+	public String getDoubanid() {
+		return doubanid;
+	}
+
+	public void setDoubanid(String doubanid) {
+		this.doubanid = doubanid;
+	}
+
+	public String getAkas() {
+		return akas;
+	}
+
+	public void setAkas(String akas) {
+		this.akas = akas;
+	}
+
 	public boolean equals2(TvShows show) {
 		if (this.sid == show.sid)
 			return true;

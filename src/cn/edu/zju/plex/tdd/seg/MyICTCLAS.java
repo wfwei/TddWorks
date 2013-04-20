@@ -9,7 +9,7 @@ public class MyICTCLAS {
 	private static final ICTCLAS50 ICTCLAS50 = new ICTCLAS50();
 
 	static {
-		if (ICTCLAS50.ICTCLAS_Init(".".getBytes(Charset.forName("GB2312"))) == false) {
+		if (ICTCLAS50.ICTCLAS_Init(".".getBytes(Charset.forName("UTF-8"))) == false) {
 			System.out.println("Init Fail!");
 			System.exit(1);
 		}
@@ -26,28 +26,36 @@ public class MyICTCLAS {
 	 * 第一个参数为用户字典路径，第二个参数为用户字典的编码类型(0:type
 	 * unknown;1:ASCII码;2:GB2312,GBK,GB10380;3:UTF-8;4:BIG5)
 	 */
-	public static synchronized void importUserDic(String filePath, int incode) {
+	public static void importUserDic(String filePath, int incode) {
 		// 导入用户字典
 		int nCount = 0;
 		String usrdir = filePath; // 用户字典路径
-		byte[] usrdirb = usrdir.getBytes();// 将string转化为byte类型
+		byte[] usrdirb = usrdir.getBytes(Charset.forName("UTF-8"));// 将string转化为byte类型
 		// 导入用户字典,返回导入用户词语个数第一个参数为用户字典路径，第二个参数为用户字典的编码类型
 		nCount = ICTCLAS50.ICTCLAS_ImportUserDictFile(usrdirb, incode);
 		System.out.println("导入用户词个数" + nCount);
 		nCount = 0;
 	}
 
+	public static void saveUserDic() {
+		ICTCLAS50.ICTCLAS_SaveTheUsrDic();
+	}
+
 	public static synchronized String fenci(String input) {
 		byte nativeBytes[] = ICTCLAS50.ICTCLAS_ParagraphProcess(
-				input.getBytes(Charset.forName("GB2312")), 0, 1);
-		return new String(nativeBytes, Charset.forName("GB2312"));
+				input.getBytes(Charset.forName("UTF-8")), 0, 1);
+		return new String(nativeBytes, Charset.forName("UTF-8"));
 	}
 
 	public static void main(String[] args) {
+		// importUserDic("meijuDict.txt", 3);
+		// saveUserDic();
 		// 字符串分词
-		String sInput = "随后温总理就离开了舟曲县城，预计温总理今天下午就回到北京。以上就是今天上午的最新动态";
+		String sInput = "美女上错身不简单oh sit!666 park avenue逝者之证间谍亚契 第一季联盟it’s always sunny in philadelphia厨房噩梦";
 		MyICTCLAS.setPOSmap(3);
-		System.out.println(MyICTCLAS.fenci(sInput));
+		String res = MyICTCLAS.fenci(sInput);
+		for(String s:res.split(" ")) 
+			System.out.println(s);
 	}
 
 	private MyICTCLAS() {

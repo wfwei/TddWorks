@@ -22,7 +22,7 @@ class TestMain { // 主函数
 			ICTCLAS50 testICTCLAS50 = new ICTCLAS50();
 			String argu = ".";
 			// 初始化
-			if (testICTCLAS50.ICTCLAS_Init(argu.getBytes("GB2312")) == false) {
+			if (testICTCLAS50.ICTCLAS_Init(argu.getBytes("UTF-8")) == false) {
 				System.out.println("Init Fail!");
 				return;
 			}

@@ -1,25 +1,48 @@
 package cn.edu.zju.plex.tdd.module;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.RssNews;
+import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 
 /**
- * RssNews parser
+ * RssNews parser TODO 改成通用类，主要用来计算文本相似度
  * 
  * @author plex
  */
 public class RssNewsRmDup {
 
 	private static final Logger LOG = Logger.getLogger(RssNewsRmDup.class);
-
 	private static final int ONE_DAY = 86400000;
+	private static final Pattern FenciResPatt = Pattern
+			.compile("([^/]+)/([^\\s]+)");
 
 	public static void main(String args[]) {
+		int timeLen = 172800000;// two days
+		while (true) {
+			List<RssNews> list = DB4Tdd.getRssNewsToMerge(timeLen);
+			RssNews[] rssNewsToMerge = new RssNews[list.size()];
+			list.toArray(rssNewsToMerge);
 
+			if (rssNewsToMerge.length < 2) {
+				LOG.info("RssNews merge work temply done");
+				break;
+			} else {
+				RssNewsRmDup.deals(rssNewsToMerge);
+				for (RssNews rssNews : rssNewsToMerge)
+					if (rssNews.getDelegate() != 0)
+						DB4Tdd.updateDelegate(rssNews);
+				LOG.info("merge rss news:" + rssNewsToMerge.length);
+			}
+
+		}
 	}
 
 	/**
@@ -32,14 +55,28 @@ public class RssNewsRmDup {
 		Set<String> aub = new HashSet<String>();
 		Set<String> anb = new HashSet<String>();
 
-		for (String w : a.getWords().split(" ")) {
-			if (w.endsWith("/n"))
-				as.add(w.substring(0, w.length() - 2));
+		Matcher mat1 = FenciResPatt.matcher(MyICTCLAS.fenci(a.getContent()
+				+ a.getTitle()));
+		while (mat1.find()) {
+			String word = mat1.group(1).trim();
+			String cixing = mat1.group(2).trim();
+			// 词性中有名词(n)成分或手动倒入的剧集(aka)
+			if (cixing.contains("n") || cixing.contains("aka")) {
+				as.add(word);
+			}
 		}
-		for (String w : b.getWords().split(" ")) {
-			if (w.endsWith("/n"))
-				bs.add(w.substring(0, w.length() - 2));
+
+		Matcher mat2 = FenciResPatt.matcher(MyICTCLAS.fenci(a.getContent()
+				+ a.getTitle()));
+		while (mat2.find()) {
+			String word = mat2.group(1).trim();
+			String cixing = mat2.group(2).trim();
+			// 词性中有名词(n)成分或手动倒入的剧集(aka)
+			if (cixing.contains("n") || cixing.contains("aka")) {
+				bs.add(word);
+			}
 		}
+
 		aub.addAll(as);
 		aub.addAll(bs);
 		anb.addAll(as);

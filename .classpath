@@ -23,5 +23,6 @@
 	<classpathentry kind="lib" path="libs/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="libs/jackson-all-1.8.5.jar"/>
 	<classpathentry kind="lib" path="libs/commons-codec.jar"/>
+	<classpathentry kind="lib" path="libs/dom4j-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

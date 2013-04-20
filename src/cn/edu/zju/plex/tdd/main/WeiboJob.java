@@ -33,7 +33,7 @@ public class WeiboJob implements Runnable {
 
 	private void parseWeibo() {
 		while (true) {
-			List<ParsedStatus> weiboToParse = DB4Tdd.getWeiboToParse(30);
+			List<ParsedStatus> weiboToParse = DB4Tdd.getWeiboToParse(100);
 			LOG.info("Get " + weiboToParse.size() + " weibo status to parse...");
 
 			if (weiboToParse.size() == 0) {
@@ -104,7 +104,7 @@ public class WeiboJob implements Runnable {
 				// TODO if needed
 
 				LOG.info("下载图片");
-				downloadImages("d:/tmp/images/");
+				downloadImages("d:/tmp/images2/");
 			} catch (Throwable t) {
 				LOG.error(t.getCause().getMessage());
 			} finally {

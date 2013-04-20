@@ -138,8 +138,8 @@ public class RssNewsJob implements Runnable {
 		while (true) {
 			LOG.info("Loop start for RssNewsJob");
 			try {
-				LOG.info("开始下载rss更新");
-				fetchRssUpdates();
+//				LOG.info("开始下载rss更新");
+//				fetchRssUpdates();
 
 				LOG.info("开始解析rss_news");
 				parseRssNews();
