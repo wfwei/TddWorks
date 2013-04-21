@@ -593,9 +593,10 @@ public final class DB4Tdd {
 		return res;
 	}
 
-	public static void updateRssNewsImageCount(long rssNewsId, int count) {
+	public static void updateRssNewsImageCountAndSize(long rssNewsId,
+			int count, String sizeInfo) {
 		String sql = "update rss_news set image_count = " + count
-				+ " where id=" + rssNewsId;
+				+ ", image_sizes='" + sizeInfo + "' where id=" + rssNewsId;
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
@@ -629,9 +630,11 @@ public final class DB4Tdd {
 		return res;
 	}
 
-	public static void updateParsedStatusImageCount(String statusId, int count) {
+	public static void updateParsedStatusImageCountAndSize(String statusId, int count,
+			String imageSizes) {
 		String sql = "update meiju_weibo set image_count = " + count
-				+ " where wid='" + statusId + "'";
+				+ ", image_sizes='" + imageSizes + "' where wid='" + statusId
+				+ "'";
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);

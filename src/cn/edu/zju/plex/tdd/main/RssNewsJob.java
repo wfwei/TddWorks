@@ -104,33 +104,34 @@ public class RssNewsJob implements Runnable {
 				for (RssNews rssNews : list) {
 
 					String[] images = rssNews.getImages().split(";");
-					int idx = 0;
-					for (int i = 0; i < images.length; i++) {
+					StringBuffer imageSizes = new StringBuffer();
+					int count = 0;
+					for (int i = 0; i < images.length && count < 5; i++) {
 						Matcher m = ImagePatt.matcher(images[i]);
 						if (m.find()) {
 							if (images[i].startsWith(".")
 									|| images[i].startsWith("/")) {
-								// TODO
-								
+								// TODO if necessary
+								LOG.info("relative image url:" + images[i]);
 							}
-							boolean success = ImageFetcher.saveimage(images[i],
+							String imageSize = ImageFetcher.saveimage(
+									images[i],
 									rootPath + "news-" + rssNews.getId() + "-"
-											+ idx + m.group(1));
-							if (success)
-								idx++;
-							else
+											+ count + m.group(1));
+							if (imageSize != null) {
+								imageSizes.append(imageSize).append(";");
+								count++;
+							} else
 								LOG.warn("fail downloading:" + images[i]);
 						} else
 							LOG.debug("invalid image url" + images[i]);
-						if (idx >= 4) {
-							break;
-						}
 					}
-					LOG.info("get image count:" + idx);
-					if (idx > 0)
-						DB4Tdd.updateRssNewsImageCount(rssNews.getId(), idx + 1);
-					else
-						DB4Tdd.updateRssNewsImageCount(rssNews.getId(), 0);
+					if (count > 0) {
+						DB4Tdd.updateRssNewsImageCountAndSize(rssNews.getId(),
+								count, imageSizes.toString());
+					} else
+						DB4Tdd.updateRssNewsImageCountAndSize(rssNews.getId(),
+								0, "");
 				}
 				LOG.info("download images for rss news:" + list.size());
 			}
@@ -143,8 +144,8 @@ public class RssNewsJob implements Runnable {
 		while (true) {
 			LOG.info("Loop start for RssNewsJob");
 			try {
-				// LOG.info("开始下载rss更新");
-				// fetchRssUpdates();
+				LOG.info("开始下载rss更新");
+				fetchRssUpdates();
 
 				LOG.info("开始解析rss_news");
 				parseRssNews();
@@ -154,9 +155,8 @@ public class RssNewsJob implements Runnable {
 
 				LOG.info("下載圖片");
 				downloadImages("d:/tmp/images/");
-			} catch (Throwable t) {
+			} catch (Exception t) {
 				LOG.error(t);
-				LOG.error(t.getCause());
 			} finally {
 				LOG.info("Loop over for RssNewsJob");
 				try {

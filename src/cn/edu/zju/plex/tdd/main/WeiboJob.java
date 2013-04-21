@@ -60,32 +60,41 @@ public class WeiboJob implements Runnable {
 			} else {
 				for (ParsedStatus status : list) {
 
+					StringBuffer imageSizes = new StringBuffer();
 					String[] images = { status.getThumbnailPic(),
 							status.getBmiddlePic(), status.getOriginalPic() };
-					int idx = 0;
+					int count = 0;
 					for (int i = 0; i < images.length; i++) {
+						if (i != 1)
+							continue; // 只保存middlesize的图片
 						Matcher m = ImagePatt.matcher(images[i]);
 						if (m.find()) {
-							boolean success = ImageFetcher.saveimage(images[i],
+							if (images[i].startsWith(".")
+									|| images[i].startsWith("/")) {
+								// TODO if necessary
+								LOG.info("relative image url:" + images[i]);
+							}
+							String imageSize = ImageFetcher.saveimage(
+									images[i],
 									rootPath + "weibo-" + status.getId() + "-"
-											+ idx + m.group(1));
-							if (success)
-								idx++;
-							else
+											+ i + m.group(1));
+							if (imageSize != null) {
+								imageSizes.append(imageSize).append(";");
+								count++;
+							} else
 								LOG.warn("fail downloading:" + images[i]);
 						} else
 							LOG.debug("invalid image url" + images[i]);
 					}
-					LOG.info("get image count:" + idx);
-					if (idx > 0)
-						DB4Tdd.updateParsedStatusImageCount(status.getId(),
-								idx + 1);
+					if (count > 0)
+						DB4Tdd.updateParsedStatusImageCountAndSize(
+								status.getId(), count, imageSizes.toString());
 					else
-						DB4Tdd.updateParsedStatusImageCount(status.getId(), 0);
+						DB4Tdd.updateParsedStatusImageCountAndSize(
+								status.getId(), 0, "");
 				}
 				LOG.info("download images for weibo count:" + list.size());
 			}
-
 		}
 	}
 
