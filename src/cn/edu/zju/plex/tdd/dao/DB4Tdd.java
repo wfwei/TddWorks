@@ -736,4 +736,40 @@ public final class DB4Tdd {
 
 	}
 
+	public static List<ParsedStatus> getWeiboToUpdateVideos(int count) {
+		String sql = "select wid, url from meiju_weibo where video is NULL and url!='' limit 0,"
+				+ count;
+		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				ParsedStatus ps = new ParsedStatus();
+				ps.setId(rs.getString(1));
+				ps.setUrl(rs.getString(2));
+				res.add(ps);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.warn("error occured in getWeiboToParse: " + e.getMessage());
+			LOG.warn(sql);
+		}
+		return res;
+	}
+
+	public static void updateWeiboVideo(String wid, String video) {
+		String sql = "update meiju_weibo set video='" + video + "' where wid='"
+				+ wid + "'";
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.warn("error occured in updateParsedStatus:" + e.getMessage());
+			LOG.warn(sql);
+		}
+
+	}
+
 }

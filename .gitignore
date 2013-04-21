@@ -1,2 +1,4 @@
 *.class
 *.log
+*.log.1
+*.log.2

@@ -9,6 +9,7 @@ import weibo4j.model.WeiboException;
 import weibo4j.org.json.JSONObject;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.TvShows;
+import cn.edu.zju.plex.tdd.entity.Video;
 import cn.edu.zju.plex.tdd.tools.UrlUtil;
 import cn.edu.zju.plex.tdd.tools.VideoUtil;
 
@@ -55,19 +56,28 @@ public class WeiboParser {
 
 		// check if url is video
 		if (status.getUrl() != null && status.getUrl().length() > 0) {
-			StringBuffer videoUrls = new StringBuffer();
 			String[] us = status.getUrl().split(";");
 			for (String u : us) {
+				// TODO 封装一个微博操作类
 				weibo4j.ShortUrl su = new weibo4j.ShortUrl();
-				su.client.setToken("");
+				su.client.setToken("2.00l9nr_DfUKrWDf655d3279arZgVvD");
 				try {
 					JSONObject jo = su.shortToLongUrl(u);
 					String vurl = jo.getJSONArray("urls").getJSONObject(0)
 							.getString("url_long");
-					if (UrlUtil.isVideo(vurl))
-						videoUrls.append(vurl);
+					Video video = VideoUtil.getVideoInfo(vurl);
+					if (video != null) {
+						status.setVideo(vurl + "," + video.getPic());
+						break;
+					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.warn(e);
+				} finally {
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
