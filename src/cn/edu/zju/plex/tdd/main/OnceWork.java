@@ -2,13 +2,15 @@ package cn.edu.zju.plex.tdd.main;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import weibo4j.org.json.JSONObject;
 import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
-import cn.edu.zju.plex.tdd.entity.Video;
-import cn.edu.zju.plex.tdd.tools.VideoUtil;
 
 public class OnceWork {
+
+	private static final Logger LOG = Logger.getLogger(OnceWork.class);
 
 	private static void updateWeiboVideo() {
 
@@ -20,39 +22,37 @@ public class OnceWork {
 				break;
 			else {
 				for (ParsedStatus ps : sts) {
-					Video video = null;
+					boolean found = false;
+					LOG.info("-------------");
 					for (String url : ps.getUrl().split(";")) {
 						if (url.length() < 1)
 							continue;
 						try {
+							LOG.info("short_url:" + url);
 							JSONObject jo = su.shortToLongUrl(url.trim());
 							String vurl = jo.getJSONArray("urls")
 									.getJSONObject(0).getString("url_long");
-							video = VideoUtil.getVideoInfo(vurl);
-							if (video != null) {
+							LOG.info("long_url:" + vurl);
+							if (vurl.indexOf("tudou.com") != -1
+									|| vurl.indexOf("video.sina.com") != -1
+									|| vurl.indexOf("v.youku.com") != -1
+									|| vurl.indexOf("v.ku6.com") != -1
+									|| vurl.indexOf("56.com") != -1
+									|| vurl.indexOf("6.cn") != -1) {
+								DB4Tdd.updateWeiboVideo(ps.getId(), vurl);
+								found = true;
 								break;
-							} else {
-								try {
-									Thread.sleep(10000);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
 							}
 						} catch (Exception e) {
 							System.err.println(e);
 						}
 					}
-					if (video != null) {
-						DB4Tdd.updateWeiboVideo(ps.getId(), video.getUrl()
-								+ "," + video.getPic());
-					} else {
+					if (!found)
 						DB4Tdd.updateWeiboVideo(ps.getId(), "");
-					}
 				}
-
 			}
-		}
 
+		}
 	}
 
 	/**

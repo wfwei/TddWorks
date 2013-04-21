@@ -11,6 +11,10 @@ public class Video {
 	private String pic;
 	private String time;
 
+	public String toString() {
+		return "[" + url + "," + pic + "]";
+	}
+
 	public Video(String url) {
 		this.url = url;
 	}

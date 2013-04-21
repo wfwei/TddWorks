@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import weibo4j.model.WeiboException;
 import weibo4j.org.json.JSONObject;
+import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.entity.Video;
@@ -65,9 +66,14 @@ public class WeiboParser {
 					JSONObject jo = su.shortToLongUrl(u);
 					String vurl = jo.getJSONArray("urls").getJSONObject(0)
 							.getString("url_long");
-					Video video = VideoUtil.getVideoInfo(vurl);
-					if (video != null) {
-						status.setVideo(vurl + "," + video.getPic());
+
+					if (vurl.indexOf("tudou.com") != -1
+							|| vurl.indexOf("video.sina.com") != -1
+							|| vurl.indexOf("v.youku.com") != -1
+							|| vurl.indexOf("v.ku6.com") != -1
+							|| vurl.indexOf("56.com") != -1
+							|| vurl.indexOf("6.cn") != -1) {
+						status.setVideo(vurl);
 						break;
 					}
 				} catch (Exception e) {

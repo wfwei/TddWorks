@@ -53,7 +53,8 @@ public class VideoUtil {
 			} catch (Exception e) {
 				video = null;
 			}
-		}
+		} else
+			video = null;
 
 		return video;
 	}
