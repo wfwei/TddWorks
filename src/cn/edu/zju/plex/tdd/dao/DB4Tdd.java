@@ -224,7 +224,7 @@ public final class DB4Tdd {
 				.format("update rss_news set page='', content='%s', images='%s', videos='%s', meiju_id='%s', meiju_cname='%s', meiju_ename='%s', status=%d where id=%d",
 						rssNews.getContent().replace('\'', '’'), rssNews
 								.getImages(), rssNews.getVideos(), rssNews
-								.getTvShows().getSid(), rssNews.getTvShows()
+								.getTvShows().getTvdbid(), rssNews.getTvShows()
 								.getCname().replace('\'', '’'), rssNews
 								.getTvShows().getEname().replace('\'', '’'),
 						rssNews.getStatus(), rssNews.getId());
@@ -402,12 +402,12 @@ public final class DB4Tdd {
 						+ "content='%s', video='%s', url='%s', topic='%s', meiju_id='%s', meiju_cname='%s', meiju_ename='%s', "
 						+ "at_unames='%s', status=%d where wid='%s'", st
 						.getContent(), st.getVideo(), st.getUrl(), st
-						.getTopic().replace('\'', '’'),
-						st.getTvShow().getSid(), st.getTvShow().getCname()
-								.replace('\'', '’'), st.getTvShow().getEname()
-								.replace('\'', '’'),
-						st.getUname().replace('\'', '’'), st.getStatus(), st
-								.getId());
+						.getTopic().replace('\'', '’'), st.getTvShow()
+						.getTvdbid(),
+						st.getTvShow().getCname().replace('\'', '’'), st
+								.getTvShow().getEname().replace('\'', '’'), st
+								.getUname().replace('\'', '’'), st.getStatus(),
+						st.getId());
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
@@ -426,7 +426,7 @@ public final class DB4Tdd {
 	 */
 	public static HashMap<String, TvShows> getMeijuTvs() {
 		HashMap<String, TvShows> tvs = new HashMap<String, TvShows>();
-		String sql = "select sid, cname, ename, aka_original, aka from tvshows where tvdbid is not NUll";
+		String sql = "select tvdbid, cname, ename, aka_original, aka from tvshows where tvdbid is not NUll";
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
@@ -630,8 +630,8 @@ public final class DB4Tdd {
 		return res;
 	}
 
-	public static void updateParsedStatusImageCountAndSize(String statusId, int count,
-			String imageSizes) {
+	public static void updateParsedStatusImageCountAndSize(String statusId,
+			int count, String imageSizes) {
 		String sql = "update meiju_weibo set image_count = " + count
 				+ ", image_sizes='" + imageSizes + "' where wid='" + statusId
 				+ "'";
@@ -672,7 +672,7 @@ public final class DB4Tdd {
 
 		String sql = String
 				.format("update rss_news set meiju_id='%s', meiju_cname='%s', meiju_ename='%s' where id=%d",
-						rssNews.getTvShows().getSid(), rssNews.getTvShows()
+						rssNews.getTvShows().getTvdbid(), rssNews.getTvShows()
 								.getCname(), rssNews.getTvShows().getEname(),
 						rssNews.getId());
 		try {
@@ -685,16 +685,16 @@ public final class DB4Tdd {
 	}
 
 	public static List<TvShows> getTvShowList() {
-		String sql = "select sid, cname, ename, doubanid, aka_original, aka from tvshows";
+		String sql = "select tvdbid, cname, ename, doubanid, aka_original, aka from tvshows";
 		List<TvShows> res = new ArrayList<TvShows>();
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				String sid = rs.getString(1);
+				String tvdbid = rs.getString(1);
 				String cname = rs.getString(2);
 				String ename = rs.getString(3);
-				TvShows tvShow = new TvShows(sid, cname, ename);
+				TvShows tvShow = new TvShows(tvdbid, cname, ename);
 				tvShow.setDoubanid(rs.getString(4));
 				tvShow.setAka(rs.getString(5));
 				tvShow.setAka_original(rs.getString(6));
@@ -709,10 +709,10 @@ public final class DB4Tdd {
 		return res;
 	}
 
-	public static void updateDoubanId(String sid, String doubanid) {
+	public static void updateDoubanId(String tvdbid, String doubanid) {
 		String sql = String.format(
-				"update tvshows set doubanid='%s' where sid='%s';", doubanid,
-				sid);
+				"update tvshows set doubanid='%s' where tvdbid='%s';",
+				doubanid, tvdbid);
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
@@ -723,9 +723,9 @@ public final class DB4Tdd {
 
 	}
 
-	public static void updateTvShowAka(String sid, String aka) {
+	public static void updateTvShowAka(String tvdbid, String aka) {
 		String sql = String.format(
-				"update tvshows set aka='%s' where sid='%s';", aka, sid);
+				"update tvshows set aka='%s' where tvdbid='%s';", aka, tvdbid);
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);

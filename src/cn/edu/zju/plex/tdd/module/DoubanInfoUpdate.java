@@ -15,7 +15,7 @@ public class DoubanInfoUpdate {
 
 	public void updateAkas(TvShows tvShow) throws InstantiationException,
 			IllegalAccessException, Exception {
-		String sid = tvShow.getSid();
+		String tvdbid = tvShow.getTvdbid();
 		String url = tvShow.getDoubanid();
 		String oldAkas = tvShow.getAka() + tvShow.getAka_original();
 		try {
@@ -33,7 +33,7 @@ public class DoubanInfoUpdate {
 			}
 			if (newAkas.length() > 0) {
 				newAkas.append(tvShow.getAka());
-				DB4Tdd.updateTvShowAka(sid, newAkas.toString());
+				DB4Tdd.updateTvShowAka(tvdbid, newAkas.toString());
 			}
 
 		} catch (Exception e) {
@@ -49,7 +49,7 @@ public class DoubanInfoUpdate {
 					&& tvShow.getDoubanid().contains("com/movie")) {
 				String doubanid = tvShow.getDoubanid().replace("com/movie",
 						"com/v2/movie");
-				DB4Tdd.updateDoubanId(tvShow.getSid(), doubanid);
+				DB4Tdd.updateDoubanId(tvShow.getTvdbid(), doubanid);
 			}
 		}
 	}

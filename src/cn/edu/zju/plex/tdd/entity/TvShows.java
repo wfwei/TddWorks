@@ -1,7 +1,7 @@
 package cn.edu.zju.plex.tdd.entity;
 
 public class TvShows {
-	private String sid;
+	private String tvdbid;
 	private String cname;
 	private String ename;
 	private String doubanid;
@@ -9,27 +9,27 @@ public class TvShows {
 	private String aka_original;
 
 	public TvShows(String sid, String cname, String ename) {
-		this.sid = sid;
+		this.tvdbid = sid;
 		this.cname = cname;
 		this.ename = ename;
 	}
 
 	public TvShows() {
-		this.sid = "";
+		this.tvdbid = "";
 		this.cname = "";
 		this.ename = "";
 	}
 
 	public String toString() {
-		return "{" + sid + "," + cname + "," + ename + "}";
+		return "{" + tvdbid + "," + cname + "," + ename + "}";
 	}
 
-	public String getSid() {
-		return sid;
+	public String getTvdbid() {
+		return tvdbid;
 	}
 
-	public void setSid(String sid) {
-		this.sid = sid;
+	public void setTvdbid(String sid) {
+		this.tvdbid = sid;
 	}
 
 	public String getCname() {
@@ -49,7 +49,7 @@ public class TvShows {
 	}
 
 	public boolean isValid() {
-		if (sid != "")
+		if (tvdbid != "")
 			return true;
 		return false;
 	}
@@ -79,7 +79,7 @@ public class TvShows {
 	}
 
 	public boolean equals2(TvShows show) {
-		if (this.sid == show.sid)
+		if (this.tvdbid == show.tvdbid)
 			return true;
 		return false;
 	}

@@ -8,4 +8,9 @@ public class UrlUtil {
 	public static String convertToAbsolute(String url, String baseUrl) {
 		throw new RuntimeException("");
 	}
+	
+	public static boolean isVideo(String vurl) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
