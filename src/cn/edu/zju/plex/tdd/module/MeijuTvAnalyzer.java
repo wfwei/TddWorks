@@ -36,6 +36,8 @@ public class MeijuTvAnalyzer {
 			content = "没 有 内 容";
 		else
 			content = content.toLowerCase();
+
+		int minWeight = content.length() > 140 ? 2 : 1;
 		// 根据剧名进行分类
 		HashMap<TvShows, Double> guessList = new HashMap<TvShows, Double>();
 		// 美女上错身/aka 不/d 简单/a oh sit!/aka 666 park avenue/aka 逝者之证/aka
@@ -78,10 +80,10 @@ public class MeijuTvAnalyzer {
 				maxW = entry.getValue();
 				result = entry.getKey();
 			}
-			if (entry.getValue() >= 2)
+			if (entry.getValue() >= minWeight)
 				candidateCount++;
 		}
-		if (candidateCount > 4 || maxW < 2) {
+		if (candidateCount > 4 || maxW < minWeight) {
 			LOG.warn("found " + candidateCount + " different meiju in \n"
 					+ content);
 			return result = new TvShows();

@@ -5,14 +5,9 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import weibo4j.model.WeiboException;
 import weibo4j.org.json.JSONObject;
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.TvShows;
-import cn.edu.zju.plex.tdd.entity.Video;
-import cn.edu.zju.plex.tdd.tools.UrlUtil;
-import cn.edu.zju.plex.tdd.tools.VideoUtil;
 
 /**
  * weibo parser
@@ -23,10 +18,21 @@ public class WeiboParser {
 
 	private static final Logger LOG = Logger.getLogger(WeiboParser.class);
 
-	private static final Pattern WeiboTopicPatt = Pattern.compile("#(.*?)#");
+	private static final Pattern WeiboTopicPatt = Pattern
+			.compile("[#【](.*?)[#】]");
+
 	private static final Pattern WeiboUrlPatt = Pattern
-			.compile("(http://t.cn/[^\\s]+)");
-	private static final Pattern AtPatt = Pattern.compile("(@[^\\s]+)");
+			.compile("(http://t.cn/[^\\s]】]+)");
+	private static final Pattern AtPatt = Pattern.compile("(@[^\\s】.。，]+)");
+
+	private String extractTopic(String content) {
+		Matcher mat = WeiboTopicPatt.matcher(content);
+		StringBuffer topics = new StringBuffer();
+		while (mat.find()) {
+			topics.append(mat.group(1) + ";");
+		}
+		return topics.toString();
+	}
 
 	public void parse(ParsedStatus status) {
 		LOG.info("start parsing weibo status:" + status.getId());
@@ -36,15 +42,10 @@ public class WeiboParser {
 		StringBuffer sb;
 
 		// extract & set topic
-		Matcher mat = WeiboTopicPatt.matcher(content);
-		StringBuffer topics = new StringBuffer();
-		while (mat.find()) {
-			topics.append(mat.group(1) + ";");
-		}
-		status.setTopic(topics.toString());
+		status.setTopic(extractTopic(content));
 
 		// extract & set urls
-		mat = WeiboUrlPatt.matcher(content);
+		Matcher mat = WeiboUrlPatt.matcher(content);
 		sb = new StringBuffer();
 		StringBuffer urls = new StringBuffer();
 		while (mat.find()) {
