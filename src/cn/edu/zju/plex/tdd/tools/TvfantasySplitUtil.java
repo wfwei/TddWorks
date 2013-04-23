@@ -21,51 +21,54 @@ import cn.edu.zju.plex.tdd.entity.RssNews;
  */
 public class TvfantasySplitUtil {
 
-	private static final Logger LOG = Logger.getLogger(TvfantasySplitUtil.class);
+	private static final Logger LOG = Logger
+			.getLogger(TvfantasySplitUtil.class);
 
 	/**
 	 * split page, remove origin, save spliters
+	 * 
 	 * @param rssNews
 	 */
 	public static void splite(RssNews rssNews) {
-		LOG.info("split rssNews"+rssNews);
-		
+		LOG.info("split rssNews" + rssNews);
+
 		ArrayList<RssNews> res = new ArrayList<RssNews>();
 		Document doc = Jsoup.parse(rssNews.getPage());
 		Element article = doc.getElementsByTag("article").get(0);
 
 		ArrayList<Element> eles = new ArrayList<Element>();
-		
+
 		for (Element e : article.children()) {
 			eles.add(e);
 			e.remove();
 		}
-	
-		for (int i = 0; i < eles.size();i++) {
+
+		for (int i = 0; i < eles.size(); i++) {
 			article = doc.getElementsByTag("article").get(0);
 			for (Element e : article.children()) {
 				e.remove();
 			}
-			while(i<eles.size() && !eles.get(i).text().contains("●")){
+			while (i < eles.size() && !eles.get(i).text().contains("●")) {
 				i++;
 			}
 			article.appendChild(eles.get(i));
-			while(i+1<eles.size() && !eles.get(i+1).text().contains("●")){
+			while (i + 1 < eles.size() && !eles.get(i + 1).text().contains("●")) {
 				i++;
 				article.appendChild(eles.get(i));
 			}
 			RssNews newbee = rssNews.clone();
+			newbee.setTitle("");
 			newbee.setPage(doc.html());
 			newbee.setId(-1);
-			newbee.setLink(newbee.getLink()+"#"+i);
+			newbee.setLink(newbee.getLink() + "#" + i);
 			res.add(newbee);
 		}
-		
+
 		for (RssNews rn : res) {
 			LOG.info("insert rssNews" + rn);
 			DB4Tdd.insertRssNews(rn);
 		}
-		LOG.info("Delete rssNews from database:"+rssNews);
+		LOG.info("Delete rssNews from database:" + rssNews);
 		DB4Tdd.delete(rssNews);
 	}
 
@@ -87,8 +90,8 @@ public class TvfantasySplitUtil {
 	}
 
 	public static void main(String args[]) {
-//		String linkReg = "http://tvfantasy.net/.{10}/newsletter[^#]*";
-//		splitAll(linkReg);
+		String linkReg = "http://tvfantasy.net/.{10}/newsletter[^#]*";
+		splitAll(linkReg);
 	}
 
 }

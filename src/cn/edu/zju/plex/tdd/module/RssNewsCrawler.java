@@ -33,12 +33,7 @@ public class RssNewsCrawler {
 		try {
 			String feedPage = httpUtil.fetchPage(rssFeed.getFeed());
 			org.horrabin.horrorss.RssFeed feed = rssParser.loadString(feedPage);
-
-			// Gets the channel information of the feed and
-			// display its title
-			// RssChannelBean channel = feed.getChannel();
-			// LOG.debug("Get feed update: " + channel.getTitle());
-
+			String author = feed.getChannel().getTitle();
 			// TODO category is not parsed
 			List<RssItemBean> items = feed.getItems();
 			for (RssItemBean item : items) {
@@ -47,7 +42,7 @@ public class RssNewsCrawler {
 					break;
 				RssNews rssnews = new RssNews();
 				String page = httpUtil.fetchPage(item.getLink());
-				rssnews.setFirstPart(item.getTitle(), item.getLink(),
+				rssnews.setFirstPart(item.getTitle(), item.getLink(), author,
 						item.getCategory(), item.getDescription(),
 						item.getPubDate(), page, rssFeed.getId());
 				res.add(rssnews);

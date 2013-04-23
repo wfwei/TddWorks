@@ -3,6 +3,8 @@ package cn.edu.zju.plex.tdd.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jsoup.nodes.Element;
+
 import cn.edu.zju.plex.tdd.entity.RssNews;
 
 /**

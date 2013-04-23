@@ -32,10 +32,10 @@ public abstract class AbstractParser {
 	public void parseContent() {
 		if (targetElements == null)
 			setTargetElements();
-		String plainText = targetElements.text();
+		String plainText = targetElements.html();
 		LOG.info("[abstract]extract text length:" + plainText.length()
 				+ " in page: " + rssNews.getLink());
-		rssNews.setContent(plainText);
+		rssNews.setContent(plainText.replaceAll("<img.*?>", ""));
 	}
 
 	/*

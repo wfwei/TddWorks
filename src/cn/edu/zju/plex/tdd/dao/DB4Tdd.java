@@ -189,9 +189,10 @@ public final class DB4Tdd {
 	public static void insertRssNews(RssNews rssnews) {
 
 		String sql = String
-				.format("insert into rss_news(title, link, category, description, pubDate, feed, page, status) values('%s', '%s', '%s', '%s', '%s', %d, '%s', %d);",
+				.format("insert into rss_news(title, link, author, category, description, pubDate, feed, page, status) values('%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', %d);",
 						rmInvalidChar(rssnews.getTitle()),
 						rmInvalidChar(rssnews.getLink()), rmInvalidChar(rssnews
+								.getAuthor()), rmInvalidChar(rssnews
 								.getCategory()), rmInvalidChar(rssnews
 								.getDescription()), new SimpleDateFormat(
 								"yyyy-MM-dd HH:mm:ss").format(rssnews
