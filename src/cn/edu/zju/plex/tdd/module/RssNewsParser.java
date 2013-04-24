@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.parser.ParserFactory;
-import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 
 /**
  * RssNews parser

@@ -3,7 +3,6 @@ package cn.edu.zju.plex.tdd.module;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.horrabin.horrorss.RssChannelBean;
 import org.horrabin.horrorss.RssItemBean;
 import org.horrabin.horrorss.RssParser;
 
@@ -25,6 +24,10 @@ public class RssNewsCrawler {
 
 	private RssParser rssParser = new RssParser();
 	private HttpUtil httpUtil = new HttpUtil();
+
+	public String fetchPage(String url) {
+		return httpUtil.fetchPage(url);
+	}
 
 	public ArrayList<RssNews> fetchUpdate(RssFeed rssFeed) {
 		LOG.info("fetching rss news updates:" + rssFeed.getTitle());

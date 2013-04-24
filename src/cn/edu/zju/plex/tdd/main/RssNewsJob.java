@@ -10,11 +10,13 @@ import org.apache.log4j.Logger;
 import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
+import cn.edu.zju.plex.tdd.module.MeijuTvAnalyzer;
 import cn.edu.zju.plex.tdd.module.RssNewsCrawler;
 import cn.edu.zju.plex.tdd.module.RssNewsParser;
 import cn.edu.zju.plex.tdd.module.RssNewsRmDup;
+import cn.edu.zju.plex.tdd.module.TvfantasySpliter;
 import cn.edu.zju.plex.tdd.tools.ImageFetcher;
-import cn.edu.zju.plex.tdd.tools.TvfantasySplitUtil;
+import cn.edu.zju.plex.tdd.tools.UrlUtil;
 
 /**
  * crawl & parse rssNews
@@ -22,8 +24,8 @@ import cn.edu.zju.plex.tdd.tools.TvfantasySplitUtil;
  * @author plex
  */
 public class RssNewsJob implements Runnable {
-
 	private static final Logger LOG = Logger.getLogger(RssNewsJob.class);
+	
 	private final int EIGHT_HOUR = 8 * 60 * 60 * 1000;
 	private RssNewsCrawler crawler = new RssNewsCrawler();
 	private RssNewsParser parser = new RssNewsParser();
@@ -57,9 +59,14 @@ public class RssNewsJob implements Runnable {
 				break;
 			} else {
 				for (RssNews rssNews : rssNewsToParse) {
-					if (rssNews.getLink().matches(
-							"http://tvfantasy.net/.{10}/newsletter[^#]+")) {
-						TvfantasySplitUtil.splite(rssNews);
+					if (rssNews.getPage() == null
+							|| rssNews.getPage().length() < 10) {
+						String page = crawler.fetchPage(rssNews.getLink());
+						rssNews.setPage(page);
+					}
+					if (rssNews.getLink().startsWith("http://tvfantasy.net/")
+							&& MeijuTvAnalyzer.countTvNames(rssNews.getTitle()) > 1) {
+						TvfantasySpliter.splite(rssNews);
 						continue;
 					}
 					rssNews = parser.parse(rssNews);
@@ -107,24 +114,24 @@ public class RssNewsJob implements Runnable {
 					StringBuffer imageSizes = new StringBuffer();
 					int count = 0;
 					for (int i = 0; i < images.length && count < 5; i++) {
-						Matcher m = ImagePatt.matcher(images[i]);
+						String imageUrl = images[i];
+						Matcher m = ImagePatt.matcher(imageUrl);
 						if (m.find()) {
-							if (images[i].startsWith(".")
-									|| images[i].startsWith("/")) {
-								// TODO if necessary
-								LOG.info("relative image url:" + images[i]);
+							if (imageUrl.startsWith(".")
+									|| imageUrl.startsWith("/")) {
+								imageUrl = UrlUtil.convertToAbsolute(imageUrl,
+										rssNews.getLink());
 							}
-							String imageSize = ImageFetcher.saveimage(
-									images[i],
+							String imageSize = ImageFetcher.saveimage(imageUrl,
 									rootPath + "news-" + rssNews.getId() + "-"
 											+ count + m.group(1));
 							if (imageSize != null) {
 								imageSizes.append(imageSize).append(";");
 								count++;
 							} else
-								LOG.warn("fail downloading:" + images[i]);
+								LOG.warn("fail downloading:" + imageUrl);
 						} else
-							LOG.debug("invalid image url" + images[i]);
+							LOG.debug("invalid image url" + imageUrl);
 					}
 					if (count > 0) {
 						DB4Tdd.updateRssNewsImageCountAndSize(rssNews.getId(),

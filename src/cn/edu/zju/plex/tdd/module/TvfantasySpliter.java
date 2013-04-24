@@ -1,4 +1,4 @@
-package cn.edu.zju.plex.tdd.tools;
+package cn.edu.zju.plex.tdd.module;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ import cn.edu.zju.plex.tdd.entity.RssNews;
  * 
  * @author WangFengwei
  */
-public class TvfantasySplitUtil {
+public class TvfantasySpliter {
 
 	private static final Logger LOG = Logger
-			.getLogger(TvfantasySplitUtil.class);
+			.getLogger(TvfantasySpliter.class);
 
 	/**
 	 * split page, remove origin, save spliters
@@ -54,7 +54,8 @@ public class TvfantasySplitUtil {
 			article.appendChild(eles.get(i));
 			while (i + 1 < eles.size() && !eles.get(i + 1).text().contains("●")) {
 				i++;
-				article.appendChild(eles.get(i));
+				if (eles.get(i + 1).text().length() > 10)
+					article.appendChild(eles.get(i));
 			}
 			RssNews newbee = rssNews.clone();
 			newbee.setTitle("");
@@ -64,12 +65,15 @@ public class TvfantasySplitUtil {
 			res.add(newbee);
 		}
 
-		for (RssNews rn : res) {
-			LOG.info("insert rssNews" + rn);
-			DB4Tdd.insertRssNews(rn);
-		}
-		LOG.info("Delete rssNews from database:" + rssNews);
-		DB4Tdd.delete(rssNews);
+		if (res.size() > 0) {
+			for (RssNews rn : res) {
+				LOG.info("insert rssNews" + rn);
+				DB4Tdd.insertRssNews(rn);
+			}
+			LOG.info("Delete rssNews from database:" + rssNews);
+			DB4Tdd.delete(rssNews);
+		} else
+			LOG.info("no elements to split:" + rssNews.getLink());
 	}
 
 	public static void splitAll(String linkReg) {
@@ -89,6 +93,7 @@ public class TvfantasySplitUtil {
 		}
 	}
 
+	// TODO 测试一下分解所有文章，看看会不会出错
 	public static void main(String args[]) {
 		String linkReg = "http://tvfantasy.net/.{10}/newsletter[^#]*";
 		splitAll(linkReg);

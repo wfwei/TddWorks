@@ -25,6 +25,28 @@ public class MeijuTvAnalyzer {
 	private static final Pattern FenciResPatt = Pattern
 			.compile("([^/]+)/([^\\s]+)");
 
+	public static int countTvNames(String content) {
+		// 美女上错身/aka 不/d 简单/a oh sit!/aka 666 park avenue/aka 逝者之证/aka
+		Matcher mat = FenciResPatt.matcher(MyICTCLAS.fenci(content));
+		Set<TvShows> tvSet = new HashSet<TvShows>();
+		while (mat.find()) {
+			String word = mat.group(1).trim();
+			String cixing = mat.group(2).trim();
+			// 词性中有名词(n)成分或手动倒入的剧集(aka)
+			if (cixing.contains("n") || cixing.contains("aka")) {
+				TvShows tvShow = Meijus.get(word);
+				if (tvShow != null) {
+					tvSet.add(tvShow);
+				} else {
+					if (cixing.contains("aka"))
+						LOG.warn("no tvshow for word:" + word);
+				}
+			}
+		}
+
+		return tvSet.size();
+	}
+
 	/**
 	 * 检测文本所属剧集，成功返回预测的TvShows，否则返回空（如果检测到多个剧集，也返回空）
 	 * 
