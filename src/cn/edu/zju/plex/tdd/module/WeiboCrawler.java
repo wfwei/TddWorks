@@ -19,7 +19,7 @@ import weibo4j.model.WeiboException;
  */
 public class WeiboCrawler {
 
-	private final Logger LOG = Logger.getLogger(DB4Tdd.class);
+	private final Logger LOG = Logger.getLogger(WeiboCrawler.class);
 	private final long INTERVAL = 12000L; // 12 seconds
 	private String accessToken = "2.00l9nr_DfUKrWDf655d3279arZgVvD";
 	private HashMap<String, String> targetUsers = DB4Tdd.getWeiboTargets();
@@ -48,6 +48,7 @@ public class WeiboCrawler {
 			boolean done = false; // if caught @lastUpdateWeibo
 			String latestWeibo = null;
 			int count = 0;
+			boolean theFirst = true; // 去掉可能的置顶微博
 			// 最多爬取最近的前1000条微博
 			for (int p = 1; p < 11 && !done; p++) {
 				paging.setPage(p);
@@ -57,9 +58,14 @@ public class WeiboCrawler {
 						StatusWapper status = tm.getUserTimelineByUid(wuid,
 								paging, 0, 0);
 						for (Status s : status.getStatuses()) {
-							if (latestWeibo == null) {
-								latestWeibo = s.getId();
+							if (theFirst
+									&& Long.valueOf(s.getId()) <= Long
+											.valueOf(lastUpdateWeibo)) {
+								theFirst = false;
+								continue;
 							}
+							if (latestWeibo == null)
+								latestWeibo = s.getId();
 
 							if (Long.valueOf(s.getId()) <= Long
 									.valueOf(lastUpdateWeibo)) {

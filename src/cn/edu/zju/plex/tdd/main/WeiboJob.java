@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import cn.edu.zju.plex.tdd.dao.DB4Tdd;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
-import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.module.WeiboCrawler;
 import cn.edu.zju.plex.tdd.module.WeiboParser;
 import cn.edu.zju.plex.tdd.tools.ImageFetcher;
@@ -67,24 +66,19 @@ public class WeiboJob implements Runnable {
 					for (int i = 0; i < images.length; i++) {
 						if (i != 1)
 							continue; // 只保存middlesize的图片
-						Matcher m = ImagePatt.matcher(images[i]);
+						String imageUrl = images[i];
+						Matcher m = ImagePatt.matcher(imageUrl);
 						if (m.find()) {
-							if (images[i].startsWith(".")
-									|| images[i].startsWith("/")) {
-								// TODO if necessary
-								LOG.info("relative image url:" + images[i]);
-							}
-							String imageSize = ImageFetcher.saveimage(
-									images[i],
+							String imageSize = ImageFetcher.saveimage(imageUrl,
 									rootPath + "weibo-" + status.getId() + "-"
 											+ i + m.group(1));
 							if (imageSize != null) {
 								imageSizes.append(imageSize).append(";");
 								count++;
 							} else
-								LOG.warn("fail downloading:" + images[i]);
+								LOG.warn("fail downloading:" + imageUrl);
 						} else
-							LOG.debug("invalid image url" + images[i]);
+							LOG.debug("invalid image url" + imageUrl);
 					}
 					if (count > 0)
 						DB4Tdd.updateParsedStatusImageCountAndSize(

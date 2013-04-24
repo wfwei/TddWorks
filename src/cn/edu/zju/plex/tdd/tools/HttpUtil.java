@@ -54,7 +54,7 @@ public class HttpUtil {
 	 * @author WangFengwei
 	 * @time 2012-8-29
 	 */
-	public String fetchPage(String url) {
+	public synchronized String fetchPage(String url) {
 		// TODO remove me
 		LOG.info("fetching url:" + url);
 		String html = null;

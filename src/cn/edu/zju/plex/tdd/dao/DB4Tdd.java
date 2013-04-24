@@ -19,7 +19,6 @@ import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.entity.TvShows;
-import cn.edu.zju.plex.tdd.tools.CharsetUtil;
 
 /**
  * TDD的数据库操作类. TODO 以表分割该类
@@ -39,7 +38,7 @@ public final class DB4Tdd {
 	/**
 	 */
 	public static List<RssNews> getRssNewsToParse(int count) {
-		String sql = "select id, title, link, category, description, pubDate, feed, page, status from rss_news where status = "
+		String sql = "select id, title, link, author, category, description, pubDate, feed, page, status from rss_news where status = "
 				+ RssNews.ST_READY + " limit 0," + count;
 		List<RssNews> res = new ArrayList<RssNews>();
 		try {
@@ -50,17 +49,18 @@ public final class DB4Tdd {
 				rssnews.setId(rs.getLong(1));
 				rssnews.setTitle(rs.getString(2));
 				rssnews.setLink(rs.getString(3));
-				rssnews.setCategory(rs.getString(4));
-				rssnews.setDescription(rs.getString(5));
+				rssnews.setAuthor(rs.getString(4));
+				rssnews.setCategory(rs.getString(5));
+				rssnews.setDescription(rs.getString(6));
 				try {
 					rssnews.setPubDate(new SimpleDateFormat(
-							"yyyy-MM-dd HH:mm:ss").parse(rs.getString(6)));
+							"yyyy-MM-dd HH:mm:ss").parse(rs.getString(7)));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				rssnews.setFeed(rs.getLong(7));
-				rssnews.setPage(rs.getString(8));
-				rssnews.setStatus(rs.getInt(9));
+				rssnews.setFeed(rs.getLong(8));
+				rssnews.setPage(rs.getString(9));
+				rssnews.setStatus(rs.getInt(10));
 				res.add(rssnews);
 			}
 		} catch (SQLException e) {
@@ -77,7 +77,8 @@ public final class DB4Tdd {
 	 * @return
 	 */
 	public static List<RssNews> getRssNewsToSplit(int count, String linkReg) {
-		String sql = "select id, title, link, category, description, pubDate, feed, page, status from rss_news where link regexp '"
+		String sql = "select id, title, link, category, description," +
+				" pubDate, feed, page, status from rss_news where link regexp '"
 				+ linkReg + "' limit 0," + count;
 		List<RssNews> res = new ArrayList<RssNews>();
 		try {
@@ -575,7 +576,7 @@ public final class DB4Tdd {
 
 	// images_count = -1是还没有获取的，没有是0
 	public static List<RssNews> getRssNewsToDownloadImages() {
-		String sql = "select id, images from rss_news where image_count = -1 and status=2 limit 0, 100";
+		String sql = "select id, link, images from rss_news where image_count = -1 and status=2 limit 0, 100";
 		List<RssNews> res = new ArrayList<RssNews>();
 		try {
 			Statement stmt = con.createStatement();
@@ -583,7 +584,8 @@ public final class DB4Tdd {
 			while (rs.next()) {
 				RssNews rssnews = new RssNews();
 				rssnews.setId(rs.getLong(1));
-				rssnews.setImages(rs.getString(2));
+				rssnews.setLink(rs.getString(2));
+				rssnews.setImages(rs.getString(3));
 				res.add(rssnews);
 			}
 		} catch (SQLException e) {
