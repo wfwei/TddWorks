@@ -63,8 +63,7 @@ public class RssNewsJob implements Runnable {
 						String page = crawler.fetchPage(rssNews.getLink());
 						rssNews.setPage(page);
 					}
-					// 加上一個条件，rssNews.getLink().matches("http://tvfantasy.net/[^#]+")
-					if (rssNews.getLink().startsWith("http://tvfantasy.net/")
+					if (rssNews.getLink().matches("http://tvfantasy.net/[^#]+")
 							&& MeijuTvAnalyzer.countTvNames(rssNews.getTitle()) > 1) {
 						TvfantasySpliter.splite(rssNews);
 						continue;

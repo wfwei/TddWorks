@@ -20,13 +20,7 @@ import cn.edu.zju.plex.tdd.entity.RssNews;
  * @author WangFengwei
  */
 public class TvfantasySpliter {
-
-<<<<<<< HEAD:src/cn/edu/zju/plex/tdd/module/TvfantasySpliter.java
 	private static final Logger LOG = Logger.getLogger(TvfantasySpliter.class);
-=======
-	private static final Logger LOG = Logger
-			.getLogger(TvfantasySpliter.class);
->>>>>>> origin/master:src/cn/edu/zju/plex/tdd/module/TvfantasySpliter.java
 
 	/**
 	 * split page, remove origin, save spliters
@@ -52,13 +46,14 @@ public class TvfantasySpliter {
 			for (Element e : article.children()) {
 				e.remove();
 			}
-			while (i < eles.size() && !eles.get(i).text().contains("●")) {
+			while (i < eles.size() && !eles.get(i).text().contains("●"))
 				i++;
-			}
+			if (i >= eles.size())
+				break;
 			article.appendChild(eles.get(i));
 			while (i + 1 < eles.size() && !eles.get(i + 1).text().contains("●")) {
 				i++;
-				if (eles.get(i + 1).text().length() > 10)
+				if (eles.get(i).text().length() > 10)
 					article.appendChild(eles.get(i));
 			}
 			RssNews newbee = rssNews.clone();
@@ -76,8 +71,10 @@ public class TvfantasySpliter {
 			}
 			LOG.info("Delete rssNews from database:" + rssNews);
 			DB4Tdd.delete(rssNews);
-		} else
+		} else {
+			rssNews.setLink(rssNews.getLink() + "#fail");
 			LOG.info("no elements to split:" + rssNews.getLink());
+		}
 	}
 
 	public static void splitAll(String linkReg) {
