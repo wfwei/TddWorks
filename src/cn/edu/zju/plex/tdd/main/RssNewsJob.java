@@ -25,7 +25,6 @@ import cn.edu.zju.plex.tdd.tools.UrlUtil;
  */
 public class RssNewsJob implements Runnable {
 	private static final Logger LOG = Logger.getLogger(RssNewsJob.class);
-
 	private final int EIGHT_HOUR = 8 * 60 * 60 * 1000;
 	private RssNewsCrawler crawler = new RssNewsCrawler();
 	private RssNewsParser parser = new RssNewsParser();

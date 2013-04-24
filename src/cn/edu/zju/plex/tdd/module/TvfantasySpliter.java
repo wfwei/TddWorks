@@ -21,7 +21,12 @@ import cn.edu.zju.plex.tdd.entity.RssNews;
  */
 public class TvfantasySpliter {
 
+<<<<<<< HEAD:src/cn/edu/zju/plex/tdd/module/TvfantasySpliter.java
 	private static final Logger LOG = Logger.getLogger(TvfantasySpliter.class);
+=======
+	private static final Logger LOG = Logger
+			.getLogger(TvfantasySpliter.class);
+>>>>>>> origin/master:src/cn/edu/zju/plex/tdd/module/TvfantasySpliter.java
 
 	/**
 	 * split page, remove origin, save spliters
