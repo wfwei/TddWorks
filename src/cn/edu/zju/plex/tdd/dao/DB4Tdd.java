@@ -65,6 +65,8 @@ public final class DB4Tdd {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			LOG.warn(e.getMessage());
+			LOG.warn("sql is:\t" + sql);
 		}
 		return res;
 	}
@@ -77,8 +79,8 @@ public final class DB4Tdd {
 	 * @return
 	 */
 	public static List<RssNews> getRssNewsToSplit(int count, String linkReg) {
-		String sql = "select id, title, link, category, description," +
-				" pubDate, feed, page, status from rss_news where link regexp '"
+		String sql = "select id, title, link, category, description,"
+				+ " pubDate, feed, page, status from rss_news where link regexp '"
 				+ linkReg + "' limit 0," + count;
 		List<RssNews> res = new ArrayList<RssNews>();
 		try {
@@ -131,7 +133,9 @@ public final class DB4Tdd {
 				res.add(ritem);
 			}
 		} catch (SQLException e) {
-			LOG.warn(e.toString());
+			e.printStackTrace();
+			LOG.warn(e.getMessage());
+			LOG.warn("sql is:\t" + sql);
 		}
 		return res;
 	}
@@ -175,7 +179,8 @@ public final class DB4Tdd {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOG.warn(e.toString());
+			LOG.warn(e.getMessage());
+			LOG.warn("sql is:\t" + sql);
 		}
 		return res;
 	}
@@ -225,7 +230,8 @@ public final class DB4Tdd {
 		String sql = String
 				.format("update rss_news set page='', content='%s', images='%s', videos='%s', meiju_id='%s', meiju_cname='%s', meiju_ename='%s', status=%d where id=%d",
 						rssNews.getContent().replace('\'', '’'), rssNews
-								.getImages(), rssNews.getVideos(), rssNews
+								.getImages(),
+						rssNews.getVideos().replace('\'', '’'), rssNews
 								.getTvShows().getTvdbid(), rssNews.getTvShows()
 								.getCname().replace('\'', '’'), rssNews
 								.getTvShows().getEname().replace('\'', '’'),
@@ -236,6 +242,8 @@ public final class DB4Tdd {
 			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			LOG.warn(e.getMessage());
+			LOG.warn("sql is:\t" + sql);
 		}
 	}
 
@@ -257,6 +265,8 @@ public final class DB4Tdd {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			LOG.warn(e.getMessage());
+			LOG.warn("sql is:\t" + sql);
 		}
 		return res;
 	}
@@ -611,6 +621,19 @@ public final class DB4Tdd {
 
 	}
 
+	public static void updateRssNewsLink(long rssNewsId, String link) {
+		String sql = "update rss_news set link = '" + link + "' where id="
+				+ rssNewsId;
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			LOG.warn("sql:\t" + sql);
+		}
+	}
+
 	public static List<ParsedStatus> getParsedStatusToDownloadImages() {
 		String sql = "select wid, wsmallimage, wmiddleimage, woriginalimage from meiju_weibo where image_count=-1 and status=2 limit 0, 100";
 		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
@@ -735,6 +758,8 @@ public final class DB4Tdd {
 			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			LOG.warn(e.getMessage());
+			LOG.warn("sql is:\t" + sql);
 		}
 
 	}

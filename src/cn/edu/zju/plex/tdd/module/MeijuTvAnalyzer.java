@@ -88,7 +88,7 @@ public class MeijuTvAnalyzer {
 					guessList.put(tvShow, weight);
 				} else {
 					if (cixing.contains("aka"))
-						LOG.warn("no tvshow for word:" + word);
+						LOG.debug("no tvshow for word:" + word);
 				}
 			}
 		}

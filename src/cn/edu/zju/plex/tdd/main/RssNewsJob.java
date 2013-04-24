@@ -60,11 +60,13 @@ public class RssNewsJob implements Runnable {
 				for (RssNews rssNews : rssNewsToParse) {
 					if (rssNews.getPage() == null
 							|| rssNews.getPage().length() < 10) {
-						String page = crawler.fetchPage(rssNews.getLink());
+						String link = rssNews.getLink();
+						if(link.contains("#"))
+							link = link.substring(0, link.indexOf('#'));
+						String page = crawler.fetchPage(link);
 						rssNews.setPage(page);
 					}
-					// 加上一個条件，rssNews.getLink().matches("http://tvfantasy.net/[^#]+")
-					if (rssNews.getLink().startsWith("http://tvfantasy.net/")
+					if (rssNews.getLink().matches("http://tvfantasy.net/[^#]+")
 							&& MeijuTvAnalyzer.countTvNames(rssNews.getTitle()) > 1) {
 						TvfantasySpliter.splite(rssNews);
 						continue;
