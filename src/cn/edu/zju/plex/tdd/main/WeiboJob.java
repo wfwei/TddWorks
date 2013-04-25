@@ -108,8 +108,9 @@ public class WeiboJob implements Runnable {
 
 				LOG.info("下载图片");
 				downloadImages("d:/tmp/images2/");
-			} catch (Throwable t) {
-				LOG.error(t.getCause().getMessage());
+			} catch (Exception t) {
+				t.printStackTrace();
+				LOG.error(t.getMessage());
 			} finally {
 				LOG.info("Loog over for WeiboJob");
 				try {
