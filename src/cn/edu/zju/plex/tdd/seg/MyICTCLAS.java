@@ -51,9 +51,9 @@ public class MyICTCLAS {
 		// importUserDic("meijuDict.txt", 3);
 		// saveUserDic();
 		// 字符串分词
-		String sInput = "美女上错身不简单oh sit!666 park avenue逝者之证间谍亚契 第一季联盟it’s always sunny in philadelphia厨房噩梦";
+		String sInput = "《南国医恋》（Hart of Dixie）S02E18《Why Don’t We Get Drunk?》美女上错身不简单oh sit!666 park avenue逝者之证间谍亚契 第一季联盟it’s always sunny in philadelphia厨房噩梦";
 		MyICTCLAS.setPOSmap(3);
-		String res = MyICTCLAS.fenci(sInput);
+		String res = MyICTCLAS.fenci(sInput.toLowerCase());
 		for(String s:res.split(" ")) 
 			System.out.println(s);
 	}

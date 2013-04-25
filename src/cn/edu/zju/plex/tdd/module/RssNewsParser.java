@@ -21,7 +21,8 @@ public class RssNewsParser {
 		ParserFactory.getParser(rssNews).parse();
 
 		LOG.info("parse tvshow");
-		TvShows tvShows = MeijuTvAnalyzer.guessTv(rssNews.getContent());
+		TvShows tvShows = MeijuTvAnalyzer.guessTv(rssNews.getContent()
+				+ rssNews.getTitle());
 		rssNews.setTvShows(tvShows);
 
 		rssNews.setStatus(RssNews.ST_FINISHED);
