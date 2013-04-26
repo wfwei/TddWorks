@@ -19,16 +19,13 @@ public class TvfantasyParser extends AbstractParser {
 	}
 
 	public void setTargetElements() {
-		// String targetId = "entry_main";
 		String targetTag = "article";
-
 		try {
-			targetElements = doc.getElementsByTag(targetTag);
+			tEle = doc.getElementsByTag(targetTag).first();
 		} catch (Exception e) {
 			LOG.error("天涯小筑 TvfantasyParse not parse well:" + rssNews);
-			targetElements = doc.getAllElements();
+			tEle = doc;
 		}
-
 	}
 
 }

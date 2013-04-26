@@ -40,7 +40,7 @@ public class TvfantasySpliter {
 			eles.add(e);
 			e.remove();
 		}
-
+		int splitId = 1;
 		for (int i = 0; i < eles.size(); i++) {
 			article = doc.getElementsByTag("article").get(0);
 			for (Element e : article.children()) {
@@ -59,8 +59,7 @@ public class TvfantasySpliter {
 			RssNews newbee = rssNews.clone();
 			newbee.setTitle("");
 			newbee.setPage(doc.html());
-			newbee.setId(-1);
-			newbee.setLink(newbee.getLink() + "#" + i);
+			newbee.setSplitId(splitId++);
 			res.add(newbee);
 		}
 
@@ -69,13 +68,9 @@ public class TvfantasySpliter {
 				LOG.info("insert rssNews" + rn);
 				DB4Tdd.insertRssNews(rn);
 			}
-			LOG.info("Delete rssNews from database:" + rssNews);
-			DB4Tdd.delete(rssNews);
-		} else {
-			rssNews.setLink(rssNews.getLink() + "#fail");
-			DB4Tdd.updateRssNewsLink(rssNews.getId(), rssNews.getLink());
-			LOG.info("no elements to split:" + rssNews.getLink());
 		}
+		rssNews.setSplitId(-1); // 已经分裂过
+		DB4Tdd.updateRssNewsSplitId(rssNews.getId(), rssNews.getSplitId());
 	}
 
 	public static void splitAll(String linkReg) {

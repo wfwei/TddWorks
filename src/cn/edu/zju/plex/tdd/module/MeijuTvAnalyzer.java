@@ -105,7 +105,7 @@ public class MeijuTvAnalyzer {
 			if (entry.getValue() >= minWeight)
 				candidateCount++;
 		}
-		if (candidateCount > 4 || maxW < minWeight) {
+		if (candidateCount > 2 || maxW < minWeight) {
 			LOG.warn("found " + candidateCount + " different meiju in \n"
 					+ content);
 			result = new TvShows();

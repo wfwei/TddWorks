@@ -20,6 +20,7 @@ public class RssNews implements Cloneable {
 	private String videos;
 	private TvShows tvShows;
 	private long delegate;
+	private int splitId = 0;
 	private int status;
 
 	public static final int ST_ERROR = -1;
@@ -45,8 +46,8 @@ public class RssNews implements Cloneable {
 	}
 
 	/**
-	 * init rss news with rss parts(title, author, link, category, description, pubDate,
-	 * content, feed) and set status = ST_READY
+	 * init rss news with rss parts(title, author, link, category, description,
+	 * pubDate, content, feed) and set status = ST_READY
 	 */
 	public void setFirstPart(String title, String link, String author,
 			String category, String description, Date pubDate, String page,
@@ -212,6 +213,14 @@ public class RssNews implements Cloneable {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public int getSplitId() {
+		return splitId;
+	}
+
+	public void setSplitId(int splitId) {
+		this.splitId = splitId;
 	}
 
 }

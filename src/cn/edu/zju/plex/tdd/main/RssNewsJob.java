@@ -61,13 +61,14 @@ public class RssNewsJob implements Runnable {
 					if (rssNews.getPage() == null
 							|| rssNews.getPage().length() < 10) {
 						String link = rssNews.getLink();
-						if(link.contains("#"))
+						if (link.contains("#"))
 							link = link.substring(0, link.indexOf('#'));
+						rssNews.setLink(link);
 						String page = crawler.fetchPage(link);
 						rssNews.setPage(page);
 					}
 					if (rssNews.getLink().matches("http://tvfantasy.net/[^#]+")
-							&& MeijuTvAnalyzer.countTvNames(rssNews.getTitle()) > 1) {
+							&& rssNews.getSplitId() == 0) {
 						TvfantasySpliter.splite(rssNews);
 						continue;
 					}
@@ -161,8 +162,8 @@ public class RssNewsJob implements Runnable {
 				LOG.info("开始解析rss_news");
 				parseRssNews();
 
-				LOG.info("开始去重");
-				rmDump();
+				// LOG.info("开始去重");
+				// rmDump();
 
 				LOG.info("下載圖片");
 				downloadImages("d:/tmp/images/");

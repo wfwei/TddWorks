@@ -11,7 +11,7 @@ public class DefaultParser extends AbstractParser {
 	@Override
 	public void setTargetElements() {
 		LOG.warn("use default parser, which is not set up well");
-		targetElements = doc.getAllElements();
+		tEle = doc;
 	}
 
 }

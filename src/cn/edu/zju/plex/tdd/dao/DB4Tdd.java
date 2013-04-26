@@ -38,7 +38,7 @@ public final class DB4Tdd {
 	/**
 	 */
 	public static List<RssNews> getRssNewsToParse(int count) {
-		String sql = "select id, title, link, author, category, description, pubDate, feed, page, status from rss_news where status = "
+		String sql = "select id, title, link, author, category, description, pubDate, feed, page, split_id, status from rss_news where status = "
 				+ RssNews.ST_READY + " limit 0," + count;
 		List<RssNews> res = new ArrayList<RssNews>();
 		try {
@@ -60,7 +60,8 @@ public final class DB4Tdd {
 				}
 				rssnews.setFeed(rs.getLong(8));
 				rssnews.setPage(rs.getString(9));
-				rssnews.setStatus(rs.getInt(10));
+				rssnews.setSplitId(rs.getInt(10));
+				rssnews.setStatus(rs.getInt(11));
 				res.add(rssnews);
 			}
 		} catch (SQLException e) {
@@ -195,7 +196,7 @@ public final class DB4Tdd {
 	public static void insertRssNews(RssNews rssnews) {
 
 		String sql = String
-				.format("insert into rss_news(title, link, author, category, description, pubDate, feed, page, status) values('%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', %d);",
+				.format("insert into rss_news(title, link, author, category, description, pubDate, feed, page, split_id status) values('%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', %d, %d);",
 						rmInvalidChar(rssnews.getTitle()),
 						rmInvalidChar(rssnews.getLink()), rmInvalidChar(rssnews
 								.getAuthor()), rmInvalidChar(rssnews
@@ -203,7 +204,8 @@ public final class DB4Tdd {
 								.getDescription()), new SimpleDateFormat(
 								"yyyy-MM-dd HH:mm:ss").format(rssnews
 								.getPubDate()), rssnews.getFeed(),
-						rmInvalidChar(rssnews.getPage()), rssnews.getStatus());
+						rmInvalidChar(rssnews.getPage()), rssnews.getSplitId(),
+						rssnews.getStatus());
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
@@ -621,8 +623,8 @@ public final class DB4Tdd {
 
 	}
 
-	public static void updateRssNewsLink(long rssNewsId, String link) {
-		String sql = "update rss_news set link = '" + link + "' where id="
+	public static void updateRssNewsSplitId(long rssNewsId, int splitId) {
+		String sql = "update rss_news set split_id = " + splitId + " where id="
 				+ rssNewsId;
 		try {
 			Statement stmt = con.createStatement();
