@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.WeiboDao;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.module.WeiboCrawler;
 import cn.edu.zju.plex.tdd.module.WeiboParser;
@@ -32,7 +32,7 @@ public class WeiboJob implements Runnable {
 
 	private void parseWeibo() {
 		while (true) {
-			List<ParsedStatus> weiboToParse = DB4Tdd.getWeiboToParse(100);
+			List<ParsedStatus> weiboToParse = WeiboDao.getWeiboToParse(100);
 			LOG.info("Get " + weiboToParse.size() + " weibo status to parse...");
 
 			if (weiboToParse.size() == 0) {
@@ -41,7 +41,7 @@ public class WeiboJob implements Runnable {
 			} else {
 				for (ParsedStatus status : weiboToParse) {
 					parser.parse(status);
-					DB4Tdd.updateParsedStatus(status);
+					WeiboDao.updateParsedStatus(status);
 				}
 			}
 		}
@@ -49,7 +49,7 @@ public class WeiboJob implements Runnable {
 
 	private void downloadImages(String rootPath) {
 		while (true) {
-			List<ParsedStatus> list = DB4Tdd.getParsedStatusToDownloadImages();
+			List<ParsedStatus> list = WeiboDao.getParsedStatusToDownloadImages();
 			LOG.info("Loop for downloading images, ParsedStatus count:"
 					+ list.size());
 
@@ -81,10 +81,10 @@ public class WeiboJob implements Runnable {
 							LOG.debug("invalid image url" + imageUrl);
 					}
 					if (count > 0)
-						DB4Tdd.updateParsedStatusImageCountAndSize(
+						WeiboDao.updateParsedStatusImageCountAndSize(
 								status.getId(), count, imageSizes.toString());
 					else
-						DB4Tdd.updateParsedStatusImageCountAndSize(
+						WeiboDao.updateParsedStatusImageCountAndSize(
 								status.getId(), 0, "");
 				}
 				LOG.info("download images for weibo count:" + list.size());

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.log4j.Logger;
 
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.WeiboDao;
 
 import weibo4j.Timeline;
 import weibo4j.model.Paging;
@@ -22,7 +22,7 @@ public class WeiboCrawler {
 	private final Logger LOG = Logger.getLogger(WeiboCrawler.class);
 	private final long INTERVAL = 12000L; // 12 seconds
 	private String accessToken = "2.00l9nr_DfUKrWDf655d3279arZgVvD";
-	private HashMap<String, String> targetUsers = DB4Tdd.getWeiboTargets();
+	private HashMap<String, String> targetUsers = WeiboDao.getWeiboTargets();
 
 	public WeiboCrawler(String accessToken, HashMap<String, String> targetUsers) {
 		this.accessToken = accessToken;
@@ -73,7 +73,7 @@ public class WeiboCrawler {
 								break;
 							}
 							count++;
-							DB4Tdd.insertWeibo(s);
+							WeiboDao.insertWeibo(s);
 						}
 					} catch (WeiboException e) {
 						e.printStackTrace();
@@ -92,7 +92,7 @@ public class WeiboCrawler {
 
 			if (latestWeibo != null) {
 				lastUpdateWeibo = latestWeibo;
-				DB4Tdd.updateWeiboTargets(wuid, lastUpdateWeibo);
+				WeiboDao.updateWeiboTargets(wuid, lastUpdateWeibo);
 			}
 			if (!done)
 				LOG.warn("not succeed in fetching weibo for user:" + wuid);

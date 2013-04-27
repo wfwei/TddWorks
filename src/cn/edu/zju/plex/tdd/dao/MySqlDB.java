@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+// Deprecated
 public final class MySqlDB {
 
 	private static String driver = "com.mysql.jdbc.Driver";
@@ -19,6 +20,7 @@ public final class MySqlDB {
 	private static MySqlDB mysql = null;
 
 	private MySqlDB() {
+		
 	}
 
 	public static void initDB() {

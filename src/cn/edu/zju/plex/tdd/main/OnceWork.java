@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import weibo4j.org.json.JSONObject;
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.WeiboDao;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 
 public class OnceWork {
@@ -17,7 +17,7 @@ public class OnceWork {
 		weibo4j.ShortUrl su = new weibo4j.ShortUrl();
 		su.client.setToken("2.00l9nr_DfUKrWDf655d3279arZgVvD");
 		while (true) {
-			List<ParsedStatus> sts = DB4Tdd.getWeiboToUpdateVideos(100);
+			List<ParsedStatus> sts = WeiboDao.getWeiboToUpdateVideos(100);
 			if (sts.size() == 0)
 				break;
 			else {
@@ -39,7 +39,7 @@ public class OnceWork {
 									|| vurl.indexOf("v.ku6.com") != -1
 									|| vurl.indexOf("56.com") != -1
 									|| vurl.indexOf("6.cn") != -1) {
-								DB4Tdd.updateWeiboVideo(ps.getId(), vurl);
+								WeiboDao.updateWeiboVideo(ps.getId(), vurl);
 								found = true;
 								break;
 							}
@@ -48,7 +48,7 @@ public class OnceWork {
 						}
 					}
 					if (!found)
-						DB4Tdd.updateWeiboVideo(ps.getId(), "");
+						WeiboDao.updateWeiboVideo(ps.getId(), "");
 				}
 			}
 

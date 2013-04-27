@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.RssNewsDao;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 
 /**
@@ -66,16 +66,16 @@ public class TvfantasySpliter {
 		if (res.size() > 0) {
 			for (RssNews rn : res) {
 				LOG.info("insert rssNews" + rn);
-				DB4Tdd.insertRssNews(rn);
+				RssNewsDao.insert(rn);
 			}
 		}
 		rssNews.setSplitId(-1); // 已经分裂过
-		DB4Tdd.updateRssNewsSplitId(rssNews.getId(), rssNews.getSplitId());
+		RssNewsDao.updateSplitId(rssNews.getId(), rssNews.getSplitId());
 	}
 
 	public static void splitAll(String linkReg) {
 		while (true) {
-			List<RssNews> rssNewsToSplit = DB4Tdd
+			List<RssNews> rssNewsToSplit = RssNewsDao
 					.getRssNewsToSplit(30, linkReg);
 			LOG.info("Get " + rssNewsToSplit.size() + " rss items to split...");
 

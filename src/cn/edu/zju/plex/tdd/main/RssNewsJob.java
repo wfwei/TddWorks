@@ -7,10 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+
+import cn.edu.zju.plex.tdd.dao.RssFeedsDao;
+import cn.edu.zju.plex.tdd.dao.RssNewsDao;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
-import cn.edu.zju.plex.tdd.module.MeijuTvAnalyzer;
 import cn.edu.zju.plex.tdd.module.RssNewsCrawler;
 import cn.edu.zju.plex.tdd.module.RssNewsParser;
 import cn.edu.zju.plex.tdd.module.RssNewsRmDup;
@@ -32,25 +33,25 @@ public class RssNewsJob implements Runnable {
 			".*(\\.(bmp|gif|jpe?g|png|tiff?|ico))$", Pattern.CASE_INSENSITIVE);
 
 	private void fetchRssUpdates() {
-		ArrayList<RssFeed> rssFeeds = DB4Tdd.getRssFeedList();
+		ArrayList<RssFeed> rssFeeds = RssFeedsDao.listAll();
 		for (RssFeed rf : rssFeeds) {
 			Date latestUpdate = null;
 			for (RssNews rssnews : crawler.fetchUpdate(rf)) {
 				if (latestUpdate == null) {
 					latestUpdate = rssnews.getPubDate();
 				}
-				DB4Tdd.insertRssNews(rssnews);
+				RssNewsDao.insert(rssnews);
 			}
 			if (latestUpdate != null) {
 				rf.setLastUpdate(latestUpdate);
-				DB4Tdd.updateRssFeedLastUpdateTime(rf);
+				RssFeedsDao.updateLastUpdateTime(rf);
 			}
 		}
 	}
 
 	private void parseRssNews() {
 		while (true) {
-			List<RssNews> rssNewsToParse = DB4Tdd.getRssNewsToParse(30);
+			List<RssNews> rssNewsToParse = RssNewsDao.getRssNewsToParse(30);
 			LOG.info("Get " + rssNewsToParse.size() + " rss items to parse...");
 
 			if (rssNewsToParse.size() == 0) {
@@ -73,17 +74,17 @@ public class RssNewsJob implements Runnable {
 						continue;
 					}
 					rssNews = parser.parse(rssNews);
-					DB4Tdd.updateParsedRssNews(rssNews);
+					RssNewsDao.updateParsedRes(rssNews);
 				}
 			}
 		}
 
 	}
-
+	
 	private void rmDump() {
 		int timeLen = 172800000;// two days
 		while (true) {
-			List<RssNews> list = DB4Tdd.getRssNewsToMerge(timeLen);
+			List<RssNews> list = RssNewsDao.getRssNewsToMerge(timeLen);
 			RssNews[] rssNewsToMerge = new RssNews[list.size()];
 			list.toArray(rssNewsToMerge);
 
@@ -94,7 +95,7 @@ public class RssNewsJob implements Runnable {
 				RssNewsRmDup.deals(rssNewsToMerge);
 				for (RssNews rssNews : rssNewsToMerge)
 					if (rssNews.getDelegate() != 0)
-						DB4Tdd.updateDelegate(rssNews);
+						RssNewsDao.updateDelegate(rssNews);
 				LOG.info("merge rss news:" + rssNewsToMerge.length);
 			}
 
@@ -103,7 +104,7 @@ public class RssNewsJob implements Runnable {
 
 	private void downloadImages(String rootPath) {
 		while (true) {
-			List<RssNews> list = DB4Tdd.getRssNewsToDownloadImages();
+			List<RssNews> list = RssNewsDao.getRssNewsToDownloadImages();
 			LOG.info("Loop for downloading images, RssNews count:"
 					+ list.size());
 
@@ -139,11 +140,11 @@ public class RssNewsJob implements Runnable {
 							LOG.debug("invalid image url" + imageUrl);
 					}
 					if (count > 0) {
-						DB4Tdd.updateRssNewsImageCountAndSize(rssNews.getId(),
+						RssNewsDao.updateImageCountAndSize(rssNews.getId(),
 								count, imageSizes.toString());
 					} else
-						DB4Tdd.updateRssNewsImageCountAndSize(rssNews.getId(),
-								0, "");
+						RssNewsDao.updateImageCountAndSize(rssNews.getId(), 0,
+								"");
 				}
 				LOG.info("download images for rss news:" + list.size());
 			}

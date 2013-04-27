@@ -18,7 +18,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.BaseDao;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.lucene.analyzer.MyICTCLASAnalyzer;
 
@@ -52,7 +52,8 @@ public class LuceneMysql {
 		int startIdx = 0, countPer = 200;
 		List<RssNews> rssNews2idx = null;
 		do {
-			rssNews2idx = DB4Tdd.getItemToIndex(startIdx, countPer);
+//			rssNews2idx = DB4Tdd.getItemToIndex(startIdx, countPer); TODO
+			rssNews2idx = null;
 			for (RssNews rssNews : rssNews2idx) {
 				Document document = new Document();
 				String validDocContent = rssNews.getTitle()

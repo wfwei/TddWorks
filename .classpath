@@ -24,5 +24,8 @@
 	<classpathentry kind="lib" path="libs/jackson-all-1.8.5.jar"/>
 	<classpathentry kind="lib" path="libs/commons-codec.jar"/>
 	<classpathentry kind="lib" path="libs/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libs/c3p0-0.9.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/c3p0-oracle-thin-extras-0.9.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/mchange-commons-java-0.2.3.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

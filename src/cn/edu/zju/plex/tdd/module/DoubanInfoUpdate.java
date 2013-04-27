@@ -3,7 +3,7 @@ package cn.edu.zju.plex.tdd.module;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.TvShowsDao;
 import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.tools.HttpUtil;
 import weibo4j.org.json.JSONObject;
@@ -33,7 +33,7 @@ public class DoubanInfoUpdate {
 			}
 			if (newAkas.length() > 0) {
 				newAkas.append(tvShow.getAka());
-				DB4Tdd.updateTvShowAka(tvdbid, newAkas.toString());
+				TvShowsDao.updateTvShowAka(tvdbid, newAkas.toString());
 			}
 
 		} catch (Exception e) {
@@ -42,14 +42,14 @@ public class DoubanInfoUpdate {
 	}
 
 	public static void updateDoubanIdToV2() {
-		for (TvShows tvShow : DB4Tdd.getTvShowList()) {
+		for (TvShows tvShow : TvShowsDao.getTvShowList()) {
 			// "http://api.douban.com/v2/movie/subject/1764796"
 			System.out.println(tvShow.getDoubanid());
 			if (tvShow.getDoubanid() != null
 					&& tvShow.getDoubanid().contains("com/movie")) {
 				String doubanid = tvShow.getDoubanid().replace("com/movie",
 						"com/v2/movie");
-				DB4Tdd.updateDoubanId(tvShow.getTvdbid(), doubanid);
+				TvShowsDao.updateDoubanId(tvShow.getTvdbid(), doubanid);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class DoubanInfoUpdate {
 	public static void main(String[] args) throws Exception {
 		updateDoubanIdToV2();
 		DoubanInfoUpdate douban = new DoubanInfoUpdate();
-		for (TvShows tvShow : DB4Tdd.getTvShowList()) {
+		for (TvShows tvShow : TvShowsDao.getTvShowList()) {
 			if (tvShow.getDoubanid() == null
 					|| tvShow.getDoubanid().length() < 1)
 				continue;

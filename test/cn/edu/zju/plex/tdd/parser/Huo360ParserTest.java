@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.RssNewsDao;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.module.RssNewsCrawler;
 
@@ -14,7 +14,7 @@ public class Huo360ParserTest {
 	int feed = 3;
 	int count = 1000;
 
-	List<RssNews> rssNewsList = DB4Tdd.getRssNewsForTest(feed, count);
+	List<RssNews> rssNewsList = RssNewsDao.getRssNewsForTest(feed, count);
 	private RssNewsCrawler crawler = new RssNewsCrawler();
 	
 	@Ignore

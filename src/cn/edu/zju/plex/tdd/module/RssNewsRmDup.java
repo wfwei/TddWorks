@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.RssNewsDao;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 
@@ -27,7 +27,7 @@ public class RssNewsRmDup {
 	public static void main(String args[]) {
 		int timeLen = 172800000;// two days
 		while (true) {
-			List<RssNews> list = DB4Tdd.getRssNewsToMerge(timeLen);
+			List<RssNews> list = RssNewsDao.getRssNewsToMerge(timeLen);
 			RssNews[] rssNewsToMerge = new RssNews[list.size()];
 			list.toArray(rssNewsToMerge);
 
@@ -38,7 +38,7 @@ public class RssNewsRmDup {
 				RssNewsRmDup.deals(rssNewsToMerge);
 				for (RssNews rssNews : rssNewsToMerge)
 					if (rssNews.getDelegate() != 0)
-						DB4Tdd.updateDelegate(rssNews);
+						RssNewsDao.updateDelegate(rssNews);
 				LOG.info("merge rss news:" + rssNewsToMerge.length);
 			}
 

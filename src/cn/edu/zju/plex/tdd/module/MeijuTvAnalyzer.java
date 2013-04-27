@@ -12,15 +12,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-
-import cn.edu.zju.plex.tdd.dao.DB4Tdd;
+import cn.edu.zju.plex.tdd.dao.RssNewsDao;
+import cn.edu.zju.plex.tdd.dao.TvShowsDao;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.entity.TvShows;
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
 
 public class MeijuTvAnalyzer {
 	// TODO 考虑更新问题，不要使用static
-	private static final HashMap<String, TvShows> Meijus = DB4Tdd.getMeijuTvs();
+	private static final HashMap<String, TvShows> Meijus = TvShowsDao
+			.getMeijuTvs();
 	private static final Logger LOG = Logger.getLogger(MeijuTvAnalyzer.class);
 	private static final Pattern FenciResPatt = Pattern
 			.compile("([^/]+)/([^\\s]+)");
@@ -139,14 +140,14 @@ public class MeijuTvAnalyzer {
 		String content = "南国医恋》（Hart of Dixie）S02E18《Why Don’t We Get Drunk?》 Lavon雄心勃勃地要把蓝铃镇打造成大学生春假（复活节假）旅游休闲的首选目的地，但是遭遇竞争对手（邻镇）的强力挑战。眼看人气就要丧失殆尽，Lavon不得不让Ruby Jeffries帮他策划一场能吸引眼球的「竞赛」。情绪不好的Zoe想要放松心情，于是答应和Jonah一起参加聚会活动。George看到两人在一起亲密的模样不由心生醋意。Wade请求Lemon和他一起参加Lavon的竞赛，赢得巨额奖金来购买Rammer Jammer酒吧（Wade刚刚听说这家酒吧正挂牌出售）。与此同时，Brick的行为变得十分怪异，每个人都注意到了……他们逼他进行治疗！";
 		MeijuTvAnalyzer.guessTv(content);
 		while (true) {
-			List<RssNews> list = DB4Tdd.getRssNewsToGuessTvShows(100);
+			List<RssNews> list = RssNewsDao.getRssNewsToGuessTvShows(100);
 			if (list.size() == 0)
 				break;
 			for (RssNews rssNews : list) {
 				if (rssNews.getContent() == null)
 					continue;
 				rssNews.setTvShows(MeijuTvAnalyzer.guessTv(rssNews.getContent()));
-				DB4Tdd.updateRssNewsTvShows(rssNews);
+				RssNewsDao.updateTvShows(rssNews);
 			}
 		}
 		// outputMeijuDict("meijuDict2.txt");
