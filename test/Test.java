@@ -1,6 +1,8 @@
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.horrabin.horrorss.RssChannelBean;
@@ -43,6 +45,35 @@ public class Test {
 		System.out.println("watche:\n" + watche);
 	}
 
+	static void JsoupTest2() throws Exception {
+		Document doc = Jsoup.parse(new URL("http://zc.qq.com/chs/index.html"),
+				1000);
+		StringBuffer sb = new StringBuffer();
+		Elements elements = doc.getElementsByTag("img");
+		for (Element ele : elements) {
+			String val = ele.attr("abc");
+			System.out.println(val);
+			if (ele.attr("src").matches(".*\\.(bmp|gif|jpe?g|png|tiff?|ico)"))
+				continue;
+			Element target = null;
+			int parentLimit = 4;
+			while (target == null && parentLimit > 0
+					&& !ele.tagName().equals("html")) {
+				String html = ele.toString();
+				if (html.contains("验证码") || html.contains("校验码"))
+					target = ele;
+				else {
+					ele = ele.parent();
+					parentLimit--;
+				}
+			}
+			if (target != null) {
+				sb.append(target.toString()).append("#F#G#F#");
+			}
+		}
+		System.out.println(sb);
+	}
+
 	static void horrorssTest() throws Exception {
 		HttpUtil httpUtil = new HttpUtil();
 		// http://www.tvjike.com/feed http://feed.mtime.com/news.rss
@@ -60,10 +91,7 @@ public class Test {
 	}
 
 	public static void main(String args[]) throws Exception {
-		// horrorssTest();
-		// JsoupTest();
-		System.out.println(Long.valueOf("3568792879684794") < Long
-				.valueOf("3568930872098879"));
+		JsoupTest2();
 	}
 
 }
