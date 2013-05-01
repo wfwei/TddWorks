@@ -108,7 +108,7 @@ public class WeiboDao extends BaseDao {
 				+ "woriginalimage, wgeo, wuname, wuid, wtime, wtext, "
 				+ "wreply2wid, wreply2uid, wrepost_count, wcomment_count "
 				+ "from meiju_weibo where status = " + RssNews.ST_READY
-				+ " limit 0," + count;
+				+ "order by wtime desc limit 0," + count;
 		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
 		Connection con = CM.getConnection();
 		Statement stmt = null;
