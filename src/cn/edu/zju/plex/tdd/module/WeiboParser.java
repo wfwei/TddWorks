@@ -22,7 +22,7 @@ public class WeiboParser {
 			.compile("[#【](.*?)[#】]");
 
 	private static final Pattern WeiboUrlPatt = Pattern
-			.compile("(http://t.cn/[^\\s]】]+)");
+			.compile("(http://t.cn/[0-9a-zA-Z]+)");
 	private static final Pattern AtPatt = Pattern.compile("(@[^\\s】.。，]+)");
 
 	private String extractTopic(String content) {
@@ -73,6 +73,12 @@ public class WeiboParser {
 							|| vurl.indexOf("v.youku.com") != -1
 							|| vurl.indexOf("v.ku6.com") != -1
 							|| vurl.indexOf("56.com") != -1
+							|| vurl.indexOf("tv.sohu.com") != -1
+							|| vurl.indexOf("v.163.com") != -1
+							|| vurl.indexOf("tv.letv.com") != -1
+							|| vurl.indexOf("v.ifeng.com") != -1
+							|| vurl.indexOf("v.qq.com") != -1
+							|| vurl.indexOf("iqiyi.com") != -1
 							|| vurl.indexOf("6.cn") != -1) {
 						status.setVideo(vurl);
 						break;
@@ -81,7 +87,7 @@ public class WeiboParser {
 					LOG.warn(e);
 				} finally {
 					try {
-						Thread.sleep(10000);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

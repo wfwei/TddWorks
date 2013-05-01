@@ -62,13 +62,11 @@ public class RssNewsJob implements Runnable {
 					if (rssNews.getPage() == null
 							|| rssNews.getPage().length() < 10) {
 						String link = rssNews.getLink();
-						if (link.contains("#"))
-							link = link.substring(0, link.indexOf('#'));
 						rssNews.setLink(link);
 						String page = crawler.fetchPage(link);
 						rssNews.setPage(page);
 					}
-					if (rssNews.getLink().matches("http://tvfantasy.net/[^#]+")
+					if (rssNews.getLink().startsWith("http://tvfantasy.net")
 							&& rssNews.getSplitId() == 0) {
 						TvfantasySpliter.splite(rssNews);
 						continue;
@@ -80,7 +78,7 @@ public class RssNewsJob implements Runnable {
 		}
 
 	}
-	
+
 	private void rmDump() {
 		int timeLen = 172800000;// two days
 		while (true) {

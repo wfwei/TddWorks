@@ -1,6 +1,8 @@
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.horrabin.horrorss.RssChannelBean;
@@ -64,6 +66,12 @@ public class Test {
 		// JsoupTest();
 		System.out.println(Long.valueOf("3568792879684794") < Long
 				.valueOf("3568930872098879"));
+
+		Pattern WeiboUrlPatt = Pattern.compile("(http://t.cn/[^\\s\\]】]+)");
+		Matcher m = WeiboUrlPatt.matcher("fsdfsdhttp://t.cn/fsdfds]fshttp://t.cn/fsdfds】http://t.cn/fsdfds 是否");
+		while (m.find()) {
+			System.out.println(m.group());
+		}
 	}
 
 }
