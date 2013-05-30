@@ -168,8 +168,6 @@ public class RssNewsDao extends BaseDao {
 		return res;
 	}
 
-	
-
 	public static List<RssNews> getRssNewsForTest(int feed, int count) {
 		String sql = "select id, title, link, feed, page from rss_news where feed = "
 				+ feed + " limit 0," + count;
@@ -295,8 +293,6 @@ public class RssNewsDao extends BaseDao {
 		}
 	}
 
-
-
 	// images_count = -1是还没有获取的，没有是0
 	public static List<RssNews> getRssNewsToDownloadImages() {
 		String sql = "select id, link, images from rss_news where image_count = -1 and status=2 limit 0, 100";
@@ -324,8 +320,8 @@ public class RssNewsDao extends BaseDao {
 		return res;
 	}
 
-	public static void updateImageCountAndSize(long rssNewsId,
-			int count, String sizeInfo) {
+	public static void updateImageCountAndSize(long rssNewsId, int count,
+			String sizeInfo) {
 		String sql = "update rss_news set image_count = " + count
 				+ ", image_sizes='" + sizeInfo + "' where id=" + rssNewsId;
 		Connection con = CM.getConnection();
@@ -405,6 +401,39 @@ public class RssNewsDao extends BaseDao {
 		} finally {
 			release(con, stmt, null);
 		}
+	}
+
+	public static List<RssNews> getRssNewsToTrainClassifier(int offset,
+			int count) {
+		String sql = "select id, title, content, meiju_id, meiju_cname, " +
+				"meiju_ename from rss_news where meiju_id is not NULL limit "
+				+ offset + ", " + count;
+		List<RssNews> res = new ArrayList<RssNews>();
+		Connection con = CM.getConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				RssNews rssnews = new RssNews();
+				rssnews.setId(rs.getLong(1));
+				rssnews.setTitle(rs.getString(2));
+				rssnews.setContent(rs.getString(3));
+				TvShows tvShows = new TvShows();
+				tvShows.setTvdbid(rs.getString(4));
+				tvShows.setCname(rs.getString(5));
+				tvShows.setEname(rs.getString(6));
+				rssnews.setTvShows(tvShows);
+				res.add(rssnews);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+			LOG.debug("sql:\t" + sql);
+		} finally {
+			release(con, stmt, rs);
+		}
+		return res;
 	}
 
 }
