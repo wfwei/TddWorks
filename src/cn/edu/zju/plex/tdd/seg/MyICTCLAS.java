@@ -43,7 +43,7 @@ public class MyICTCLAS {
 
 	public static synchronized String fenci(String input) {
 		byte nativeBytes[] = ICTCLAS50.ICTCLAS_ParagraphProcess(
-				input.getBytes(Charset.forName("UTF-8")), 0, 1);
+				input.getBytes(Charset.forName("UTF-8")), 0, 0); // 显示词性则设为1
 		return new String(nativeBytes, Charset.forName("UTF-8"));
 	}
 
@@ -54,7 +54,7 @@ public class MyICTCLAS {
 		String sInput = "《南国医恋》（Hart of Dixie）S02E18《Why Don’t We Get Drunk?》美女上错身不简单oh sit!666 park avenue逝者之证间谍亚契 第一季联盟it’s always sunny in philadelphia厨房噩梦";
 		MyICTCLAS.setPOSmap(3);
 		String res = MyICTCLAS.fenci(sInput.toLowerCase());
-		for(String s:res.split(" ")) 
+		for (String s : res.split(" "))
 			System.out.println(s);
 	}
 

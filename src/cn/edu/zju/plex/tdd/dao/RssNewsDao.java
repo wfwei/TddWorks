@@ -405,8 +405,8 @@ public class RssNewsDao extends BaseDao {
 
 	public static List<RssNews> getRssNewsToTrainClassifier(int offset,
 			int count) {
-		String sql = "select id, title, content, meiju_id, meiju_cname, " +
-				"meiju_ename from rss_news where meiju_id is not NULL limit "
+		String sql = "select id, title, content, meiju_id, meiju_cname, "
+				+ "meiju_ename from rss_news where meiju_id is not NULL and meiju_id != '' limit "
 				+ offset + ", " + count;
 		List<RssNews> res = new ArrayList<RssNews>();
 		Connection con = CM.getConnection();
