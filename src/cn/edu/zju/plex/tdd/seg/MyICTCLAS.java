@@ -4,9 +4,16 @@ import java.nio.charset.Charset;
 
 import ICTCLAS.I3S.AC.ICTCLAS50;
 
-// TODO implement mutli-thread version
+/**
+ * 1. 使用前需要把源字符串处理成小写并且去除空格
+ * <p>
+ * sInput.toLowerCase().replaceAll(" ", "") TODO 词性标注有问题，有时候是aka有时候是un，这个挺奇怪的
+ * 
+ * @author WangFengwei
+ */
 public class MyICTCLAS {
 	private static final ICTCLAS50 ICTCLAS50 = new ICTCLAS50();
+	public static final String SEP = " ";
 
 	static {
 		if (ICTCLAS50.ICTCLAS_Init(".".getBytes(Charset.forName("UTF-8"))) == false) {
@@ -14,7 +21,7 @@ public class MyICTCLAS {
 			System.exit(1);
 		}
 		// 设置词性标注集(0 计算所二级标注集，1 计算所一级标注集，2 北大二级标注集，3 北大一级标注集)
-		ICTCLAS50.ICTCLAS_SetPOSmap(2);
+		ICTCLAS50.ICTCLAS_SetPOSmap(3);
 	}
 
 	/** 设置词性标注集(0 计算所二级标注集，1 计算所一级标注集，2 北大二级标注集，3 北大一级标注集) */
@@ -43,19 +50,23 @@ public class MyICTCLAS {
 
 	public static synchronized String fenci(String input) {
 		byte nativeBytes[] = ICTCLAS50.ICTCLAS_ParagraphProcess(
-				input.getBytes(Charset.forName("UTF-8")), 0, 1);
+				input.getBytes(Charset.forName("UTF-8")), 0, 1); // 显示词性则设为1
 		return new String(nativeBytes, Charset.forName("UTF-8"));
 	}
 
 	public static void main(String[] args) {
-		// importUserDic("meijuDict.txt", 3);
-		// saveUserDic();
+		importUserDic("meijuDict.txt", 3);
+		saveUserDic();
 		// 字符串分词
-		String sInput = "《南国医恋》（Hart of Dixie）S02E18《Why Don’t We Get Drunk?》美女上错身不简单oh sit!666 park avenue逝者之证间谍亚契 第一季联盟it’s always sunny in philadelphia厨房噩梦";
-		MyICTCLAS.setPOSmap(3);
-		String res = MyICTCLAS.fenci(sInput.toLowerCase());
-		for(String s:res.split(" ")) 
-			System.out.println(s);
+		String sInput = "生活大爆炸神秘因素生活大爆炸 神秘因素the big bang theory 权利的游戏南国医恋》"
+				+ "（Hart of Dixie）<tset>a b《权力的游戏》（Game of Thrones）S03E02《Dark Wings, Dark Words》 ";
+		String res = MyICTCLAS.fenci(sInput.toLowerCase().replaceAll(
+				"(<.*?>)|(\\s)", ""));
+		// res = WordFilter.filterStopWords(res, " ");
+		for (String s : res.split(" ")) {
+			if (s.length() > 0)
+				System.out.println(s);
+		}
 	}
 
 	private MyICTCLAS() {

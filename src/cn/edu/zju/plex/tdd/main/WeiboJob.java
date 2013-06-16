@@ -26,7 +26,8 @@ public class WeiboJob implements Runnable {
 	private static final Pattern ImagePatt = Pattern.compile(
 			".*(\\.(bmp|gif|jpe?g|png|tiff?|ico))$", Pattern.CASE_INSENSITIVE);
 
-	private void fetchWeiboUpdate() {
+	private void updateWeibo() {
+		crawler.fetchAndStoreNew();
 		crawler.fetchAndStoreUpdate();
 	}
 
@@ -81,10 +82,10 @@ public class WeiboJob implements Runnable {
 							LOG.debug("invalid image url" + imageUrl);
 					}
 					if (count > 0)
-						WeiboDao.updateParsedStatusImageCountAndSize(
+						WeiboDao.updateImageCountAndSize(
 								status.getId(), count, imageSizes.toString());
 					else
-						WeiboDao.updateParsedStatusImageCountAndSize(
+						WeiboDao.updateImageCountAndSize(
 								status.getId(), 0, "");
 				}
 				LOG.info("download images for weibo count:" + list.size());
@@ -98,7 +99,7 @@ public class WeiboJob implements Runnable {
 			LOG.info("Loop start for WeiboJob");
 			try {
 				LOG.info("开始下载微博更新");
-				fetchWeiboUpdate();
+				updateWeibo();
 
 				LOG.info("开始解析微博");
 				parseWeibo();
