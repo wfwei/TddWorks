@@ -81,7 +81,7 @@ public class ConnectionManager {
 		// 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 initialPoolSize
 		ds.setInitialPoolSize(3);
 		// 连接池中保留的最大连接数。Default: 15 maxPoolSize
-		ds.setMaxPoolSize(10);
+		ds.setMaxPoolSize(100);
 		// // 连接池中保留的最小连接数。
 		// ds.setMinPoolSize(1);
 		// 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 acquireIncrement
@@ -89,8 +89,8 @@ public class ConnectionManager {
 
 		// 每60秒检查所有连接池中的空闲连接。Default: 0 idleConnectionTestPeriod
 		ds.setIdleConnectionTestPeriod(60);
-		// 最大空闲时间,25000秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 maxIdleTime
-		ds.setMaxIdleTime(25000);
+		// 最大空闲时间,7200秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 maxIdleTime
+		ds.setMaxIdleTime(7200);
 		// 连接关闭时默认将所有未提交的操作回滚。Default: false autoCommitOnClose
 		ds.setAutoCommitOnClose(true);
 

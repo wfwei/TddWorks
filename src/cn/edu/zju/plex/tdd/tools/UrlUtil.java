@@ -29,7 +29,7 @@ public class UrlUtil {
 		int domainStartIdx = url.indexOf("//") + 2;
 		int domainEndIdx = url.indexOf('/', domainStartIdx);
 		if (domainEndIdx > domainStartIdx)
-			return url.substring(0, domainEndIdx - 1);
+			return url.substring(0, domainEndIdx);
 		else {
 			LOG.warn("get protocol and domain failed for url:" + url);
 			return url;

@@ -26,7 +26,7 @@ import cn.edu.zju.plex.tdd.tools.UrlUtil;
  */
 public class RssNewsJob implements Runnable {
 	private static final Logger LOG = Logger.getLogger(RssNewsJob.class);
-	private final int EIGHT_HOUR = 8 * 60 * 60 * 1000;
+	private final int FOUR_HOUR = 4 * 60 * 60 * 1000;
 	private RssNewsCrawler crawler = new RssNewsCrawler();
 	private RssNewsParser parser = new RssNewsParser();
 	private static final Pattern ImagePatt = Pattern.compile(
@@ -171,7 +171,7 @@ public class RssNewsJob implements Runnable {
 			} finally {
 				LOG.info("Loop over for RssNewsJob");
 				try {
-					Thread.sleep(EIGHT_HOUR);
+					Thread.sleep(FOUR_HOUR);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

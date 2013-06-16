@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import cn.edu.zju.plex.tdd.dao.RssNewsDao;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.seg.MyICTCLAS;
+import cn.edu.zju.plex.tdd.seg.WordFilter;
 
 /**
  * RssNews parser TODO 改成通用类，主要用来计算文本相似度
@@ -55,8 +56,9 @@ public class RssNewsRmDup {
 		Set<String> aub = new HashSet<String>();
 		Set<String> anb = new HashSet<String>();
 
-		Matcher mat1 = FenciResPatt.matcher(MyICTCLAS.fenci(a.getContent()
-				+ a.getTitle()));
+		Matcher mat1 = FenciResPatt.matcher(WordFilter.filterWithCixing(
+				MyICTCLAS.fenci(a.getContent() + a.getTitle()), MyICTCLAS.SEP,
+				true));
 		while (mat1.find()) {
 			String word = mat1.group(1).trim();
 			String cixing = mat1.group(2).trim();
@@ -66,8 +68,10 @@ public class RssNewsRmDup {
 			}
 		}
 
-		Matcher mat2 = FenciResPatt.matcher(MyICTCLAS.fenci(a.getContent()
-				+ a.getTitle()));
+		Matcher mat2 = FenciResPatt.matcher(WordFilter.filterWithCixing(
+				MyICTCLAS.fenci(b.getContent() + b.getTitle()), MyICTCLAS.SEP,
+				true));
+
 		while (mat2.find()) {
 			String word = mat2.group(1).trim();
 			String cixing = mat2.group(2).trim();

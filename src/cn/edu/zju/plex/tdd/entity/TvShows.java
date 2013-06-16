@@ -49,7 +49,7 @@ public class TvShows {
 	}
 
 	public boolean isValid() {
-		if (tvdbid != "")
+		if (tvdbid != null && tvdbid.length() > 0 && tvdbid != "null")
 			return true;
 		return false;
 	}
@@ -79,9 +79,20 @@ public class TvShows {
 	}
 
 	public boolean equals2(TvShows show) {
-		if (this.tvdbid == show.tvdbid)
+		if (this.tvdbid.equals(show.tvdbid))
 			return true;
 		return false;
 	}
 
+	// 为啥重写了还是不行？
+	@Override
+	public int hashCode() {
+		return this.getTvdbid().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		TvShows tvshow = (TvShows) obj;
+		return this.getTvdbid() == tvshow.getTvdbid();
+	}
 }

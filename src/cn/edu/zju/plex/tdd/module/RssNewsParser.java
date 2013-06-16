@@ -26,6 +26,8 @@ public class RssNewsParser {
 		rssNews.setTvShows(tvShows);
 
 		rssNews.setStatus(RssNews.ST_FINISHED);
+		
+		LOG.info("parse over");
 		return rssNews;
 	}
 

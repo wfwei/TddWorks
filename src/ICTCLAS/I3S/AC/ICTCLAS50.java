@@ -1,7 +1,5 @@
 package ICTCLAS.I3S.AC;
 
-import java.io.*;
-
 public class ICTCLAS50 {
 	// public enum eCodeType
 	// {

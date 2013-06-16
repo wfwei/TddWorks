@@ -3,7 +3,6 @@ package cn.edu.zju.plex.tdd.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -13,7 +12,6 @@ public class BaseDao {
 
 	protected static final ConnectionManager CM = ConnectionManager
 			.getInstance();
-
 	protected static final Logger LOG = Logger.getLogger(BaseDao.class);
 
 	/**

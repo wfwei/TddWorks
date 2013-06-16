@@ -40,7 +40,7 @@ public class RssNewsCrawler {
 			// TODO category is not parsed
 			List<RssItemBean> items = feed.getItems();
 			for (RssItemBean item : items) {
-				if (item.getPubDate().getTime() < rssFeed.getLastUpdate()
+				if (item.getPubDate().getTime() <= rssFeed.getLastUpdate()
 						.getTime())
 					break;
 				RssNews rssnews = new RssNews();
