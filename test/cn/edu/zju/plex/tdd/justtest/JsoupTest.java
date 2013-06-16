@@ -1,9 +1,8 @@
+package cn.edu.zju.plex.tdd.justtest;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
 import org.horrabin.horrorss.RssChannelBean;
 import org.horrabin.horrorss.RssItemBean;
@@ -16,8 +15,8 @@ import org.jsoup.select.Elements;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.tools.HttpUtil;
 
-public class Test {
-	private static final Logger LOG = Logger.getLogger(Test.class);
+public class JsoupTest {
+	private static final Logger LOG = Logger.getLogger(JsoupTest.class);
 
 	static void JsoupTest() throws Exception {
 		ArrayList<RssNews> res = new ArrayList<RssNews>();

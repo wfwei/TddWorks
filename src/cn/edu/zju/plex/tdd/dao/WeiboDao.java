@@ -107,8 +107,8 @@ public class WeiboDao extends BaseDao {
 		String sql = "select wid, wmid, wsmallimage, wmiddleimage, "
 				+ "woriginalimage, wgeo, wuname, wuid, wtime, wtext, "
 				+ "wreply2wid, wreply2uid, wrepost_count, wcomment_count "
-				+ "from meiju_weibo where status = " + RssNews.ST_READY
-				+ "order by wtime desc limit 0," + count;
+				+ "from meiju_weibo where status = " + ParsedStatus.ST_READY
+				+ " order by wtime desc limit 0," + count;
 		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
 		Connection con = CM.getConnection();
 		Statement stmt = null;
@@ -201,8 +201,8 @@ public class WeiboDao extends BaseDao {
 		return res;
 	}
 
-	public static void updateParsedStatusImageCountAndSize(String statusId,
-			int count, String imageSizes) {
+	public static void updateImageCountAndSize(String statusId, int count,
+			String imageSizes) {
 		String sql = "update meiju_weibo set image_count = " + count
 				+ ", image_sizes='" + imageSizes + "' where wid='" + statusId
 				+ "'";
@@ -264,6 +264,62 @@ public class WeiboDao extends BaseDao {
 			release(con, stmt, null);
 		}
 
+	}
+
+	/**
+	 * 得到最近2天的微博，更新其评论数和转发数 TODO test
+	 */
+	public static List<ParsedStatus> getWeiboToUpdate(String beginTime,
+			int offset, int count) {
+		String sql = "select wid, wrepost_count, wcomment_count "
+				+ "from meiju_weibo where wtime > '" + beginTime
+				+ "' order by wtime desc limit " + offset + "," + count;
+		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
+		Connection con = CM.getConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				ParsedStatus ps = new ParsedStatus();
+				ps.setId(rs.getString(1));
+				ps.setRepostsCount(rs.getInt(2));
+				ps.setCommentsCount(rs.getInt(3));
+				res.add(ps);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.warn("error occured in getWeiboToParse: " + e.getMessage());
+			LOG.debug(sql);
+		} finally {
+			release(con, stmt, rs);
+		}
+		return res;
+	}
+
+	/**
+	 * 更新微博的评论数和转发数 TODO test
+	 */
+	public static void updateCommentAndRepostCount(String wid,
+			int commentCount, int repostCount) {
+
+		String sql = String
+				.format("update meiju_weibo set wcomment_count=%d, wrepost_count=%d where wid='%s'",
+						commentCount, repostCount, wid);
+		Connection con = CM.getConnection();
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.warn("error occured in updateParsedStatus:" + e.getMessage());
+			LOG.debug("sql:" + sql);
+		} finally {
+			release(con, stmt, null);
+		}
 	}
 
 }

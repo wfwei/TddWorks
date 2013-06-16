@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import weibo4j.org.json.JSONObject;
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
 import cn.edu.zju.plex.tdd.entity.TvShows;
+import cn.edu.zju.plex.tdd.tools.VideoThumbnail;
 
 /**
  * weibo parser
@@ -67,20 +68,22 @@ public class WeiboParser {
 					JSONObject jo = su.shortToLongUrl(u);
 					String vurl = jo.getJSONArray("urls").getJSONObject(0)
 							.getString("url_long");
-
+					// TODO how to speed up?
 					if (vurl.indexOf("tudou.com") != -1
-							|| vurl.indexOf("video.sina.com") != -1
-							|| vurl.indexOf("v.youku.com") != -1
-							|| vurl.indexOf("v.ku6.com") != -1
 							|| vurl.indexOf("56.com") != -1
+							|| vurl.indexOf("v.youku.com") != -1
+							|| vurl.indexOf("video.sina.com") != -1
+							|| vurl.indexOf("tv.letv.com") != -1
+							|| vurl.indexOf("v.ku6.com") != -1
 							|| vurl.indexOf("tv.sohu.com") != -1
 							|| vurl.indexOf("v.163.com") != -1
-							|| vurl.indexOf("tv.letv.com") != -1
 							|| vurl.indexOf("v.ifeng.com") != -1
 							|| vurl.indexOf("v.qq.com") != -1
 							|| vurl.indexOf("iqiyi.com") != -1
 							|| vurl.indexOf("6.cn") != -1) {
-						status.setVideo(vurl);
+						status.setVideo(vurl + ","
+								+ VideoThumbnail.getVideoThumbnail(vurl));
+
 						break;
 					}
 				} catch (Exception e) {
