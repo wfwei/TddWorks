@@ -107,8 +107,8 @@ public class WeiboDao extends BaseDao {
 		String sql = "select wid, wmid, wsmallimage, wmiddleimage, "
 				+ "woriginalimage, wgeo, wuname, wuid, wtime, wtext, "
 				+ "wreply2wid, wreply2uid, wrepost_count, wcomment_count "
-				+ "from meiju_weibo where status = " + ParsedStatus.ST_READY
-				+ " order by wtime desc limit 0," + count;
+				+ "from meiju_weibo where status = " + RssNews.ST_READY
+				+ "order by wtime desc limit 0," + count;
 		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
 		Connection con = CM.getConnection();
 		Statement stmt = null;
