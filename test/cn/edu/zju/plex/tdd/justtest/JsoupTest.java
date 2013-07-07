@@ -20,6 +20,11 @@ import cn.edu.zju.plex.tdd.tools.HttpUtil;
 public class JsoupTest {
 	private static final Logger LOG = Logger.getLogger(JsoupTest.class);
 
+	/*
+	 * doc = Jsoup .connect(ocwHomeUrl) .userAgent(
+	 * "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
+	 * ) .referrer("http://www.google.com").timeout(10000).get();
+	 */
 	static void JsoupTest() throws Exception {
 		ArrayList<RssNews> res = new ArrayList<RssNews>();
 		Document doc = Jsoup
@@ -99,7 +104,8 @@ public class JsoupTest {
 				.valueOf("3568930872098879"));
 
 		Pattern WeiboUrlPatt = Pattern.compile("(http://t.cn/[^\\s\\]】]+)");
-		Matcher m = WeiboUrlPatt.matcher("fsdfsdhttp://t.cn/fsdfds]fshttp://t.cn/fsdfds】http://t.cn/fsdfds 是否");
+		Matcher m = WeiboUrlPatt
+				.matcher("fsdfsdhttp://t.cn/fsdfds]fshttp://t.cn/fsdfds】http://t.cn/fsdfds 是否");
 		while (m.find()) {
 			System.out.println(m.group());
 		}

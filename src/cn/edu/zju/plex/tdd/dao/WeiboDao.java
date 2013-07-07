@@ -12,7 +12,6 @@ import java.util.List;
 import weibo4j.model.Status;
 
 import cn.edu.zju.plex.tdd.entity.ParsedStatus;
-import cn.edu.zju.plex.tdd.entity.RssNews;
 
 public class WeiboDao extends BaseDao {
 
@@ -107,7 +106,7 @@ public class WeiboDao extends BaseDao {
 		String sql = "select wid, wmid, wsmallimage, wmiddleimage, "
 				+ "woriginalimage, wgeo, wuname, wuid, wtime, wtext, "
 				+ "wreply2wid, wreply2uid, wrepost_count, wcomment_count "
-				+ "from meiju_weibo where status = " + RssNews.ST_READY
+				+ "from meiju_weibo where status = " + ParsedStatus.ST_READY
 				+ " order by wtime desc limit 0," + count;
 		List<ParsedStatus> res = new ArrayList<ParsedStatus>();
 		Connection con = CM.getConnection();
@@ -134,7 +133,7 @@ public class WeiboDao extends BaseDao {
 				ps.setRepostsCount(rs.getInt(13));
 				ps.setCommentsCount(rs.getInt(14));
 
-				ps.setStatus(RssNews.ST_READY);
+				ps.setStatus(ParsedStatus.ST_READY);
 				res.add(ps);
 			}
 		} catch (Exception e) {

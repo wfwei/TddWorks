@@ -71,9 +71,9 @@ public class WordFilter {
 		for (String wordAndCixing : words.split(sep)) {
 			String word = null, cixing = null;
 			int sepIdx = wordAndCixing.indexOf('/');
-			if (!wordAndCixing.contains("/")) {
+			if (sepIdx<0) {
 				LOG.warn("word not contain cixing information");
-				sepIdx = wordAndCixing.length() - 1; // TODO test
+				sepIdx = wordAndCixing.length();
 			}
 			word = wordAndCixing.substring(0, sepIdx);
 			cixing = wordAndCixing.substring(sepIdx + 1);

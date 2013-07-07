@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class VideoThumbnailTest {
 	
+	@Ignore
 	@Test
 	public void testGetVideoThumbnail() {
 		System.out.println("Testing on testGetVideoThumbnail\n");
@@ -40,7 +41,6 @@ public class VideoThumbnailTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGetTudou() throws IOException {
 		System.out.println("Testing on testGetTudou");
@@ -69,7 +69,6 @@ public class VideoThumbnailTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testGet56() throws IOException {
 		System.out.println("Testing on testGet56");

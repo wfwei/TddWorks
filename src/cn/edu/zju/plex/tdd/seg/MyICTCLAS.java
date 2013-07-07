@@ -55,13 +55,14 @@ public class MyICTCLAS {
 	}
 
 	public static void main(String[] args) {
-		importUserDic("meijuDict.txt", 3);
-		saveUserDic();
+//		importUserDic("meijuDict.txt", 3);
+//		saveUserDic();
 		// 字符串分词
-		String sInput = "生活大爆炸神秘因素生活大爆炸 神秘因素the big bang theory 权利的游戏南国医恋》"
-				+ "（Hart of Dixie）<tset>a b《权力的游戏》（Game of Thrones）S03E02《Dark Wings, Dark Words》 ";
-		String res = MyICTCLAS.fenci(sInput.toLowerCase().replaceAll(
-				"(<.*?>)|(\\s)", ""));
+//		String sInput = "生活大爆炸神秘因素生活大爆炸 神秘因素the big bang theory 权利的游戏南国医恋》"
+//				+ "（Hart of Dixie）<tset>a b《权力的游戏》（Game of Thrones）S03E02《Dark Wings, Dark Words》 ";
+//		String res = MyICTCLAS.fenci(sInput.toLowerCase().replaceAll(
+//				"(<.*?>)|(\\s)", ""));
+		String res = MyICTCLAS.fenci("高级体系结构");
 		// res = WordFilter.filterStopWords(res, " ");
 		for (String s : res.split(" ")) {
 			if (s.length() > 0)
