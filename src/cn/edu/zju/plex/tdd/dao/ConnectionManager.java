@@ -74,9 +74,12 @@ public class ConnectionManager {
 		ds = new ComboPooledDataSource();
 
 		ds.setDriverClass("com.mysql.jdbc.Driver");
-		ds.setJdbcUrl("jdbc:mysql://10.214.52.12/db4tdd?useUnicode=true&characterEncoding=UTF-8");
-		ds.setUser("plex");
-		ds.setPassword("wangfengwei");
+		ds.setJdbcUrl("jdbc:mysql://42.121.117.9/ikanfou?useUnicode=true&characterEncoding=UTF-8");
+		ds.setUser("wangfengwei");
+		ds.setPassword("wfwei2beidou");
+		// ds.setJdbcUrl("jdbc:mysql://10.214.52.12/db4tdd?useUnicode=true&characterEncoding=UTF-8");
+		// ds.setUser("plex");
+		// ds.setPassword("wangfengwei");
 
 		// 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 initialPoolSize
 		ds.setInitialPoolSize(3);

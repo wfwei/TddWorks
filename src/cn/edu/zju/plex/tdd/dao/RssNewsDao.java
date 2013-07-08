@@ -168,6 +168,34 @@ public class RssNewsDao extends BaseDao {
 		return res;
 	}
 
+	// TODO remove me
+	public static List<RssNews> getRssNewsTmp() {
+		String sql = "select id, title, meiju_id from rss_news where feed=1 and meiju_id !='' and title!=''";
+		List<RssNews> res = new ArrayList<RssNews>();
+		Connection con = CM.getConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				RssNews rssnews = new RssNews();
+				rssnews.setId(rs.getLong(1));
+				rssnews.setTitle(rs.getString(2));
+				TvShows tvShows = new TvShows(rs.getString(3), null, null);
+				rssnews.setTvShows(tvShows);
+				res.add(rssnews);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LOG.warn(e.getMessage());
+			LOG.debug("sql is:\t" + sql);
+		} finally {
+			release(con, stmt, rs);
+		}
+		return res;
+	}
+
 	public static List<RssNews> getRssNewsForTest(int feed, int count) {
 		String sql = "select id, title, link, feed, page from rss_news where feed = "
 				+ feed + " limit 0," + count;

@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import cn.edu.zju.plex.tdd.dao.RssFeedsDao;
 import cn.edu.zju.plex.tdd.dao.RssNewsDao;
+import cn.edu.zju.plex.tdd.dao.TvepisodesDao;
 import cn.edu.zju.plex.tdd.entity.RssFeed;
 import cn.edu.zju.plex.tdd.entity.RssNews;
 import cn.edu.zju.plex.tdd.module.RssNewsCrawler;
@@ -31,6 +32,8 @@ public class RssNewsJob implements Runnable {
 	private RssNewsParser parser = new RssNewsParser();
 	private static final Pattern ImagePatt = Pattern.compile(
 			".*(\\.(bmp|gif|jpe?g|png|tiff?|ico))$", Pattern.CASE_INSENSITIVE);
+	private static final Pattern SEPATT = Pattern
+			.compile(".*?S(\\d\\d)E(\\d\\d).*");
 
 	private void fetchRssUpdates() {
 		ArrayList<RssFeed> rssFeeds = RssFeedsDao.listAll();
@@ -73,6 +76,20 @@ public class RssNewsJob implements Runnable {
 					}
 					rssNews = parser.parse(rssNews);
 					RssNewsDao.updateParsedRes(rssNews);
+
+					// 更新tvepisodes表中的rss_news_id字段
+					if (rssNews.getLink().startsWith("http://tvfantasy.net")) {
+						Matcher match = SEPATT.matcher(rssNews.getTitle());
+						if (match.find()) {
+							int season = Integer.parseInt(match.group(1));
+							int episode = Integer.parseInt(match.group(2));
+							String tvdbid = rssNews.getTvShows().getTvdbid();
+							TvepisodesDao.updateRssNewsId(rssNews.getId(),
+									tvdbid, season, episode);
+							LOG.info("update tvepisodes with:"
+									+ rssNews.getTitle());
+						}
+					}
 				}
 			}
 		}
