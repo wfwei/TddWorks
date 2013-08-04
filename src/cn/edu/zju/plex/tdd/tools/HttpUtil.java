@@ -167,7 +167,7 @@ public class HttpUtil {
 			// "username:cf.wfwei@gmail.com;password:wfwei@google",
 			// "utf-8"));
 			HttpUtil http = new HttpUtil();
-			System.out.println(http.fetchPage("http://www.baidu.com"));
+			System.out.println(http.fetchPage("http://tvfantasy.net/2013/04/13/orphan-black-1x03-synopsis/"));
 		} catch (Exception e) {
 			LOG.error(e.toString());
 		}
