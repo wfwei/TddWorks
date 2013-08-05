@@ -55,7 +55,7 @@ public class DoubanInfoUpdate {
 	}
 
 	public static void main(String[] args) throws Exception {
-		updateDoubanIdToV2();
+//		updateDoubanIdToV2();
 		DoubanInfoUpdate douban = new DoubanInfoUpdate();
 		for (TvShows tvShow : TvShowsDao.getTvShowList()) {
 			if (tvShow.getDoubanid() == null
